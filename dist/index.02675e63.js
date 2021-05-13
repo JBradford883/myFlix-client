@@ -1050,7 +1050,8 @@ try {
   var _react = require('react');
   var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
   var _reactDefault = _parcelHelpers.interopDefault(_react);
-  require('react-dom');
+  var _reactDom = require('react-dom');
+  var _reactDomDefault = _parcelHelpers.interopDefault(_reactDom);
   require('./index.scss');
   var _jsxFileName = "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/index.jsx";
   // Main component  (will eventually use all the others)
@@ -1079,7 +1080,7 @@ try {
   // Finds the root of the app
   const container = document.getElementsByClassName('app-container')[0];
   // Tells React to render the app in the root DOM element
-  ReactDom.render(/*#__PURE__*/_reactDefault.default.createElement(MyFlixApplication), container);
+  _reactDomDefault.default.render(/*#__PURE__*/_reactDefault.default.createElement(MyFlixApplication), container);
   helpers.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
