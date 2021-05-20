@@ -31,3 +31,5 @@ To create the client-side component of a movie web application. The web applicat
 
 - React
 - React-dom
+- axios
+- prop-types
