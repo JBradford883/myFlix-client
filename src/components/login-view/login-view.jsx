@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 
 export function LoginView(props) {
-  const [username, setUserName] = userState('');
-  const [password, serPassword] = userState('');
+  const [username, setUserName] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleSubmit = () => {
     e.preventDefault();
     console.log(username, password);
-    // Send a request to the server for authentication then call props.onLoggedIn(username)
-    props.onLoggedIn(usename);
+    props.onLoggedIn(username);
   };
 
   return (
