@@ -27608,7 +27608,7 @@ try {
             lineNumber: 24,
             columnNumber: 11
           }
-        }, movie.Director.name)), /*#__PURE__*/_reactDefault.default.createElement("div", {
+        }, movie.Director.Name)), /*#__PURE__*/_reactDefault.default.createElement("div", {
           className: "movie-genre",
           __self: this,
           __source: {
@@ -27632,7 +27632,7 @@ try {
             lineNumber: 28,
             columnNumber: 11
           }
-        }, movie.Genre.name)), /*#__PURE__*/_reactDefault.default.createElement("button", {
+        }, movie.Genre.Name)), /*#__PURE__*/_reactDefault.default.createElement("button", {
           onClick: () => {
             onBackClick(null);
           },
