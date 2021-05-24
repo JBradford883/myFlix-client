@@ -14,6 +14,7 @@ export function LoginView(props) {
     props.onLoggedIn(username);
   };
 
+  // Login form for username and password
   return (
     <Form>
       <Form.Group controlId="formUsername">
