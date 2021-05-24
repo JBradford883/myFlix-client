@@ -1,0 +1,15 @@
+.movie-view {
+  margin: 25px 0;
+}
+
+.movie-description {
+  overflow:hidden;
+  line-height: 1.5rem;
+  max-height: 8rem;
+  -webkit-box-orient: vertical;
+  display: block;
+  display: -webkit-box;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 4;
+}
