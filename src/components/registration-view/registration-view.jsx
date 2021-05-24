@@ -16,28 +16,28 @@ export function RegistrationView(props) {
 
   // Form to register username, password, email, birthday
   return (
-    <Form>
+    <Form className="col-md-6 offset-3">
       <Form.Group controlId="formUsername">
         <Form.Label>Username:</Form.Label>
-        <Form.Control type="text" onChange={e => setUserName(e.target.value)} />
+        <Form.Control type="text" placeholder="Enter Username" onChange={e => setUserName(e.target.value)} />
       </Form.Group>
 
       <Form.Group controlId="formPassword">
         <Form.Label>Password:</Form.Label>
-        <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
+        <Form.Control type="password" placeholder="Enter Password" onChange={e => setPassword(e.target.value)} />
       </Form.Group>
 
       <Form.Group controlId="formEmail">
         <Form.Label>Email:</Form.Label>
-        <Form.Control type="text" onChange={e => setEmail(e.target.value)} />
+        <Form.Control type="text" placeholder="name@example.com" onChange={e => setEmail(e.target.value)} />
       </Form.Group>
 
       <Form.Group controlId="formBirthday">
         <Form.Label>Birthday:</Form.Label>
-        <Form.Control type="text" value={birthday} onChange={e => setBirthday(e.target.value)} />
+        <Form.Control type="text" placeholder="dd/mm/yyyy" value={birthday} onChange={e => setBirthday(e.target.value)} />
       </Form.Group>
 
-      <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
+      <Button variant="danger" type="submit" onClick={handleSubmit}>Submit</Button>
     </Form>
   );
 }
