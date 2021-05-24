@@ -1,0 +1,13 @@
+.movie-poster {
+  height: 100%;
+  width: auto;
+}
+
+.movie-description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.my-flix {
+  color: steelblue;
+}
+/*# sourceMappingURL=index.17951e9a.css.map */
