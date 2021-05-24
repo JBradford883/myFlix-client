@@ -14,6 +14,7 @@ export function RegistrationView(props) {
     props.onRegister(username);
   };
 
+  // Form to register username, password, email, birthday
   return (
     <Form>
       <Form.Group controlId="formUsername">
