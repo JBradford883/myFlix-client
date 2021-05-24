@@ -23,11 +23,13 @@ export function LoginView(props) {
       </Form.Group>
     <>
       <h1 className="headline text-center font-weight-bold text-danger">Welcome to myFlix App</h1>
+          <Form.Control type="text" placeholder="Enter Username" onChange={e => setUserName(e.target.value)} />
 
       <Form.Group controlId="formPassword">
         <Form.Label>Password:</Form.Label>
         <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
       </Form.Group>
+          <Form.Control type="password" placeholder="Enter Password" onChange={e => setPassword(e.target.value)} />
 
         <Button variant="danger" type="submit" onClick={handleSubmit}>Submit</Button>
       </Form>
