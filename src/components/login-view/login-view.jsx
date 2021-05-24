@@ -20,6 +20,8 @@ export function LoginView(props) {
         <Form.Label>Username:</Form.Label>
         <Form.Control type="text" onChange={e => setUserName(e.target.value)} />
       </Form.Group>
+    <>
+      <h1 className="headline text-center font-weight-bold text-danger">Welcome to myFlix App</h1>
 
       <Form.Group controlId="formPassword">
         <Form.Label>Password:</Form.Label>
@@ -28,5 +30,6 @@ export function LoginView(props) {
 
       <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
     </Form>
+    </>
   );
 }
