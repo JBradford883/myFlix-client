@@ -6,7 +6,7 @@ import axios from 'axios';
 import './login-view.scss';
 
 export function LoginView(props) {
-  const [username, setUserName] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
@@ -35,7 +35,7 @@ export function LoginView(props) {
       <Form className="col-md-6 offset-3">
         <Form.Group controlId="formUsername">
           <Form.Label>Username:</Form.Label>
-          <Form.Control type="text" placeholder="Enter Username" onChange={e => setUserName(e.target.value)} />
+          <Form.Control type="text" placeholder="Enter Username" onChange={e => setUsername(e.target.value)} />
         </Form.Group>
 
         <Form.Group controlId="formPassword">

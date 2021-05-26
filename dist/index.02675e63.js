@@ -28408,7 +28408,7 @@ try {
   var _jsxFileName = "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/login-view/login-view.jsx", _s = $RefreshSig$();
   function LoginView(props) {
     _s();
-    const [username, setUserName] = _react.useState('');
+    const [username, setUsername] = _react.useState('');
     const [password, setPassword] = _react.useState('');
     const handleSubmit = e => {
       e.preventDefault();
@@ -28462,7 +28462,7 @@ try {
       }, "Username:"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Control, {
         type: "text",
         placeholder: "Enter Username",
-        onChange: e => setUserName(e.target.value),
+        onChange: e => setUsername(e.target.value),
         __self: this,
         __source: {
           fileName: _jsxFileName,
@@ -28507,7 +28507,7 @@ try {
       }, "Submit")))
     );
   }
-  _s(LoginView, "77lfu0QofYWzE21P+Ljjc0SKKFw=");
+  _s(LoginView, "wuQOK7xaXdVz4RMrZQhWbI751Oc=");
   _c = LoginView;
   var _c;
   $RefreshReg$(_c, "LoginView");
