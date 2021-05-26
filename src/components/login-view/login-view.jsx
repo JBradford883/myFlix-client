@@ -25,7 +25,10 @@ export function LoginView(props) {
       });
   };
 
-  // Login form for username and password
+  /*
+  Login form
+  Expects - valid username and password to be entered into the form
+  */
   return (
     <>
       <h1 className="headline text-center font-weight-bold text-danger">Welcome to myFlix App</h1>
