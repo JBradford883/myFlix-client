@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-import { Link } from "react-router-dom";
-
-import './director-view.scss';
-
 export class DirectorView extends React.Component {
 
   render() {
@@ -15,9 +11,10 @@ export class DirectorView extends React.Component {
     return (
       <Card className='director-view'>
         <Card.Body>
-          <Card.Title>{Director.Name}</Card.Title>
-          <Card.Text class="director-bio">{director.Bio}</Card.Text>
-          <Card.Text class="director-birth">{director.Birth}</Card.Text>
+          <Card.Title><h1>{director.Name}</h1></Card.Title>
+          <Card.Text class="director-bio"><b>Bio:</b> {director.Bio}</Card.Text>
+          <Card.Text class="director-birth"><b>Birth Year:</b> {director.Birth}</Card.Text>
+          <Card.Text class="director-death"><b>Death Year:</b> {director.Death}</Card.Text>
           <Button onClick={() => onBackClick(null)} variant="primary">Back</Button>
         </Card.Body>
       </Card>
