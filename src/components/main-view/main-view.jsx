@@ -131,7 +131,7 @@ export class MainView extends React.Component {
           }
           } />
 
-          <Route path="/genre/:name" render={({ match, history }) => {
+          <Route path="/genres/:name" render={({ match, history }) => {
             if (!user) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
