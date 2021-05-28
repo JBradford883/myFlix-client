@@ -57,7 +57,7 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const { movies, selectedMovie, user, register } = this.state;
+    const { movies, user } = this.state;
 
     return (
       <Router>
