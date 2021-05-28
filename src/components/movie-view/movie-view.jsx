@@ -20,7 +20,7 @@ export class MovieView extends React.Component {
           <span className="label"><b>Title:</b> </span>
           <span className="value">{movie.Title}</span>
         </div>
-        <div className="movie-description">
+        <div className="description">
           <span className="label"><b>Description:</b> </span>
           <span className="value">{movie.Description}</span>
         </div>
