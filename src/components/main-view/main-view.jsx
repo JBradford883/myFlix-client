@@ -15,24 +15,36 @@ export class MainView extends React.Component {
 
   constructor() {
     super();
+
     this.state = {
       movies: [],
-      selectedMovie: null,
-      user: null,
-      register: false
+      user: null
     };
   }
 
-  componentDidMount() {
-    axios.get('https://myflix-2388-app.herokuapp.com/movies')
+  getMovies(token) {
+    axios.get('https://myflix-2388-app.herokuapp.com/movies', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
       .then(response => {
+        // Assign the result to the state
         this.setState({
           movies: response.data
         });
       })
-      .catch(error => {
+      .catch(function (error) {
         console.log(error);
       });
+  }
+
+  componentDidMount() {
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user')
+      });
+      this.getMovies(accessToken);
+    }
   }
 
   /* When a movie is clicked, this function is invoked and updates the state of the `selectMovie` *property to that movie */
