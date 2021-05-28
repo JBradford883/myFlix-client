@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 
+import { Link } from "react-router-dom";
+
 import './movie-view.scss';
 
 export class MovieView extends React.Component {
