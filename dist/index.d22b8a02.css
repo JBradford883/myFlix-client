@@ -1,34 +1,4 @@
 .my-flix {
   color: steelblue;
 }
-.movie-view {
-  margin: 25px 0;
-}
-
-.movie-description {
-  overflow: hidden;
-  line-height: 1.5rem;
-  max-height: 8rem;
-  -webkit-box-orient: vertical;
-  display: block;
-  display: -webkit-box;
-  overflow: hidden !important;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 4;
-}
-.movie-view {
-  line-height: 30px;
-}
-
-.movie-img {
-  height: 500px;
-  padding-right: 20px;
-}
-.headline {
-  font-family: "Limelight";
-  padding: 20px 0;
-}
-.main-view {
-  margin-bottom: 10px;
-}
 /*# sourceMappingURL=index.d22b8a02.css.map */

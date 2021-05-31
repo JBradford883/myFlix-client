@@ -3,7 +3,7 @@
 }
 
 .movie-description {
-  overflow:hidden;
+  overflow: hidden;
   line-height: 1.5rem;
   max-height: 8rem;
   -webkit-box-orient: vertical;
@@ -17,3 +17,12 @@
 .movie-view:hover {
   transform: scale(1.02);
 }
+
+.headline {
+  font-family: "Limelight";
+  padding: 20px 0;
+}
+.my-flix {
+  color: steelblue;
+}
+/*# sourceMappingURL=index.17951e9a.css.map */
