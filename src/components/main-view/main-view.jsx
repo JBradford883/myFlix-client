@@ -3,41 +3,24 @@ import axios from 'axios';
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import { MovieCard } from '../movie-card/movie-card';
-import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
-import { DirectorView } from '../director-view/director-view';
+import { MovieCard } from '../movie-card/movie-card';
+import { MovieView } from '../movie-view/movie-view';
 import { GenreView } from '../genre-view/genre-view';
-import { ProfileView } from '../profile-view/profile-view';
+import { DirectorView } from '../director-view/director-view';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-export class MainView extends React.Component {
+class MainView extends React.Component {
 
   constructor() {
     super();
-
     this.state = {
-      selectedMovie: [],
+      movies: [],
       user: null
     };
-  }
-
-  getMovies(token) {
-    axios.get('https://myflix-2388-app.herokuapp.com/movies', {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(response => {
-        // Assign the result to the state
-        this.setState({
-          movies: response.data
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
   }
 
   componentDidMount() {
@@ -50,15 +33,17 @@ export class MainView extends React.Component {
     }
   }
 
-  /* When a movie is clicked, this function is invoked and updates the state of the `selectMovie` *property to that movie */
-
+  /*When a movie is clicked, this function is invoked and updates the state of the `selectedMovie` *property to that movie*/
   setSelectedMovie(movie) {
     this.setState({
       selectedMovie: movie
     });
   }
 
-  /* When a user successfully logs in, this function updates the `user` property in state to that *particular user */
+  /*
+  When a user successfully logs in, this function updates the `user` property in state to that *particular user
+  Stores users data in their browser so when a page refresh occur they do not need to log back in.
+  */
   onLoggedIn(authData) {
     console.log(authData);
     this.setState({
@@ -78,10 +63,26 @@ export class MainView extends React.Component {
     });
   }
 
+
   onRegister(register) {
     this.setState({
       register
     });
+  }
+
+  getMovies(token) {
+    axios.get('https://myflix-2388-app.herokuapp.com/movies', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
+        // Assign the result to the state
+        this.setState({
+          movies: response.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   render() {
@@ -156,3 +157,5 @@ export class MainView extends React.Component {
     );
   }
 }
+
+export default MainView;
