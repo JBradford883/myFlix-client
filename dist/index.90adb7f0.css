@@ -1,10 +1,3 @@
-.headline {
-  font-family: "Limelight";
-  padding: 20px 0;
-}
-.movie-view {
-  margin: 25px 0;
-}
 
 .movie-description {
   overflow: hidden;
@@ -17,15 +10,7 @@
   text-overflow: ellipsis;
   -webkit-line-clamp: 4;
 }
-.movie-view {
-  line-height: 30px;
-}
-
-.movie-img {
-  height: 500px;
-  padding-right: 20px;
-}
 .my-flix {
   color: steelblue;
 }
-/*# sourceMappingURL=index.778c89a2.css.map */
+/*# sourceMappingURL=index.90adb7f0.css.map */
