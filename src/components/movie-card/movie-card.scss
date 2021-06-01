@@ -1,7 +1,3 @@
-.movie-view {
-  margin: 25px 0;
-}
-
 .movie-description {
   overflow:hidden;
   line-height: 1.5rem;
@@ -12,8 +8,4 @@
   overflow: hidden !important;
   text-overflow: ellipsis;
   -webkit-line-clamp: 4;
-}
-
-.movie-view:hover {
-  transform: scale(1.02);
 }
