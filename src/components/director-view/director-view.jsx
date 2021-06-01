@@ -11,16 +11,24 @@ export class DirectorView extends React.Component {
     return (
       <Card className='director-view'>
         <Card.Body>
-          <Card.Title><h1>{director.Name}</h1></Card.Title>
-          <Card.Text class="director-bio"><b>Bio:</b> {director.Bio}</Card.Text>
-          <Card.Text class="director-birth"><b>Birth Year:</b> {director.Birth}</Card.Text>
-          <Card.Text class="director-death"><b>Death Year:</b> {director.Death}</Card.Text>
-          <Button onClick={() => onBackClick(null)} variant="primary">Back</Button>
+          <Card.Title className="director-name"><h1>{director.Name}</h1></Card.Title>
+
+          <Card.Text className="font-weight-bold mb-0">Biography</Card.Text>
+          <Card.Text className="director-bio">{director.Bio}</Card.Text>
+
+          <Card.Text className="font-weight-bold mb-0">Birth Year</Card.Text>
+          <Card.Text className="director-birth">{director.Birth}</Card.Text>
+
+          <Card.Text className="font-weight-bold mb-0">Death Year</Card.Text>
+          <Card.Text className="director-death">{director.Death}</Card.Text>
+
+          <Button onClick={() => onBackClick(null)} block variant="primary">Back to Main</Button>
         </Card.Body>
       </Card>
     );
   }
 }
+
 
 DirectorView.propTypes = {
   director: PropTypes.shape({
