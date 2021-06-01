@@ -33,44 +33,6 @@ export class MovieView extends React.Component {
   }
 }
 
-
-/*
-  return (
-    <div className="movie-view">
-      <div>
-        <img className="movie-img float-left" src={movie.ImagePath} />
-      </div>
-      <div className="movie-title">
-        <span className="label"><b>Title:</b> </span>
-        <span className="value">{movie.Title}</span>
-      </div>
-      <div className="description">
-        <span className="label"><b>Description:</b> </span>
-        <span className="value">{movie.Description}</span>
-      </div>
-      <div className="movie-director">
-        <span className="label"><b>Director:</b> </span>
-        <span className="value">{movie.Director.Name}</span>
-      </div>
-      <Link to={`/directors/${movie.Director.Name}`}>
-        <Button variant="primary">More Info</Button>
-      </Link>
-      <div className="movie-genre">
-        <span className="label"><b>Genre:</b> </span>
-        <span className="value">{movie.Genre.Name}</span>
-      </div>
-      <Link to={`/genres/${movie.Genre.Name}`}>
-        <Button variant="primary">More Info</Button>
-      </Link>
-      <div>
-        <Button className="t-5" onClick={() => onBackClick(null)} variant="primary">Back</Button>
-      </div>
-    </div>
-  );
-}
-}
-*/
-
 MovieView.propTypes = {
   movie: PropTypes.shape({
     Title: PropTypes.string.isRequired,
