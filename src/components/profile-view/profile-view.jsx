@@ -55,9 +55,7 @@ export function ProfileView(props) {
         </Form.Group>
 
         <Button className="mr-2" variant="danger" type="submit" onClick={handleSubmit}>Update</Button>
-        <Link to={`/genres/${movie.Genre.Name}`}>
-          <Button variant="link">Genre</Button>
-        </Link>
+        <Button onClick={() => onBackClick()} variant='danger'>Back to main</Button>
       </Form>
     </>
   );
