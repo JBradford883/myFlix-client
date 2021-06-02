@@ -22219,7 +22219,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 125
+                lineNumber: 123
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -22242,7 +22242,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 135
+                lineNumber: 133
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -22265,7 +22265,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 146
+                lineNumber: 144
             },
             __self: this
         }))));
@@ -29306,16 +29306,21 @@ function ProfileView(props) {
             lineNumber: 57
         },
         __self: this
-    }, "Update"), /*#__PURE__*/ _reactDefault.default.createElement(_buttonDefault.default, {
-        onClick: ()=>onBackClick()
-        ,
-        variant: "danger",
+    }, "Update"), /*#__PURE__*/ _reactDefault.default.createElement(Link, {
+        to: `/genres/${movie.Genre.Name}`,
         __source: {
             fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
             lineNumber: 58
         },
         __self: this
-    }, "Back to main"))));
+    }, /*#__PURE__*/ _reactDefault.default.createElement(_buttonDefault.default, {
+        variant: "link",
+        __source: {
+            fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
+            lineNumber: 59
+        },
+        __self: this
+    }, "Genre")))));
 }
 _s(ProfileView, "iEOEpagk8SbrGlv7Xw+f4+HPFE0=");
 _c = ProfileView;

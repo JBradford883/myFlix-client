@@ -116,9 +116,7 @@ class MainView extends React.Component {
             if (!user) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} /></Col>
             return <Col md={8}>
-              <ProfileView onLoggedIn={user => this.onLoggedIn(user)}
-                movie={movies} user={user}
-                onBackClick={() => history.goBack()} />
+              <ProfileView onLoggedIn={user => this.onLoggedIn(user)} movie={movies} user={user} onBackClick={() => history.goBack()} />
             </Col>
           }} />
 
