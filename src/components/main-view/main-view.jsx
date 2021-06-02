@@ -9,6 +9,7 @@ import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { GenreView } from '../genre-view/genre-view';
 import { DirectorView } from '../director-view/director-view';
+import { ProfileView } from '../profile-view/profile-view';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -116,7 +117,7 @@ class MainView extends React.Component {
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} /></Col>
             return <Col md={8}>
               <ProfileView onLoggedIn={user => this.onLoggedIn(user)}
-                movies={movies} user={user}
+                movie={movies} user={user}
                 onBackClick={() => history.goBack()} />
             </Col>
           }} />
