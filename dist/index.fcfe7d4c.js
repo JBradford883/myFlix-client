@@ -22060,6 +22060,7 @@ var _movieCard = require("../movie-card/movie-card");
 var _movieView = require("../movie-view/movie-view");
 var _genreView = require("../genre-view/genre-view");
 var _directorView = require("../director-view/director-view");
+var _profileView = require("../profile-view/profile-view");
 var _row = require("react-bootstrap/Row");
 var _rowDefault = parcelHelpers.interopDefault(_row);
 var _col = require("react-bootstrap/Col");
@@ -22129,14 +22130,14 @@ class MainView extends _reactDefault.default.Component {
         return(/*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.BrowserRouter, {
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 92
+                lineNumber: 93
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_rowDefault.default, {
             className: "main-view justify-content-md-center",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 93
+                lineNumber: 94
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -22159,7 +22160,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 95
+                lineNumber: 96
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -22172,7 +22173,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 107
+                lineNumber: 108
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -22184,17 +22185,17 @@ class MainView extends _reactDefault.default.Component {
                 })));
                 return(/*#__PURE__*/ _reactDefault.default.createElement(_colDefault.default, {
                     md: 8
-                }, /*#__PURE__*/ _reactDefault.default.createElement(ProfileView, {
+                }, /*#__PURE__*/ _reactDefault.default.createElement(_profileView.ProfileView, {
                     onLoggedIn: (user1)=>this.onLoggedIn(user1)
                     ,
-                    movies: movies,
+                    movie: movies,
                     user: user,
                     onBackClick: ()=>history.goBack()
                 })));
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 114
+                lineNumber: 115
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -22218,7 +22219,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 124
+                lineNumber: 125
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -22241,7 +22242,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 134
+                lineNumber: 135
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -22264,7 +22265,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 145
+                lineNumber: 146
             },
             __self: this
         }))));
@@ -22277,7 +22278,7 @@ exports.default = MainView;
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","axios":"7rA65","react-router-dom":"1PMSK","../login-view/login-view":"2Z0HZ","../registration-view/registration-view":"1QKnt","../movie-card/movie-card":"7kJC8","../movie-view/movie-view":"3jpQC","../genre-view/genre-view":"3jllo","../director-view/director-view":"39ZVM","react-bootstrap/Row":"3fzwD","react-bootstrap/Col":"2D0r8","@parcel/transformer-js/src/esmodule-helpers.js":"7IoRK","../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"3QRYi"}],"7rA65":[function(require,module,exports) {
+},{"react":"3b2NM","axios":"7rA65","react-router-dom":"1PMSK","../login-view/login-view":"2Z0HZ","../registration-view/registration-view":"1QKnt","../movie-card/movie-card":"7kJC8","../movie-view/movie-view":"3jpQC","../genre-view/genre-view":"3jllo","../director-view/director-view":"39ZVM","react-bootstrap/Row":"3fzwD","react-bootstrap/Col":"2D0r8","@parcel/transformer-js/src/esmodule-helpers.js":"7IoRK","../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"3QRYi","../profile-view/profile-view":"e9Iw2"}],"7rA65":[function(require,module,exports) {
 module.exports = require('./lib/axios');
 
 },{"./lib/axios":"4qfhW"}],"4qfhW":[function(require,module,exports) {
@@ -28274,6 +28275,8 @@ var _form = require("react-bootstrap/Form");
 var _formDefault = parcelHelpers.interopDefault(_form);
 var _button = require("react-bootstrap/Button");
 var _buttonDefault = parcelHelpers.interopDefault(_button);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _s = $RefreshSig$();
 function RegistrationView(props) {
     _s();
@@ -28283,28 +28286,45 @@ function RegistrationView(props) {
     const [birthday, setBirthday] = _react.useState('');
     const handleSubmit = (e)=>{
         e.preventDefault();
-        console.log(username, password, email, birthday);
-        props.onRegister(username);
+        /* Send a request to the server for authentication */ _axiosDefault.default.post('https://myflix-2388-app.herokuapp.com/users', {
+            Username: username,
+            Password: password,
+            Email: email,
+            Birthday: birthday
+        }).then((response)=>{
+            const data = response.data;
+            console.log(data);
+            window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
+        }).catch((e1)=>{
+            console.log('error registering the user');
+        });
     };
     // Form to register username, password, email, birthday
-    return(/*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default, {
+    return(/*#__PURE__*/ _reactDefault.default.createElement(_reactDefault.default.Fragment, null, /*#__PURE__*/ _reactDefault.default.createElement("h1", {
+        className: "headline text-center font-weight-bold text-danger",
+        __source: {
+            fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/registration-view/registration-view.jsx",
+            lineNumber: 35
+        },
+        __self: this
+    }, "Register for myFlix App"), /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default, {
         className: "col-md-6 offset-3",
         __source: {
             fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 19
+            lineNumber: 36
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Group, {
         controlId: "formUsername",
         __source: {
             fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 20
+            lineNumber: 37
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Label, {
         __source: {
             fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 21
+            lineNumber: 38
         },
         __self: this
     }, "Username:"), /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Control, {
@@ -28314,20 +28334,20 @@ function RegistrationView(props) {
         ,
         __source: {
             fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 22
+            lineNumber: 39
         },
         __self: this
     })), /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Group, {
         controlId: "formPassword",
         __source: {
             fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 25
+            lineNumber: 42
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Label, {
         __source: {
             fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 26
+            lineNumber: 43
         },
         __self: this
     }, "Password:"), /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Control, {
@@ -28337,20 +28357,20 @@ function RegistrationView(props) {
         ,
         __source: {
             fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 27
+            lineNumber: 44
         },
         __self: this
     })), /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Group, {
         controlId: "formEmail",
         __source: {
             fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 30
+            lineNumber: 47
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Label, {
         __source: {
             fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 31
+            lineNumber: 48
         },
         __self: this
     }, "Email:"), /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Control, {
@@ -28360,20 +28380,20 @@ function RegistrationView(props) {
         ,
         __source: {
             fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 32
+            lineNumber: 49
         },
         __self: this
     })), /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Group, {
         controlId: "formBirthday",
         __source: {
             fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 35
+            lineNumber: 52
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Label, {
         __source: {
             fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 36
+            lineNumber: 53
         },
         __self: this
     }, "Birthday:"), /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Control, {
@@ -28384,7 +28404,7 @@ function RegistrationView(props) {
         ,
         __source: {
             fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 37
+            lineNumber: 54
         },
         __self: this
     })), /*#__PURE__*/ _reactDefault.default.createElement(_buttonDefault.default, {
@@ -28393,10 +28413,10 @@ function RegistrationView(props) {
         onClick: handleSubmit,
         __source: {
             fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/registration-view/registration-view.jsx",
-            lineNumber: 40
+            lineNumber: 57
         },
         __self: this
-    }, "Submit")));
+    }, "Submit"))));
 }
 _s(RegistrationView, "iEOEpagk8SbrGlv7Xw+f4+HPFE0=");
 _c = RegistrationView;
@@ -28408,7 +28428,7 @@ $RefreshReg$(_c, "RegistrationView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","react-bootstrap/Form":"6A5ko","react-bootstrap/Button":"1ru0l","@parcel/transformer-js/src/esmodule-helpers.js":"7IoRK","../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"3QRYi"}],"7kJC8":[function(require,module,exports) {
+},{"react":"3b2NM","react-bootstrap/Form":"6A5ko","react-bootstrap/Button":"1ru0l","@parcel/transformer-js/src/esmodule-helpers.js":"7IoRK","../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"3QRYi","axios":"7rA65"}],"7kJC8":[function(require,module,exports) {
 var helpers = require("../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -28870,7 +28890,7 @@ MovieView.propTypes = {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","prop-types":"4dfy5","react-bootstrap/Button":"1ru0l","react-bootstrap/Card":"1CZWQ","react-router-dom":"1PMSK","@parcel/transformer-js/src/esmodule-helpers.js":"7IoRK","../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"3QRYi"}],"3jllo":[function(require,module,exports) {
+},{"react":"3b2NM","prop-types":"4dfy5","react-bootstrap/Button":"1ru0l","react-router-dom":"1PMSK","@parcel/transformer-js/src/esmodule-helpers.js":"7IoRK","../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"3QRYi","react-bootstrap/Card":"1CZWQ"}],"3jllo":[function(require,module,exports) {
 var helpers = require("../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -29127,6 +29147,186 @@ var _default = Row;
 exports.default = _default;
 module.exports = exports["default"];
 
-},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","classnames":"5aJRc","react":"3b2NM","./ThemeProvider":"4rz1S"}],"7JlsF":[function() {},{}]},["1j6wU","Pi5Vq","6dau1"], "6dau1", "parcelRequire279c")
+},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","classnames":"5aJRc","react":"3b2NM","./ThemeProvider":"4rz1S"}],"e9Iw2":[function(require,module,exports) {
+var helpers = require("../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ProfileView", ()=>ProfileView
+);
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _form = require("react-bootstrap/Form");
+var _formDefault = parcelHelpers.interopDefault(_form);
+var _button = require("react-bootstrap/Button");
+var _buttonDefault = parcelHelpers.interopDefault(_button);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _s = $RefreshSig$();
+function ProfileView(props) {
+    _s();
+    const [username, setUserName] = _react.useState('');
+    const [password, setPassword] = _react.useState('');
+    const [email, setEmail] = _react.useState('');
+    const [birthday, setBirthday] = _react.useState('');
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        /* Send a request to the server for authentication */ _axiosDefault.default.get('https://myflix-2388-app.herokuapp.com/users', {
+            Username: username,
+            Password: password,
+            Email: email,
+            Birthday: birthday
+        }).then((response)=>{
+            const data = response.data;
+            console.log(data);
+            window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
+        }).catch((e1)=>{
+            console.log('error registering the user');
+        });
+    };
+    // Form to register username, password, email, birthday
+    return(/*#__PURE__*/ _reactDefault.default.createElement(_reactDefault.default.Fragment, null, /*#__PURE__*/ _reactDefault.default.createElement("h1", {
+        className: "headline text-center font-weight-bold text-danger",
+        __source: {
+            fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
+            lineNumber: 35
+        },
+        __self: this
+    }, "Your myFlix Profile"), /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default, {
+        className: "col-md-6 offset-3",
+        __source: {
+            fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
+            lineNumber: 36
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Group, {
+        controlId: "formUsername",
+        __source: {
+            fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
+            lineNumber: 37
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Label, {
+        __source: {
+            fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
+            lineNumber: 38
+        },
+        __self: this
+    }, "Username:"), /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Control, {
+        type: "text",
+        placeholder: "Enter Username",
+        onChange: (e)=>setUserName(e.target.value)
+        ,
+        __source: {
+            fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
+            lineNumber: 39
+        },
+        __self: this
+    })), /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Group, {
+        controlId: "formPassword",
+        __source: {
+            fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
+            lineNumber: 42
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Label, {
+        __source: {
+            fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
+            lineNumber: 43
+        },
+        __self: this
+    }, "Password:"), /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Control, {
+        type: "password",
+        placeholder: "Enter Password",
+        onChange: (e)=>setPassword(e.target.value)
+        ,
+        __source: {
+            fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
+            lineNumber: 44
+        },
+        __self: this
+    })), /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Group, {
+        controlId: "formEmail",
+        __source: {
+            fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
+            lineNumber: 47
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Label, {
+        __source: {
+            fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
+            lineNumber: 48
+        },
+        __self: this
+    }, "Email:"), /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Control, {
+        type: "text",
+        placeholder: "name@example.com",
+        onChange: (e)=>setEmail(e.target.value)
+        ,
+        __source: {
+            fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
+            lineNumber: 49
+        },
+        __self: this
+    })), /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Group, {
+        controlId: "formBirthday",
+        __source: {
+            fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
+            lineNumber: 52
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Label, {
+        __source: {
+            fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
+            lineNumber: 53
+        },
+        __self: this
+    }, "Birthday:"), /*#__PURE__*/ _reactDefault.default.createElement(_formDefault.default.Control, {
+        type: "text",
+        placeholder: "dd/mm/yyyy",
+        value: birthday,
+        onChange: (e)=>setBirthday(e.target.value)
+        ,
+        __source: {
+            fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
+            lineNumber: 54
+        },
+        __self: this
+    })), /*#__PURE__*/ _reactDefault.default.createElement(_buttonDefault.default, {
+        className: "mr-2",
+        variant: "danger",
+        type: "submit",
+        onClick: handleSubmit,
+        __source: {
+            fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
+            lineNumber: 57
+        },
+        __self: this
+    }, "Update"), /*#__PURE__*/ _reactDefault.default.createElement(_buttonDefault.default, {
+        onClick: ()=>onBackClick()
+        ,
+        variant: "danger",
+        __source: {
+            fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
+            lineNumber: 58
+        },
+        __self: this
+    }, "Back to main"))));
+}
+_s(ProfileView, "iEOEpagk8SbrGlv7Xw+f4+HPFE0=");
+_c = ProfileView;
+var _c;
+$RefreshReg$(_c, "ProfileView");
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react":"3b2NM","@parcel/transformer-js/src/esmodule-helpers.js":"7IoRK","../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"3QRYi","axios":"7rA65","react-bootstrap/Form":"6A5ko","react-bootstrap/Button":"1ru0l"}],"7JlsF":[function() {},{}]},["1j6wU","Pi5Vq","6dau1"], "6dau1", "parcelRequire279c")
 
 //# sourceMappingURL=index.fcfe7d4c.js.map
