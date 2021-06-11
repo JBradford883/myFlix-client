@@ -4,15 +4,14 @@ import axios from 'axios';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import { LoginView } from '../login-view/login-view';
-import { RegistrationView } from '../registration-view/registration-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
-import { GenreView } from '../genre-view/genre-view';
+import { RegistrationView } from '../registration-view/registration-view';
 import { DirectorView } from '../director-view/director-view';
+import { GenreView } from '../genre-view/genre-view';
 import { ProfileView } from '../profile-view/profile-view';
 
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Row, Col } from 'react-bootstrap';
 
 class MainView extends React.Component {
 
@@ -20,8 +19,10 @@ class MainView extends React.Component {
     super();
     this.state = {
       movies: [],
-      user: null
-    };
+      selectedMovie: null,
+      user: null,
+      token: null,
+    }
   }
 
   componentDidMount() {
@@ -45,6 +46,22 @@ class MainView extends React.Component {
   When a user successfully logs in, this function updates the `user` property in state to that *particular user
   Stores users data in their browser so when a page refresh occur they do not need to log back in.
   */
+  getMovies(token) {
+    axios.get('https://myflix-2388-app.herokuapp.com/movies', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
+        // Assign the result to the state
+        this.setState({
+          movies: response.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
   onLoggedIn(authData) {
     console.log(authData);
     this.setState({
@@ -64,26 +81,10 @@ class MainView extends React.Component {
     });
   }
 
-
   onRegister(register) {
     this.setState({
       register
     });
-  }
-
-  getMovies(token) {
-    axios.get('https://myflix-2388-app.herokuapp.com/movies', {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(response => {
-        // Assign the result to the state
-        this.setState({
-          movies: response.data
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
   }
 
   render() {
@@ -116,7 +117,7 @@ class MainView extends React.Component {
             if (!user) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} /></Col>
             return <Col md={8}>
-              <ProfileView onLoggedIn={user => this.onLoggedIn(user)} movie={movies} user={user} onBackClick={() => history.goBack()} />
+              <ProfileView onLoggedIn={user => this.onLoggedIn(user)} movies={movies} user={user} onBackClick={() => history.goBack()} />
             </Col>
           }} />
 
@@ -149,8 +150,8 @@ class MainView extends React.Component {
             return <Col md={8}>
               <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre} onBackClick={() => history.goBack()} />
             </Col>
-          }
-          } />
+          }} />
+
         </Row>
       </Router>
     );
