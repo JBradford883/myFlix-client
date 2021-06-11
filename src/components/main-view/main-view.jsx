@@ -45,6 +45,22 @@ class MainView extends React.Component {
   When a user successfully logs in, this function updates the `user` property in state to that *particular user
   Stores users data in their browser so when a page refresh occur they do not need to log back in.
   */
+  getMovies(token) {
+    axios.get('https://myflix-2388-app.herokuapp.com/movies', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
+        // Assign the result to the state
+        this.setState({
+          movies: response.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
   onLoggedIn(authData) {
     console.log(authData);
     this.setState({
