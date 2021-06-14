@@ -35,7 +35,14 @@ class MainView extends React.Component {
     }
   }
 
-  /*When a movie is clicked, this function is invoked and updates the state of the `selectedMovie` *property to that movie*/
+  newUser(newData) {
+    localStorage.setItem('user', newData.Username);
+    this.setState({
+      userData: newData,
+      user: newData.Username
+    });
+  }
+
   setSelectedMovie(movie) {
     this.setState({
       selectedMovie: movie
