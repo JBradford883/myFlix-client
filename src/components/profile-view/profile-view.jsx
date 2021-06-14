@@ -7,7 +7,7 @@ export class ProfileView extends React.Component {
 
 
   render() {
-    const { onBackClick, user, token, deleteAcc } = this.props;
+    let { onBackClick, user, userData, token } = this.props;
 
 
     return (
