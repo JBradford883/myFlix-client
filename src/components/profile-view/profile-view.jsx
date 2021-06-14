@@ -41,7 +41,7 @@ export class ProfileView extends React.Component {
           </Form.Group>
         </Form>
 
-        <Button block variant="danger" type="submit">Update Profile</Button>
+        <Button block variant="danger" type="submit" onClick={() => { updateInfo(token) }}>Update Profile</Button>
 
         <Button variant="danger" block type="button" onClick={() => { deleteAcc(token); onSignOut(null); history.push('/'); }}>Delete My Account</Button>
 
