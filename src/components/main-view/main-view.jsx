@@ -49,6 +49,21 @@ class MainView extends React.Component {
     });
   }
 
+  getAcc(token, user) {
+    axios.get(`https://myflix-2388-app.herokuapp.com/users/${user}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
+        console.log('Account was received successfully');
+        this.setState({
+          userData: response.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   /*
   When a user successfully logs in, this function updates the `user` property in state to that *particular user
   Stores users data in their browser so when a page refresh occur they do not need to log back in.
