@@ -37,7 +37,7 @@ export class ProfileView extends React.Component {
           </Form.Group>
           <Form.Group controlId="formBirthday" onSubmit={this.handleSubmit}>
             <Form.Label>Birthday</Form.Label>
-            <Form.Control name="Birthday" type="birthday" onChange={this.handleChange} />
+            <Form.Control name="Birthday" type="date" onChange={this.handleChange} />
           </Form.Group>
         </Form>
 
