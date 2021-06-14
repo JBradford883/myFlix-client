@@ -9,7 +9,6 @@ export class ProfileView extends React.Component {
   render() {
     let { onBackClick, user, userData, token } = this.props;
 
-
     return (
       <Container className="profile-view" >
         <Card>
