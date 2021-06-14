@@ -45,8 +45,6 @@ export class ProfileView extends React.Component {
 
         <Button variant="danger" block type="button" onClick={() => { deleteAcc(token); onSignOut(null); history.push('/'); }}>Delete My Account</Button>
 
-        <Button onClick={() => onBackClick()} block variant='danger'>Back to main</Button>
-
       </Container>
     );
   }
