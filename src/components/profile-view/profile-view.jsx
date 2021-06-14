@@ -7,17 +7,16 @@ export class ProfileView extends React.Component {
 
 
   render() {
-    const { onBackClick, user, token, deleteAcc } = this.props;
-
+    let { onBackClick, user, userData, token } = this.props;
 
     return (
       <Container className="profile-view" >
         <Card>
           <h2 className="profile-title d-flex justify-content-center text-danger mt-2">Your Profile Info</h2>
           <Card.Body>
-            <Card.Title className="d-flex justify-content-center mb-1">Username: {`${user.Username}`}</Card.Title>
-            <Card.Title className="d-flex justify-content-center mb-1">Email: {user.Email}</Card.Title>
-            <Card.Title className="d-flex justify-content-center">Birthday: {user.Birthday}</Card.Title>
+            <Card.Title className="d-flex justify-content-center mb-1">Username: {`${userData.Username}`}</Card.Title>
+            <Card.Title className="d-flex justify-content-center mb-1">Email: {`${userData.Email}`}</Card.Title>
+            <Card.Title className="d-flex justify-content-center">Birthday: {`${userData.Birthday}`}</Card.Title>
           </Card.Body>
         </Card>
 
@@ -37,15 +36,13 @@ export class ProfileView extends React.Component {
           </Form.Group>
           <Form.Group controlId="formBirthday" onSubmit={this.handleSubmit}>
             <Form.Label>Birthday</Form.Label>
-            <Form.Control name="Birthday" type="birthday" onChange={this.handleChange} />
+            <Form.Control name="Birthday" type="date" onChange={this.handleChange} />
           </Form.Group>
         </Form>
 
-        <Button block variant="danger" type="submit">Update Profile</Button>
+        <Button block variant="danger" type="submit" onClick={() => { updateInfo(token) }}>Update Profile</Button>
 
         <Button variant="danger" block type="button" onClick={() => { deleteAcc(token); onSignOut(null); history.push('/'); }}>Delete My Account</Button>
-
-        <Button onClick={() => onBackClick()} block variant='danger'>Back to main</Button>
 
       </Container>
     );

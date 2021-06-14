@@ -10,6 +10,7 @@ import { RegistrationView } from '../registration-view/registration-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { ProfileView } from '../profile-view/profile-view';
+import { NavigationBar } from '../navigation-bar/navigation-bar'
 
 import { Row, Col } from 'react-bootstrap';
 
@@ -21,25 +22,51 @@ class MainView extends React.Component {
       movies: [],
       selectedMovie: null,
       user: null,
+      userData: null,
       token: null,
     }
   }
 
   componentDidMount() {
     let accessToken = localStorage.getItem('token');
+    let userToken = localStorage.getItem('user');
     if (accessToken !== null) {
       this.setState({
-        user: localStorage.getItem('user')
+        user: localStorage.getItem('user'),
+        token: localStorage.getItem('token')
       });
+      this.getAcc(accessToken, userToken);
       this.getMovies(accessToken);
     }
   }
 
-  /*When a movie is clicked, this function is invoked and updates the state of the `selectedMovie` *property to that movie*/
+  newUser(newData) {
+    localStorage.setItem('user', newData.Username);
+    this.setState({
+      userData: newData,
+      user: newData.Username
+    });
+  }
+
   setSelectedMovie(movie) {
     this.setState({
       selectedMovie: movie
     });
+  }
+
+  getAcc(token, user) {
+    axios.get(`https://myflix-2388-app.herokuapp.com/users/${user}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
+        console.log('Account was received successfully');
+        this.setState({
+          userData: response.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   /*
@@ -65,11 +92,13 @@ class MainView extends React.Component {
   onLoggedIn(authData) {
     console.log(authData);
     this.setState({
-      user: authData.user.Username
+      user: authData.user.Username,
+      token: authData.token
     });
 
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
+    this.getAcc(authData.token, authData.user.Username)
     this.getMovies(authData.token);
   }
 
@@ -88,7 +117,7 @@ class MainView extends React.Component {
   }
 
   render() {
-    const { movies, user } = this.state;
+    const { movies, user, userData, token } = this.state;
 
     return (
       <Router>
@@ -103,6 +132,7 @@ class MainView extends React.Component {
               <Col md={3} key={m._id}>
                 <MovieCard movie={m} />
               </Col>
+
             ))
           }} />
 
@@ -113,12 +143,17 @@ class MainView extends React.Component {
             </Col>
           }} />
 
-          <Route exact path="/users/:username" render={({ history }) => {
-            if (!user) return <Col>
-              <LoginView onLoggedIn={user => this.onLoggedIn(user)} /></Col>
-            return <Col md={8}>
-              <ProfileView onLoggedIn={user => this.onLoggedIn(user)} movies={movies} user={user} onBackClick={() => history.goBack()} />
+          <Route path={`/users/${user}`} render={({ history }) => {
+            if (!userData) return <Col>
+              <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
+            return <>
+              <NavigationBar user={user} history={match, history} />
+              <Col md={8}>
+                <ProfileView user={user} token={token} history={history} userData={userData} onNewUser={newData => { this.newUser(newData); }} onSignOut={signState => { this.signOut(signState); }} onBackClick={() => history.goBack()} />
+              </Col>
+            </>
+
           }} />
 
           <Route exact path="/movies/:movieId" render={({ match, history }) => {
@@ -136,9 +171,12 @@ class MainView extends React.Component {
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
-            return <Col md={8}>
-              <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} onBackClick={() => history.goBack()} />
-            </Col>
+            return <>
+              <NavigationBar user={user} history={match, history} />
+              <Col md={8}>
+                <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} onBackClick={() => history.goBack()} />
+              </Col>
+            </>
           }
           } />
 
@@ -147,9 +185,12 @@ class MainView extends React.Component {
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
-            return <Col md={8}>
-              <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre} onBackClick={() => history.goBack()} />
-            </Col>
+            return <>
+              <NavigationBar user={user} history={match, history} />
+              <Col md={8}>
+                <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre} onBackClick={() => history.goBack()} />
+              </Col>
+            </>
           }} />
 
         </Row>

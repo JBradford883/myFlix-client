@@ -13,7 +13,13 @@
   text-overflow: ellipsis;
   -webkit-line-clamp: 4;
 }
+.profile-view {
+  margin-top: 80px;
+}
 
+.profile-title {
+  font-family: "Limelight";
+}
 .my-flix {
   color: steelblue;
 }
