@@ -40,14 +40,6 @@ class MainView extends React.Component {
     }
   }
 
-  newUser(newData) {
-    localStorage.setItem('user', newData.Username);
-    this.setState({
-      userData: newData,
-      user: newData.Username
-    });
-  }
-
   setSelectedMovie(movie) {
     this.setState({
       selectedMovie: movie
@@ -88,6 +80,23 @@ class MainView extends React.Component {
       });
   }
 
+  updateProfile(userFields) {
+    axios.put(`https://myflix-2388-app.herokuapp.com/users/${user}`, {
+      Username: username,
+      Password: password,
+      Email: email,
+      Birthday: birthday
+
+    })
+      .then(response => {
+        const data = response.data;
+        console.log(data);
+      })
+      .catch(e => {
+        console.log('Error updating user profile')
+      });
+  };
+
   /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
   onLoggedIn(authData) {
     console.log(authData);
@@ -106,7 +115,8 @@ class MainView extends React.Component {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.setState({
-      user: null
+      user: null,
+      userData: null
     });
   }
 
@@ -161,9 +171,12 @@ class MainView extends React.Component {
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
-            return <Col md={6} className="movie-view">
-              <MovieView movie={movies.find(m => m._id === match.params.movieId)} onBackClick={() => history.goBack()} />
-            </Col>
+            return <>
+              <NavigationBar user={user} history={match, history} />
+              <Col md={6} className="movie-view">
+                <MovieView movie={movies.find(m => m._id === match.params.movieId)} onBackClick={() => history.goBack()} />
+              </Col>
+            </>
           }} />
 
           <Route exact path="/directors/:name" render={({ match, history }) => {

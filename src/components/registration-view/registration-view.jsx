@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 
 export function RegistrationView(props) {
-  const [username, setUserName] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
@@ -36,7 +36,7 @@ export function RegistrationView(props) {
       <Form className="col-md-6 offset-3">
         <Form.Group controlId="formUsername">
           <Form.Label>Username:</Form.Label>
-          <Form.Control type="text" placeholder="Enter Username" onChange={e => setUserName(e.target.value)} />
+          <Form.Control type="text" placeholder="Enter Username" onChange={e => setUsername(e.target.value)} />
         </Form.Group>
 
         <Form.Group controlId="formPassword">
