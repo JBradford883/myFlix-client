@@ -40,14 +40,6 @@ class MainView extends React.Component {
     }
   }
 
-  newUser(newData) {
-    localStorage.setItem('user', newData.Username);
-    this.setState({
-      userData: newData,
-      user: newData.Username
-    });
-  }
-
   setSelectedMovie(movie) {
     this.setState({
       selectedMovie: movie
