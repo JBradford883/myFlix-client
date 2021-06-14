@@ -170,9 +170,12 @@ class MainView extends React.Component {
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
-            return <Col md={6} className="movie-view">
-              <MovieView movie={movies.find(m => m._id === match.params.movieId)} onBackClick={() => history.goBack()} />
-            </Col>
+            return <>
+              <NavigationBar user={user} history={match, history} />
+              <Col md={6} className="movie-view">
+                <MovieView movie={movies.find(m => m._id === match.params.movieId)} onBackClick={() => history.goBack()} />
+              </Col>
+            </>
           }} />
 
           <Route exact path="/directors/:name" render={({ match, history }) => {
