@@ -80,23 +80,6 @@ class MainView extends React.Component {
       });
   }
 
-  updateProfile(userFields) {
-    axios.put(`https://myflix-2388-app.herokuapp.com/users/${user}`, {
-      Username: username,
-      Password: password,
-      Email: email,
-      Birthday: birthday
-
-    })
-      .then(response => {
-        const data = response.data;
-        console.log(data);
-      })
-      .catch(e => {
-        console.log('Error updating user profile')
-      });
-  };
-
   /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
   onLoggedIn(authData) {
     console.log(authData);
