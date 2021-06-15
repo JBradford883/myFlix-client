@@ -39859,21 +39859,21 @@ class ProfileView extends _reactDefault.default.Component {
                 lineNumber: 48
             },
             __self: this
-        }, "Username: ", `${userData.Username} `), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Title, {
+        }, "Username: ", `${userData.Username}`), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Title, {
             className: "d-flex justify-content-center mb-1",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
                 lineNumber: 49
             },
             __self: this
-        }, "Email: ", `${userData.Email} `), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Title, {
+        }, "Email: ", `${userData.Email}`), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Title, {
             className: "d-flex justify-content-center mb-1",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
                 lineNumber: 50
             },
             __self: this
-        }, "Birthday: ", `${userData.Birthday} `))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form, {
+        }, "Birthday: ", `${userData.Birthday}`))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form, {
             className: "block",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
