@@ -33,6 +33,19 @@ export class ProfileView extends React.Component {
     e.preventDefault();
     this.props.updateProfile(this.state.inputValues)
   }
+    function deleteAcc(token) {
+      console.log('Not deleted yet');
+      axios.delete(`https://myflix-2388-app.herokuapp.com/users/${user}`,
+        { headers: { 'Authorization': `Bearer ${token}` } })
+        .then(response => {
+          console.log(response);
+          console.log(`${user} has been deleted`);
+        })
+        .catch(e => {
+          console.log('There is an error');
+          console.log(e);
+        });
+    }
 
 
   render() {
@@ -74,7 +87,7 @@ export class ProfileView extends React.Component {
 
         <Button block variant="danger" type="submit" onClick={() => { handleSubmit(e) }}>Update Profile</Button>
 
-        <Button variant="danger" block type="button" onClick={() => { deleteAcc(token); onSignOut(null); history.push('/'); }}>Delete My Account</Button>
+        <Button variant="danger" block type="button" onClick={() => { deleteAcc(token); history.push('/'); }}>Delete My Account</Button>
 
       </Container>
     );
