@@ -4,13 +4,14 @@ import { Card, Button } from 'react-bootstrap';
 
 import { Link } from 'react-router-dom';
 
+import './movie-view.scss';
 
 export class MovieView extends React.Component {
   render() {
     const { movie, onBackClick } = this.props;
 
     return (
-      <Card>
+      <Card className="movie-view">
         <Card.Img className="movie-img float-left" src={movie.ImagePath} />
         <Card.Body>
           <Card.Title>{movie.Title}</Card.Title>
