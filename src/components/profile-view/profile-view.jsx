@@ -6,6 +6,7 @@ import './profile-view.scss';
 
 export class ProfileView extends React.Component {
 
+
   render() {
     let { user, userData, token, history } = this.props;
 
@@ -18,6 +19,7 @@ export class ProfileView extends React.Component {
       },
         { headers: { 'Authorization': `Bearer ${token}` } })
         .then(response => {
+          console.log(response);
           console.log('Successfully updated your account information');
         })
         .catch(function (error) {
@@ -60,15 +62,15 @@ export class ProfileView extends React.Component {
           </Form.Group>
           <Form.Group controlId="formPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control name="Password" type="password" placeholder="Update your password" onChange={this.handleChange} />
+            <Form.Control name="password" type="password" placeholder="Update your password" onChange={this.handleChange} />
           </Form.Group>
           <Form.Group controlId="formEmail">
             <Form.Label>Email</Form.Label>
-            <Form.Control name="Email" type="email" placeholder="Update your email address" onChange={this.handleChange} />
+            <Form.Control name="email" type="email" placeholder="Update your email address" onChange={this.handleChange} />
           </Form.Group>
           <Form.Group controlId="formBirthday">
             <Form.Label>Birthday</Form.Label>
-            <Form.Control name="Birthday" type="date" onChange={this.handleChange} />
+            <Form.Control name="birthday" type="date" onChange={this.handleChange} />
           </Form.Group>
         </Form>
 
