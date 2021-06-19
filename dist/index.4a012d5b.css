@@ -2,6 +2,10 @@
   font-family: "Limelight";
   padding: 20px 0;
 }
+.movie-card {
+  margin-top: 70px;
+}
+
 .movie-description {
   overflow: hidden;
   line-height: 1.5rem;
@@ -12,6 +16,9 @@
   overflow: hidden !important;
   text-overflow: ellipsis;
   -webkit-line-clamp: 4;
+}
+.movie-view {
+  margin-top: 50px;
 }
 .director-view {
   margin-top: 80px;
