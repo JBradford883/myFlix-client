@@ -148,7 +148,7 @@ class MainView extends React.Component {
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
             return <>
-              <NavigationBar user={user} history={match, history} />
+              <NavigationBar user={user} history={history} />
               <Col md={8}>
                 <ProfileView user={user} token={token} history={history} userData={userData} onNewUser={newData => { this.newUser(newData); }} onSignOut={signState => { this.signOut(signState); }} onBackClick={() => history.goBack()} />
               </Col>
@@ -162,7 +162,7 @@ class MainView extends React.Component {
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
             return <>
-              <NavigationBar user={user} history={match, history} />
+              <NavigationBar user={user} history={history} />
               <Col md={6} className="movie-view">
                 <MovieView movie={movies.find(m => m._id === match.params.movieId)} onBackClick={() => history.goBack()} />
               </Col>
@@ -175,7 +175,7 @@ class MainView extends React.Component {
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
             return <>
-              <NavigationBar user={user} history={match, history} />
+              <NavigationBar user={user} history={history} />
               <Col md={8}>
                 <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} onBackClick={() => history.goBack()} />
               </Col>
@@ -189,7 +189,7 @@ class MainView extends React.Component {
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
             return <>
-              <NavigationBar user={user} history={match, history} />
+              <NavigationBar user={user} history={history} />
               <Col md={8}>
                 <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre} onBackClick={() => history.goBack()} />
               </Col>
