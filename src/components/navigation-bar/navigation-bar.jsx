@@ -10,10 +10,12 @@ export class NavigationBar extends React.Component {
     this.setState({
       user: null
     });
+    console.log("You have been logged out");
   }
 
+
   render() {
-    const { onLoggedOut, history, user, userData } = this.props;
+    const { history, user } = this.props;
 
     return (
       <>
