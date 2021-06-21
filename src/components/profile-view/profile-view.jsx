@@ -6,41 +6,68 @@ import './profile-view.scss';
 
 export class ProfileView extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      formValues: {
+        Username: props.userData.Username,
+        Password: '',
+        Email: props.userData.Email,
+        Birthday: props.userData.Birthday
+      },
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateProfile = this.updateProfile.bind(this);
+    this.deleteAcc = this.deleteAcc.bind(this);
+  }
+
+  handleChange(e) {
+    const { target } = e;
+    this.setState((prev) => ({
+      formValues: {
+        ...prev.formValues,
+        [target.name]: target.value,
+      },
+    }));
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.updateProfile(this.props.token);
+  }
+
+  // PUT request to update the users profile
+  updateProfile(token) {
+    axios.put(`https://myflix-2388-app.herokuapp.com/users/${this.props.user}`,
+      this.state.formValues,
+      { headers: { 'Authorization': `Bearer ${token}` } })
+      .then(response => {
+        console.log('Successfully updated your account information');
+        this.props.onProfileUpdate(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  // DELETE request to remove the user profile 
+  deleteAcc(token) {
+    axios.delete(`https://myflix-2388-app.herokuapp.com/users/${this.props.user}`,
+      { headers: { 'Authorization': `Bearer ${token}` } })
+      .then(response => {
+        console.log(response);
+        console.log(`${this.props.user} has been deleted`);
+      })
+      .catch(e => {
+        console.log('There is an error');
+        console.log(e);
+      });
+  }
+
 
   render() {
     let { user, userData, token, history } = this.props;
-
-    function updateProfile(token) {
-      axios.put(`https://myflix-2388-app.herokuapp.com/users/${user}`, {
-        Username: username,
-        Password: password,
-        Email: email,
-        Birthday: birthday,
-      },
-        { headers: { 'Authorization': `Bearer ${token}` } })
-        .then(response => {
-          console.log(response);
-          console.log('Successfully updated your account information');
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
-
-    function deleteAcc(token) {
-      console.log('Not deleted yet');
-      axios.delete(`https://myflix-2388-app.herokuapp.com/users/${user}`,
-        { headers: { 'Authorization': `Bearer ${token}` } })
-        .then(response => {
-          console.log(response);
-          console.log(`${user} has been deleted`);
-        })
-        .catch(e => {
-          console.log('There is an error');
-          console.log(e);
-        });
-    }
-
 
     return (
       <Container className="profile-view" >
@@ -58,62 +85,29 @@ export class ProfileView extends React.Component {
           <h2 className="profile-title d-flex justify-content-center text-danger mt-3">Update your profile</h2>
           <Form.Group controlId="formUsername">
             <Form.Label>Username</Form.Label>
-            <Form.Control name="Username" type="username" placeholder="Update your username" onChange={this.handleChange} />
+            <Form.Control name="Username" type="username" value={this.state.formValues.Username} placeholder="Update your username" onChange={this.handleChange} />
           </Form.Group>
           <Form.Group controlId="formPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control name="password" type="password" placeholder="Update your password" onChange={this.handleChange} />
+            <Form.Control name="Password" type="password" value={this.state.formValues.Password} placeholder="Update your password" onChange={this.handleChange} />
           </Form.Group>
           <Form.Group controlId="formEmail">
             <Form.Label>Email</Form.Label>
-            <Form.Control name="email" type="email" placeholder="Update your email address" onChange={this.handleChange} />
+            <Form.Control name="Email" type="email" value={this.state.formValues.Email} placeholder="Update your email address" onChange={this.handleChange} />
           </Form.Group>
           <Form.Group controlId="formBirthday">
             <Form.Label>Birthday</Form.Label>
-            <Form.Control name="birthday" type="date" onChange={this.handleChange} />
+            <Form.Control name="Birthday" type="date" value={this.state.formValues.Birthday} onChange={this.handleChange} />
           </Form.Group>
         </Form>
 
 
 
-        <Button block variant="danger" type="submit" onClick={() => { updateProfile(token) }}>Update Profile</Button>
+        <Button block variant="danger" type="submit" onClick={this.handleSubmit}>Update Profile</Button>
 
-        <Button variant="danger" block type="button" onClick={() => { deleteAcc(token); history.push('/'); }}>Delete My Account</Button>
+        <Button variant="danger" block type="button" onClick={() => { this.deleteAcc(token); history.push('/'); }}>Delete My Account</Button>
 
       </Container>
     );
   }
 }
-
-
-
-
-/*
-constructor(props) {
-    super(props);
-    this.state = {
-      formValues: {
-        Username: props.userData.Username,
-        Password: '',
-        Email: props.userData.Email,
-        Birthday: props.userData.Birthday
-      },
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(e) {
-    const { target } = e;
-    this.setState((prev) => ({
-      formValues: {
-        ...prev.formValues,
-        [target.name]: target.value,
-      },
-    }));
-  }
-
-  handleSubmit(token) {
-    e.preventDefault();
-    this.props.updateProfile(this.state.inputValues)
-    */
