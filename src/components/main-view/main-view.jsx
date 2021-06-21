@@ -150,7 +150,7 @@ class MainView extends React.Component {
             return <>
               <NavigationBar user={user} history={history} />
               <Col md={8}>
-                <ProfileView user={user} token={token} history={history} userData={userData} onNewUser={newData => { this.newUser(newData); }} onSignOut={signState => { this.signOut(signState); }} onBackClick={() => history.goBack()} />
+                <ProfileView user={user} token={token} history={history} userData={userData} onProfileUpdate={this.onProfileUpdate} onNewUser={newData => { this.newUser(newData); }} onBackClick={() => history.goBack()} />
               </Col>
             </>
 
