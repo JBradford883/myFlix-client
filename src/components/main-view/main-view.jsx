@@ -109,12 +109,10 @@ class MainView extends React.Component {
       localStorage.setItem("user", updatedUserData.Username);
   }
 
-  onDeleteAcc(deleteUserData) {
+  onAddFavMovie(addMovie) {
     this.setState({
-      userData: deleteUserData,
-      user: deleteUserData.Username
-    }),
-      localStorage.removeItem("user", deleteUserData.Username);
+      addMovie: addMovie
+    })
   }
 
   render() {
