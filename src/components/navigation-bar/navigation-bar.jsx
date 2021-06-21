@@ -11,6 +11,7 @@ export class NavigationBar extends React.Component {
       user: null
     });
     console.log("You have been logged out");
+    window.open('/', '_self');
   }
 
 
