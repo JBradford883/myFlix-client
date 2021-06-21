@@ -55,13 +55,15 @@ export class ProfileView extends React.Component {
   deleteAcc(token) {
     axios.delete(`https://myflix-2388-app.herokuapp.com/users/${this.props.user}`,
       { headers: { 'Authorization': `Bearer ${token}` } })
-      .then(response => {
-        console.log(response);
-        console.log(`${this.props.user} has been deleted`);
+
+      .then(() => {
+        alert(`${this.props.user} has been deleted`);
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        window.location.pathname = "/";
       })
-      .catch(e => {
-        console.log('There is an error');
-        console.log(e);
+      .catch(function (error) {
+        console.log(error);
       });
   }
 
