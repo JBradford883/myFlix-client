@@ -24,7 +24,8 @@ class MainView extends React.Component {
       user: null,
       userData: null,
       token: null,
-    }
+    };
+    this.onProfileUpdate = this.onProfileUpdate.bind(this);
   }
 
   componentDidMount() {
@@ -94,19 +95,26 @@ class MainView extends React.Component {
     this.getMovies(authData.token);
   }
 
-  onLoggedOut() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    this.setState({
-      user: null,
-      userData: null
-    });
-  }
-
   onRegister(register) {
     this.setState({
       register
     });
+  }
+
+  onProfileUpdate(updatedUserData) {
+    this.setState({
+      userData: updatedUserData,
+      user: updatedUserData.Username
+    }),
+      localStorage.setItem("user", updatedUserData.Username);
+  }
+
+  onDeleteAcc(deleteUserData) {
+    this.setState({
+      userData: deleteUserData,
+      user: deleteUserData.Username
+    }),
+      localStorage.removeItem("user", deleteUserData.Username);
   }
 
   render() {
@@ -114,9 +122,10 @@ class MainView extends React.Component {
 
     return (
       <Router>
+
         <Row className="main-view justify-content-md-center">
 
-          <Route exact path="/" render={() => {
+          <Route exact path="/" render={({ history }) => {
             if (!user) return (
               <Col>
                 <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
