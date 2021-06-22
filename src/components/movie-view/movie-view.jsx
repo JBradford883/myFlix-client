@@ -1,37 +1,44 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, Container, Row } from 'react-bootstrap';
 
 import { Link } from 'react-router-dom';
 
 import './movie-view.scss';
 
 export class MovieView extends React.Component {
+
   render() {
     const { movie, onBackClick } = this.props;
 
     return (
-      <Card className="movie-view">
-        <Card.Img className="movie-img float-left" src={movie.ImagePath} />
-        <Card.Body>
-          <Card.Title>{movie.Title}</Card.Title>
-          <Card.Text className="description"><b>Description:</b> {movie.Description}</Card.Text>
-          <Card.Text>
-            <span className='label'>Genre: </span>
-            <span className='value'>{movie.Genre.Name}</span>
-          </Card.Text>
-          <Card.Text>
-            <span className='label'>Director: </span>
-            <span className='value'>{movie.Director.Name}</span>
-          </Card.Text>
-          <Link to={`/genres/${movie.Genre.Name}`}>
-            <Button className="mb-2" block variant="danger">Genre Information</Button>
-          </Link>
-          <Link to={`/directors/${movie.Director.Name}`}>
-            <Button className="mb-2" block variant="danger">Director Information</Button>
-          </Link>
-          <Button onClick={() => onBackClick()} block variant='danger'>Back to main</Button>
-        </Card.Body>
+      <Card className="movie-view shadow">
+        <div className="m-3">
+          <div className="movie-poster float-left mr-3">
+            <img src={movie.ImagePath} />
+          </div>
+          <div className="movie-title mb-2">
+            <span className="value font-weight-bold h2">{movie.Title}</span>
+          </div>
+          <div className="movie-info mb-2">
+            <span className="label font-weight-bold">Description: </span>
+            <span className="value">{movie.Description}</span>
+          </div>
+          <div className="movie-description mb-2">
+            <span className="label font-weight-bold">Director: </span>
+            <Link className="link" to={`/directors/${movie.Director.Name}`}>
+              <span className="value">{movie.Director.Name}</span>
+            </Link>
+          </div>
+          <div className="movie-description mb-2">
+            <span className="label font-weight-bold">Genre: </span>
+            <Link className="link" to={`/genres/${movie.Genre.Name}`}>
+              <span className="value">{movie.Genre.Name}</span>
+            </Link>
+          </div>
+          {/*<Button onClick={() => onBackClick()} variant='dark'>Back</Button>*/}
+
+        </div>
       </Card>
     );
   }
@@ -55,3 +62,24 @@ MovieView.propTypes = {
   }).isRequired,
   onBackClick: PropTypes.func.isRequired
 };
+
+
+// <Card className="movie-view">
+      //   <Card.Body>
+      //     <Card.Img className="movie-img mb-3" src={movie.ImagePath} />
+      //     <Card.Title>{movie.Title}</Card.Title>
+      //     <Card.Text className="description"><b>Description:</b> {movie.Description}</Card.Text>
+      //     <Card.Text>
+      //       <span className="label font-weight-bold">Director: </span>
+      //       <Link className="link" to={`/directors/${movie.Director.Name}`}>
+      //         <span className="value">{movie.Director.Name}</span>
+      //       </Link>
+      //     </Card.Text>
+      //     <Card.Text>
+      //       <span className="label font-weight-bold">Genre: </span>
+      //       <Link className="link" to={`/genres/${movie.Genre.Name}`}>
+      //         <span className="value">{movie.Genre.Name}</span>
+      //       </Link>
+      //     </Card.Text>
+      //   </Card.Body>
+      // </Card>
