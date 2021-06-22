@@ -23,11 +23,37 @@ export function RegistrationView(props) {
         const data = response.data;
         console.log(data);
         window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
+        alert('You have sucessfully registered.');
       })
       .catch(e => {
         console.log('error registering the user')
       });
   };
+
+  // const formValidation = () => {
+  //   const usernameError = {};
+  //   const emailError = {};
+  //   const passwordError = {};
+  //   const birthdayError = {};
+  //   let isValid = true;
+  //   if (username.trim().length < 6) {
+  //     usernameError.usernameShort = "Must be alphanumeric and contains at least 6 characters";
+  //     isValid = false;
+  //   }
+  //   else if (password.trim().length < 4) {
+  //     passwordError.passwordMissing = "You must enter a password.(minimum 4 characters) ";
+  //     isValid = false;
+  //   }
+  //   else if (!email.includes(".") || !email.includes("@")) {
+  //     emailError.emailNotEmail = "A valid email address is required.";
+  //     isValid = false;
+  //   }
+  //   else if (birthday === '') {
+  //     BirthdayError.noBirthday = "Please enter a birthdate";
+  //     isValid = false;
+  //   }
+  //   return isValid;
+  // };
 
   // Form to register username, password, email, birthday
   return (
