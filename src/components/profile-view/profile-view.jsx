@@ -108,7 +108,16 @@ export class ProfileView extends React.Component {
 
         <Button block variant="danger" type="submit" onClick={this.handleSubmit}>Update Profile</Button>
 
-        <Button variant="danger" block type="button" onClick={() => { this.deleteAcc(token); history.push('/'); }}>Delete My Account</Button>
+        <Button id="delete-btn" variant="danger" block onClick={() => {
+          const confirmBox = window.confirm(
+            "Are you sure you want to delete your account?"
+          )
+          if (confirmBox === true) {
+            this.deleteAcc(token)
+          }
+        }} >
+          Delete Your Account
+        </Button>
 
       </Container>
     );
