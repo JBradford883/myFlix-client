@@ -10,33 +10,36 @@ export class GenreView extends React.Component {
     const { genre, onBackClick, movies } = this.props;
 
     return (
-      <>
-        <Container>
-          <Card className='genre-view'>
-            <Card.Body>
-              <Card.Title><h1 className="font-weight-bold">{genre.Name}</h1></Card.Title>
-              <Card.Text className="genre-description"><b>Description:</b> {genre.Description}</Card.Text>
-              <Button onClick={() => onBackClick(null)} block variant="danger">Back</Button>
-            </Card.Body>
-          </Card>
-        </Container>
+      <Container>
+        <Card className='genre-view'>
+          <Card.Body>
+            <Card.Title className="font-weight-bold text-center h1">{genre.Name}</Card.Title>
+            <Card.Text className="genre-description"><b>Description:</b> {genre.Description}</Card.Text>
+            <Card.Text cclassName="text-center h5 mb-4">Movies belonging to this genre:</Card.Text>
 
-        <Container className='my-3'>
-          <div>
-            <h4 className=' text-center mb-4 white-words'>{genre.Name} Movies:</h4>
-            <div className="genre-movies text-center">
-            </div>
-          </div>
-        </Container>
+            <Row className="genre-movies mb-3">
+              {movies.map(m => {
+                if (m.Genre && m.Genre.Name === genre.Name) {
+                  return (
+                    <Col className="genre-card text-center mb-2" lg={3} md={6}>
+                      <Card.Img className="genre-img" key={m._id} src={m.ImagePath} />
+                    </Col>
+                  );
+                }
+              })}
+            </Row>
 
-      </>
+            <Button onClick={() => onBackClick(null)} variant="danger">Back</Button>
+          </Card.Body>
+        </Card>
+      </Container>
     );
   }
 }
 
 GenreView.propTypes = {
   genre: PropTypes.shape({
+    Name: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired
-  }).isRequired,
-  onBackClick: PropTypes.func.isRequired
+  }).isRequired
 };
