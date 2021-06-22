@@ -73,8 +73,8 @@ export class ProfileView extends React.Component {
 
     return (
       <Container className="profile-view" >
-        <Card>
-          <h2 className="profile-title d-flex justify-content-center text-danger mt-2">Your Profile Info</h2>
+        <Card className="shadow-sm">
+          <h2 className="profile-title d-flex justify-content-center text-danger mt-2">{`${userData.Username}`} Profile Info</h2>
           <Card.Body>
             <Card.Title className="d-flex justify-content-center mb-1">Username: {`${userData.Username}`}</Card.Title>
             <Card.Title className="d-flex justify-content-center mb-1">Email: {`${userData.Email}`}</Card.Title>
