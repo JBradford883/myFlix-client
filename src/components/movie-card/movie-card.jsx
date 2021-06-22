@@ -21,8 +21,11 @@ export class MovieCard extends React.Component {
           <Link to={`/movies/${movie._id}`}>
             <Button className="mb-2" block variant="danger">Movie Info</Button>
           </Link>
+          <div>
+            <Button className="Favorite-Movies" block variant="danger" onClick={() => this.addFavorite(movie._id)}>Add to Favorites</Button>
+          </div>
         </Card.Body>
-      </Card>
+      </Card >
     );
   }
 }
@@ -33,6 +36,7 @@ MovieCard.propTypes = {
     Description: PropTypes.string.isRequired,
     ImagePath: PropTypes.string.isRequired
   }).isRequired,
+};
 
 /* Director and Genre Buttons
 
