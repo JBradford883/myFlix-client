@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Card, Container } from 'react-bootstrap';
+import { Button, Card, Container, Row, Col } from 'react-bootstrap';
 
 import './director-view.scss';
 
 export class DirectorView extends React.Component {
 
   render() {
-    const { director, onBackClick } = this.props;
+    const { director, onBackClick, movies } = this.props;
 
     return (
       <Container className='director-view'>
         <Card>
           <Card.Body>
-            <Card.Title><h1 className="font-weight-bold">{director.Name}</h1></Card.Title>
+            <h1 className="font-weight-bold text-center">{director.Name}</h1>
 
             <Card.Text className="font-weight-bold mb-0">Biography</Card.Text>
             <Card.Text>{director.Bio}</Card.Text>
@@ -23,8 +23,21 @@ export class DirectorView extends React.Component {
 
             <Card.Text className="font-weight-bold mb-0">Death Year</Card.Text>
             <Card.Text>{director.Death}</Card.Text>
+            <h4 className='text-center mb-4'>Movies this director has filmed:</h4>
 
-            <Button onClick={() => onBackClick(null)} block variant="danger">Back to Main</Button>
+            <Row className="director-movies mb-3">
+              {movies.map(m => {
+                if (m.Director && m.Director.Name === director.Name) {
+                  return (
+                    <Col className="director-card text-center mb-2" lg={3} md={6}>
+                      <Card.Img className="director-img" key={m._id} src={m.ImagePath} />
+                    </Col>
+                  );
+                }
+              })}
+            </Row>
+
+            <Button onClick={() => onBackClick(null)} variant="danger">Back</Button>
           </Card.Body>
         </Card>
       </Container>
