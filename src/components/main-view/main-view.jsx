@@ -135,7 +135,7 @@ class MainView extends React.Component {
               <>
                 <NavigationBar user={user} history={history} />
                 {movies.map(m => (
-                  <Col md={3} key={m._id}>
+                  <Col lg={3} sm={4} key={m._id}>
                     <MovieCard movie={m} />
                   </Col>
 
@@ -174,7 +174,7 @@ class MainView extends React.Component {
             if (movies.length === 0) return <div className="main-view" />;
             return <>
               <NavigationBar user={user} history={history} />
-              <Col md={6} className="movie-view">
+              <Col md={12} className="movie-view">
                 <MovieView movie={movies.find(m => m._id === match.params.movieId)} onBackClick={() => history.goBack()} />
               </Col>
             </>
@@ -188,8 +188,8 @@ class MainView extends React.Component {
             if (movies.length === 0) return <div className="main-view" />;
             return <>
               <NavigationBar user={user} history={history} />
-              <Col md={8}>
-                <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} onBackClick={() => history.goBack()} />
+              <Col md={12}>
+                <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} onBackClick={() => history.goBack()} movies={movies} />
               </Col>
             </>
           }
@@ -203,8 +203,8 @@ class MainView extends React.Component {
             if (movies.length === 0) return <div className="main-view" />;
             return <>
               <NavigationBar user={user} history={history} />
-              <Col md={8}>
-                <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre} onBackClick={() => history.goBack()} />
+              <Col md={12}>
+                <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre} onBackClick={() => history.goBack()} movies={movies} />
               </Col>
             </>
           }} />
