@@ -85,7 +85,7 @@ export class ProfileView extends React.Component {
 
 
         <Form className="block">
-          <h2 className="profile-title d-flex justify-content-center text-danger mt-3">Update your profile</h2>
+          <h2 className="profile-title d-flex justify-content-center text-danger mt-3">Update your user profile</h2>
           <Form.Group controlId="formUsername">
             <Form.Label>Username</Form.Label>
             <Form.Control name="Username" type="username" value={this.state.formValues.Username} placeholder="Update your username" onChange={this.handleChange} />
