@@ -45,6 +45,7 @@ export class ProfileView extends React.Component {
       .then(response => {
         console.log('Successfully updated your account information');
         this.props.onProfileUpdate(response.data);
+        alert('You have sucessfully updated your profile.');
       })
       .catch(function (error) {
         console.log(error);
