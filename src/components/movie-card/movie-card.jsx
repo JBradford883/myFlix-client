@@ -1,13 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import { Button, Card, Col } from 'react-bootstrap';
 
 import { Link } from "react-router-dom";
 
 import './movie-card.scss';
+import axios from 'axios';
 
 export class MovieCard extends React.Component {
+  constructor() {
+    super();
+    this.state = {};
+  }
+
+  // POST request to add movie to users favorites list
+  addFavorite(movieData) {
+    axios.post(`https://myflix-2388-app.herokuapp.com/users/${this.props.user}/movies/${movie._id}`,
+    )
+      .then(response => {
+        console.log(response);
+        console.log('Successfully added movies to Favorites list');
+        alert("Added to favorites!")
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
 
   render() {
     const { movie } = this.props;
