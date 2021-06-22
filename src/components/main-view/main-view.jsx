@@ -109,7 +109,7 @@ class MainView extends React.Component {
       localStorage.setItem("user", updatedUserData.Username);
   }
 
-  onAddFavMovie(addMovie) {
+  onAddFFavorite(addMovie) {
     this.setState({
       addMovie: addMovie
     })
@@ -123,6 +123,7 @@ class MainView extends React.Component {
 
         <Row className="main-view justify-content-md-center">
 
+          {/*Main View*/}
           <Route exact path="/" render={({ history }) => {
             if (!user) return (
               <Col>
@@ -143,6 +144,7 @@ class MainView extends React.Component {
             );
           }} />
 
+          {/*Registration View*/}
           <Route path="/register" render={() => {
             if (user) return <Redirect to="/" />
             return <Col>
@@ -150,6 +152,7 @@ class MainView extends React.Component {
             </Col>
           }} />
 
+          {/*Profile View*/}
           <Route path={`/users/${user}`} render={({ history }) => {
             if (!userData) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
@@ -163,6 +166,7 @@ class MainView extends React.Component {
 
           }} />
 
+          {/*Movie View*/}
           <Route exact path="/movies/:movieId" render={({ match, history }) => {
             if (!user) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
@@ -176,6 +180,7 @@ class MainView extends React.Component {
             </>
           }} />
 
+          {/*Director View*/}
           <Route exact path="/directors/:name" render={({ match, history }) => {
             if (!user) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
@@ -190,6 +195,7 @@ class MainView extends React.Component {
           }
           } />
 
+          {/*Genre View*/}
           <Route exact path="/genres/:name" render={({ match, history }) => {
             if (!user) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
