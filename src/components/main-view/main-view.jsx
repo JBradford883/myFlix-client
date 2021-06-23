@@ -110,7 +110,7 @@ class MainView extends React.Component {
       localStorage.setItem("user", updatedUserData.Username);
   }
 
-  onAddFFavorite(addMovie) {
+  onAddFavorite(addMovie) {
     this.setState({
       addMovie: addMovie
     })
@@ -175,7 +175,7 @@ class MainView extends React.Component {
             if (movies.length === 0) return <div className="main-view" />;
             return <>
               <NavigationBar user={user} history={history} />
-              <Col md={12} className="movie-view">
+              <Col lg={12} md={10} sm={8} className="movie-view">
                 <MovieView movie={movies.find(m => m._id === match.params.movieId)} onBackClick={() => history.goBack()} />
               </Col>
             </>
