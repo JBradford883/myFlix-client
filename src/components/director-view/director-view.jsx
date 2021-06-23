@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card, Container, Row, Col } from 'react-bootstrap';
 
+import { Link } from "react-router-dom";
+
 import './director-view.scss';
 
 export class DirectorView extends React.Component {
@@ -11,7 +13,7 @@ export class DirectorView extends React.Component {
 
     return (
       <Container className='director-view'>
-        <Card>
+        <Card className="shadow">
           <Card.Body>
             <h1 className="font-weight-bold text-center">{director.Name}</h1>
 
@@ -30,14 +32,15 @@ export class DirectorView extends React.Component {
                 if (m.Director && m.Director.Name === director.Name) {
                   return (
                     <Col className="director-card text-center mb-2" lg={3} md={6}>
-                      <Card.Img className="director-img" key={m._id} src={m.ImagePath} />
+                      <Link to={`/movies/${m._id}`}>
+                        <Card.Img className="director-img" key={m._id} src={m.ImagePath} />
+                      </Link>
                     </Col>
                   );
                 }
               })}
             </Row>
-
-            <Button onClick={() => onBackClick(null)} variant="danger">Back</Button>
+            <Button onClick={() => onBackClick(null)} variant="dark">Back</Button>
           </Card.Body>
         </Card>
       </Container>
