@@ -13,7 +13,8 @@ export class ProfileView extends React.Component {
         Username: props.userData.Username,
         Password: '',
         Email: props.userData.Email,
-        Birthday: props.userData.Birthday
+        Birthday: props.userData.Birthday,
+        FavoriteMovies: []
       },
     };
     this.handleChange = this.handleChange.bind(this);
@@ -37,13 +38,14 @@ export class ProfileView extends React.Component {
     this.updateProfile(this.props.token);
   }
 
+
   // PUT request to update the users profile
   updateProfile(token) {
     axios.put(`https://myflix-2388-app.herokuapp.com/users/${this.props.user}`,
       this.state.formValues,
       { headers: { 'Authorization': `Bearer ${token}` } })
       .then(response => {
-        console.log('Successfully updated your account information');
+        console.log('You have sucessfully updated your profile.');
         this.props.onProfileUpdate(response.data);
         alert('You have sucessfully updated your profile.');
       })
@@ -70,7 +72,7 @@ export class ProfileView extends React.Component {
 
 
   render() {
-    let { user, userData, token, history } = this.props;
+    const { movies, userData, token } = this.props;
 
     return (
       <Container className="profile-view" >
@@ -80,6 +82,7 @@ export class ProfileView extends React.Component {
             <Card.Title className="d-flex justify-content-center mb-1">Username: {`${userData.Username}`}</Card.Title>
             <Card.Title className="d-flex justify-content-center mb-1">Email: {`${userData.Email}`}</Card.Title>
             <Card.Title className="d-flex justify-content-center mb-1">Birthday: {`${userData.Birthday}`}</Card.Title>
+            <Card.Title className="d-flex justify-content-center mb-1">Favorite Movies: {`${userData.FavoriteMovies}`}</Card.Title>
           </Card.Body>
         </Card>
 
@@ -118,6 +121,7 @@ export class ProfileView extends React.Component {
         }} >
           Delete Your Account
         </Button>
+
 
       </Container>
     );
