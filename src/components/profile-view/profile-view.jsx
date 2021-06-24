@@ -13,14 +13,22 @@ export class ProfileView extends React.Component {
         Username: props.userData.Username,
         Password: '',
         Email: props.userData.Email,
-        Birthday: props.userData.Birthday,
-        FavoriteMovies: []
+        Birthday: this.formatDate(props.userData.Birthday),
+        FavoriteMovies: [],
+        UsernameErr: '',
+        PasswordErr: '',
+        EmailErr: '',
       },
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateProfile = this.updateProfile.bind(this);
     this.deleteAcc = this.deleteAcc.bind(this);
+  }
+
+  formatDate(date) {
+    if (date) date = date.substring(0, 10);
+    return date;
   }
 
   handleChange(e) {
@@ -34,11 +42,8 @@ export class ProfileView extends React.Component {
   }
 
   handleSubmit(e) {
-    isValid = formValidation();
-    if (isValid) {
-      e.preventDefault();
-      this.updateProfile(this.props.token);
-    }
+    e.preventDefault();
+    this.updateProfile(this.props.token);
   }
 
   // PUT request to update the users profile
@@ -73,9 +78,9 @@ export class ProfileView extends React.Component {
   }
 
   // formValidation() {
-  //   let usernameErr = {};
-  //   let passwordErr = {};
-  //   let emailErr = {};
+  //   const usernameErr = {};
+  //   const passwordErr = {};
+  //   const emailErr = {};
   //   let isValid = true;
 
   //   if (username === '') {
@@ -119,7 +124,7 @@ export class ProfileView extends React.Component {
           <Card.Body>
             <Card.Text className="d-flex justify-content-center mb-1">Username: {`${userData.Username}`}</Card.Text>
             <Card.Text className="d-flex justify-content-center mb-1">Email: {`${userData.Email}`}</Card.Text>
-            <Card.Text className="d-flex justify-content-center mb-1">Birthday: {`${userData.Birthday}`}</Card.Text>
+            <Card.Text className="d-flex justify-content-center mb-1">Birthday: {`${this.formatDate(userData.Birthday)}`}</Card.Text>
           </Card.Body>
         </Card>
 
@@ -128,15 +133,15 @@ export class ProfileView extends React.Component {
           <h2 className="profile-title d-flex justify-content-center text-danger mt-3">Update your user profile</h2>
           <Form.Group controlId="formUsername">
             <Form.Label>Username</Form.Label>
-            <Form.Control name="Username" type="username" value={this.state.formValues.Username} placeholder="Update your username" onChange={this.handleChange} />
-            {/* <Form.Control name="Username" type="username" value={this.state.formValues.Username} placeholder="Enter a valid username of at least 6 characters" onChange={this.handleChange} />
-            {Object.keys(usernameErr).map((key) => {
+            {/* <Form.Control name="Username" type="username" value={this.state.formValues.Username} placeholder="Update your username" onChange={this.handleChange} /> */}
+            <Form.Control name="Username" type="username" value={this.state.formValues.Username} placeholder="Enter a valid username of at least 6 characters" onChange={this.handleChange} />
+            {Object.keys(this.state.formValues.UsernameErr).map((key) => {
               return (
                 <div key={key} style={{ color: "red" }}>
-                  {usernameErr[key]}
+                  {this.state.formValues.UsernameErr[key]}
                 </div>
               );
-            })} */}
+            })}
           </Form.Group>
           <Form.Group controlId="formPassword">
             <Form.Label>Password</Form.Label>
