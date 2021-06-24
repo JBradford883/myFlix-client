@@ -79,10 +79,9 @@ export class ProfileView extends React.Component {
         <Card className="shadow-sm">
           <h2 className="profile-title d-flex justify-content-center text-danger mt-2">{`${userData.Username}`} Profile Info</h2>
           <Card.Body>
-            <Card.Title className="d-flex justify-content-center mb-1">Username: {`${userData.Username}`}</Card.Title>
-            <Card.Title className="d-flex justify-content-center mb-1">Email: {`${userData.Email}`}</Card.Title>
-            <Card.Title className="d-flex justify-content-center mb-1">Birthday: {`${userData.Birthday}`}</Card.Title>
-            <Card.Title className="d-flex justify-content-center mb-1">Favorite Movies: {`${userData.FavoriteMovies}`}</Card.Title>
+            <Card.Text className="d-flex justify-content-center mb-1">Username: {`${userData.Username}`}</Card.Text>
+            <Card.Text className="d-flex justify-content-center mb-1">Email: {`${userData.Email}`}</Card.Text>
+            <Card.Text className="d-flex justify-content-center mb-1">Birthday: {`${userData.Birthday}`}</Card.Text>
           </Card.Body>
         </Card>
 
