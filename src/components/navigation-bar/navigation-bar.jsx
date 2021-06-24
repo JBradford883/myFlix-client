@@ -10,15 +10,18 @@ export class NavigationBar extends React.Component {
     this.setState({
       user: null
     });
+    console.log("You have been logged out");
+    window.open('/', '_self');
   }
 
+
   render() {
-    const { onLoggedOut, history, user, userData } = this.props;
+    const { history, user } = this.props;
 
     return (
       <>
         <Navbar className="navbar fixed-top" expand="lg" bg="danger" variant="dark">
-          <Navbar.Brand className="font-weight-bold">myFlix Movie App</Navbar.Brand>
+          <Navbar.Brand className="font-weight-bold">Welcome to myFlix Movie App</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse className="justify-content-end" id="responsive-navbar-nav">
             <Nav className="navsize2">

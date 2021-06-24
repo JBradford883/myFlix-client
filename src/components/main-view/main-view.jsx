@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
@@ -24,7 +24,8 @@ class MainView extends React.Component {
       user: null,
       userData: null,
       token: null,
-    }
+    };
+    this.onProfileUpdate = this.onProfileUpdate.bind(this);
   }
 
   componentDidMount() {
@@ -94,19 +95,19 @@ class MainView extends React.Component {
     this.getMovies(authData.token);
   }
 
-  onLoggedOut() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+  onRegister(register) {
+    console.log(register);
     this.setState({
-      user: null,
-      userData: null
+      register,
     });
   }
 
-  onRegister(register) {
+  onProfileUpdate(updatedUserData) {
     this.setState({
-      register
-    });
+      userData: updatedUserData,
+      user: updatedUserData.Username
+    }),
+      localStorage.setItem("user", updatedUserData.Username);
   }
 
   render() {
@@ -114,21 +115,31 @@ class MainView extends React.Component {
 
     return (
       <Router>
+
         <Row className="main-view justify-content-md-center">
 
-          <Route exact path="/" render={() => {
-            if (!user) return <Col>
-              <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-            </Col>
-            if (movies.length === 0) return <div className="main-view" />;
-            return movies.map(m => (
-              <Col md={3} key={m._id}>
-                <MovieCard movie={m} />
+          {/*Main View*/}
+          <Route exact path="/" render={({ history }) => {
+            if (!user) return (
+              <Col>
+                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
               </Col>
+            )
+            if (movies.length === 0) return <div className="main-view" />;
+            return (
+              <>
+                <NavigationBar user={user} history={history} />
+                {movies.map(m => (
+                  <Col lg={3} sm={4} key={m._id}>
+                    <MovieCard movie={m} />
+                  </Col>
 
-            ))
+                ))}
+              </>
+            );
           }} />
 
+          {/*Registration View*/}
           <Route path="/register" render={() => {
             if (user) return <Redirect to="/" />
             return <Col>
@@ -136,55 +147,59 @@ class MainView extends React.Component {
             </Col>
           }} />
 
+          {/*Profile View*/}
           <Route path={`/users/${user}`} render={({ history }) => {
             if (!userData) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
             return <>
-              <NavigationBar user={user} history={match, history} />
+              <NavigationBar user={user} history={history} />
               <Col md={8}>
-                <ProfileView user={user} token={token} history={history} userData={userData} onNewUser={newData => { this.newUser(newData); }} onSignOut={signState => { this.signOut(signState); }} onBackClick={() => history.goBack()} />
+                <ProfileView user={user} token={token} history={history} userData={userData} onProfileUpdate={this.onProfileUpdate} onNewUser={newData => { this.newUser(newData); }} onBackClick={() => history.goBack()} />
               </Col>
             </>
 
           }} />
 
+          {/*Movie View*/}
           <Route exact path="/movies/:movieId" render={({ match, history }) => {
             if (!user) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
             return <>
-              <NavigationBar user={user} history={match, history} />
-              <Col md={6} className="movie-view">
+              <NavigationBar user={user} history={history} />
+              <Col lg={12} md={10} sm={8} className="movie-view">
                 <MovieView movie={movies.find(m => m._id === match.params.movieId)} onBackClick={() => history.goBack()} />
               </Col>
             </>
           }} />
 
+          {/*Director View*/}
           <Route exact path="/directors/:name" render={({ match, history }) => {
             if (!user) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
             return <>
-              <NavigationBar user={user} history={match, history} />
-              <Col md={8}>
-                <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} onBackClick={() => history.goBack()} />
+              <NavigationBar user={user} history={history} />
+              <Col md={12}>
+                <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} onBackClick={() => history.goBack()} movies={movies} />
               </Col>
             </>
           }
           } />
 
+          {/*Genre View*/}
           <Route exact path="/genres/:name" render={({ match, history }) => {
             if (!user) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
             return <>
-              <NavigationBar user={user} history={match, history} />
-              <Col md={8}>
-                <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre} onBackClick={() => history.goBack()} />
+              <NavigationBar user={user} history={history} />
+              <Col md={12}>
+                <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre} onBackClick={() => history.goBack()} movies={movies} />
               </Col>
             </>
           }} />

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import { Button, Card, Col } from 'react-bootstrap';
 
 import { Link } from "react-router-dom";
 
@@ -13,7 +12,7 @@ export class MovieCard extends React.Component {
     const { movie } = this.props;
 
     return (
-      <Card className='movie-view mb-5'>
+      <Card className='movie-card shadow-sm'>
         <Card.Img className="movie-poster" variant="top" src={movie.ImagePath} />
         <Card.Body>
           <Card.Title>{movie.Title}</Card.Title>
@@ -25,10 +24,10 @@ export class MovieCard extends React.Component {
             <Button className="mb-2" block variant="danger">Director</Button>
           </Link>
           <Link to={`/genres/${movie.Genre.Name}`}>
-            <Button block variant="danger">Genre</Button>
+            <Button className="mb-2" block variant="danger">Genre</Button>
           </Link>
         </Card.Body>
-      </Card>
+      </Card >
     );
   }
 }
@@ -40,3 +39,14 @@ MovieCard.propTypes = {
     ImagePath: PropTypes.string.isRequired
   }).isRequired,
 };
+
+/* Director and Genre Buttons
+
+<Link to={`/directors/${movie.Director.Name}`}>
+            <Button className="mb-2" block variant="danger">Director</Button>
+          </Link>
+          <Link to={`/genres/${movie.Genre.Name}`}>
+            <Button className="mb-2" block variant="danger">Genre</Button>
+          </Link>
+
+*/
