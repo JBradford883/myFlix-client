@@ -107,7 +107,11 @@ export class ProfileView extends React.Component {
 
 
   render() {
-    const { movies, userData, token } = this.props;
+    let { movies, userData, token } = this.props;
+    let { usernameErr, emailErr, passwordErr } = this.state;
+    // let favoriteMovieList = movies.filter(movie => {
+    //   return this.state.favoriteMovies.includes(movie._id);
+    // });
 
     return (
       <Container className="profile-view" >
@@ -164,6 +168,25 @@ export class ProfileView extends React.Component {
           Delete Your Account
         </Button>
 
+        {/* <Container className=" favorites">
+          {favoriteMovieList.map(
+            (movie) => {
+              return (
+                <div key={movie._id}>
+                  <Card className='favorite-movies'>
+                    <Link to={`/movies/${movie._id}`}>
+                      <Card.Img className="movie-card-link" variant="top" src={movie.ImagePath} />
+                    </Link>
+                    <Button className="remove-favorite" variant="danger" onClick={() => this.removeFavorite(movie)}>
+                      Remove Favorite
+                    </Button>
+
+                  </Card>
+                </div>
+              );
+            }
+          )}
+        </Container> */}
 
       </Container>
     );
