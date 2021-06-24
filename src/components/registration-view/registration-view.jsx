@@ -14,7 +14,7 @@ export function RegistrationView(props) {
   const [emailErr, setEmailErr] = useState({});
   const [passwordErr, setPasswordErr] = useState({});
 
-
+  // User form validation
   const formValidation = () => {
     const usernameErr = {};
     const passwordErr = {};
