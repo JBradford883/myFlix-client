@@ -5,7 +5,6 @@ import { Button, Card, Col } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
 import './movie-card.scss';
-import axios from 'axios';
 
 export class MovieCard extends React.Component {
 
