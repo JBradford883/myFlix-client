@@ -125,23 +125,44 @@ export class ProfileView extends React.Component {
             <Card.Text className="d-flex justify-content-center mb-1">Username: {`${userData.Username}`}</Card.Text>
             <Card.Text className="d-flex justify-content-center mb-1">Email: {`${userData.Email}`}</Card.Text>
             <Card.Text className="d-flex justify-content-center mb-1">Birthday: {`${this.formatDate(userData.Birthday)}`}</Card.Text>
+            <Card.Body>
+              <h2 className="profile-title d-flex justify-content-center text-danger mt-2">Favorite Movies</h2>
+              {/* <Container className=" favorites">
+                {favoriteMovieList.map(
+                  (movie) => {
+                    return (
+                      <div key={movie._id}>
+                        <Card className='favorite-movies'>
+                          <Link to={`/movies/${movie._id}`}>
+                            <Card.Img className="movie-card-link" variant="top" src={movie.ImagePath} />
+                          </Link>
+                          <Button className="remove-favorite" variant="danger" onClick={() => this.removeFavorite(movie)}>
+                            Remove Favorite
+                          </Button>
+
+                        </Card>
+                      </div>
+                    );
+                  }
+                )}
+              </Container> */}
+            </Card.Body>
           </Card.Body>
         </Card>
-
 
         <Form className="block">
           <h2 className="profile-title d-flex justify-content-center text-danger mt-3">Update your user profile</h2>
           <Form.Group controlId="formUsername">
             <Form.Label>Username</Form.Label>
-            {/* <Form.Control name="Username" type="username" value={this.state.formValues.Username} placeholder="Update your username" onChange={this.handleChange} /> */}
-            <Form.Control name="Username" type="username" value={this.state.formValues.Username} placeholder="Enter a valid username of at least 6 characters" onChange={this.handleChange} />
+            <Form.Control name="Username" type="username" value={this.state.formValues.Username} placeholder="Update your username" onChange={this.handleChange} />
+            {/* <Form.Control name="Username" type="username" value={this.state.formValues.Username} placeholder="Enter a valid username of at least 6 characters" onChange={this.handleChange} />
             {Object.keys(this.state.formValues.UsernameErr).map((key) => {
               return (
                 <div key={key} style={{ color: "red" }}>
                   {this.state.formValues.UsernameErr[key]}
                 </div>
               );
-            })}
+            })} */}
           </Form.Group>
           <Form.Group controlId="formPassword">
             <Form.Label>Password</Form.Label>
@@ -171,26 +192,6 @@ export class ProfileView extends React.Component {
         }} >
           Delete Your Account
         </Button>
-
-        {/* <Container className=" favorites">
-          {favoriteMovieList.map(
-            (movie) => {
-              return (
-                <div key={movie._id}>
-                  <Card className='favorite-movies'>
-                    <Link to={`/movies/${movie._id}`}>
-                      <Card.Img className="movie-card-link" variant="top" src={movie.ImagePath} />
-                    </Link>
-                    <Button className="remove-favorite" variant="danger" onClick={() => this.removeFavorite(movie)}>
-                      Remove Favorite
-                    </Button>
-
-                  </Card>
-                </div>
-              );
-            }
-          )}
-        </Container> */}
 
       </Container>
     );
