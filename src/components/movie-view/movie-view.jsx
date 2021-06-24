@@ -68,7 +68,6 @@ export class MovieView extends React.Component {
             </div>
           </div>
         </Card>
-        {/* <Button className="mt-3" onClick={() => onBackClick()} block variant='dark'>Back</Button> */}
       </Container>
     );
   }
