@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react';
-import { Form, Button, Container, Card } from 'react-bootstrap';
+import { Form, Button, Container, Card, Row } from 'react-bootstrap';
 
 import './profile-view.scss';
 
@@ -40,7 +40,6 @@ export class ProfileView extends React.Component {
       this.updateProfile(this.props.token);
     }
   }
-
 
   // PUT request to update the users profile
   updateProfile(token) {
