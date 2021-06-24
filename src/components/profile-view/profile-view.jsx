@@ -34,8 +34,11 @@ export class ProfileView extends React.Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
-    this.updateProfile(this.props.token);
+    isValid = formValidation();
+    if (isValid) {
+      e.preventDefault();
+      this.updateProfile(this.props.token);
+    }
   }
 
 
@@ -70,6 +73,38 @@ export class ProfileView extends React.Component {
       });
   }
 
+  // formValidation() {
+  //   let usernameErr = {};
+  //   let passwordErr = {};
+  //   let emailErr = {};
+  //   let isValid = true;
+
+  //   if (username === '') {
+  //     usernameErr.userMissing = "You must enter a Username";
+  //     isValid = false;
+  //   }
+
+  //   if (username.trim().length < 6) {
+  //     usernameErr.usernameShort = "Username must be at least 6 characters";
+  //     isValid = false;
+  //   }
+
+  //   if (password === '') {
+  //     passwordErr.passwordMissing = "You must enter a Password"
+  //   }
+
+  //   if (!email.includes(".") && !email.includes("@")) {
+  //     emailErr.emailNotEmail = "A valid email address is required";
+  //   }
+
+  //   this.setState({
+  //     usernameErr: usernameErr,
+  //     passwordErr: passwordErr,
+  //     emailErr: emailErr,
+  //   })
+  //   return isValid;
+  // };
+
 
   render() {
     const { movies, userData, token } = this.props;
@@ -91,6 +126,14 @@ export class ProfileView extends React.Component {
           <Form.Group controlId="formUsername">
             <Form.Label>Username</Form.Label>
             <Form.Control name="Username" type="username" value={this.state.formValues.Username} placeholder="Update your username" onChange={this.handleChange} />
+            {/* <Form.Control name="Username" type="username" value={this.state.formValues.Username} placeholder="Enter a valid username of at least 6 characters" onChange={this.handleChange} />
+            {Object.keys(usernameErr).map((key) => {
+              return (
+                <div key={key} style={{ color: "red" }}>
+                  {usernameErr[key]}
+                </div>
+              );
+            })} */}
           </Form.Group>
           <Form.Group controlId="formPassword">
             <Form.Label>Password</Form.Label>
