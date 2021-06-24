@@ -110,12 +110,6 @@ class MainView extends React.Component {
       localStorage.setItem("user", updatedUserData.Username);
   }
 
-  onAddFavorite(addMovie) {
-    this.setState({
-      addMovie: addMovie
-    })
-  }
-
   render() {
     const { movies, user, userData, token } = this.state;
 
