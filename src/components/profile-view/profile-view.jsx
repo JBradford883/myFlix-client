@@ -26,26 +26,6 @@ export class ProfileView extends React.Component {
     this.deleteAcc = this.deleteAcc.bind(this);
   }
 
-  formatDate(date) {
-    if (date) date = date.substring(0, 10);
-    return date;
-  }
-
-  handleChange(e) {
-    const { target } = e;
-    this.setState((prev) => ({
-      formValues: {
-        ...prev.formValues,
-        [target.name]: target.value,
-      },
-    }));
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    this.updateProfile(this.props.token);
-  }
-
   // PUT request to update the users profile
   updateProfile(token) {
     axios.put(`https://myflix-2388-app.herokuapp.com/users/${this.props.user}`,
@@ -55,6 +35,7 @@ export class ProfileView extends React.Component {
         console.log('You have sucessfully updated your profile.');
         this.props.onProfileUpdate(response.data);
         alert('You have sucessfully updated your profile.');
+        this.props.history.push(`/users/${response.data.Username}`)
       })
       .catch(function (error) {
         console.log(error);
@@ -77,38 +58,54 @@ export class ProfileView extends React.Component {
       });
   }
 
-  // formValidation() {
-  //   const usernameErr = {};
-  //   const passwordErr = {};
-  //   const emailErr = {};
-  //   let isValid = true;
+  // DELETE request to remove a movie from favorites list
+  removeFavorite(movie) {
+    let token = localStorage.getItem('token');
+    let user = localStorage.getItem('user');
+    axios.delete(`https://myflix-2388-app.herokuapp.com/users/${user}/movies/${movie._id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    }).then(
+      (response) => {
+        console.log(response);
+        alert('You have sucessfully updated your favorites list.');
+      }).catch(
+        function (error) {
+          console.log(error)
+          alert('There was an error.');
+        }
+      );
+  }
 
-  //   if (username === '') {
-  //     usernameErr.userMissing = "You must enter a Username";
-  //     isValid = false;
-  //   }
+  formatDate(date) {
+    if (date) date = date.substring(0, 10);
+    return date;
+  }
 
-  //   if (username.trim().length < 6) {
-  //     usernameErr.usernameShort = "Username must be at least 6 characters";
-  //     isValid = false;
-  //   }
+  handleChange(e) {
+    const { target } = e;
+    this.setState((prev) => ({
+      formValues: {
+        ...prev.formValues,
+        [target.name]: target.value,
+      },
+    }));
+  }
 
-  //   if (password === '') {
-  //     passwordErr.passwordMissing = "You must enter a Password"
-  //   }
+  handleSubmit(e) {
+    e.preventDefault();
+    this.updateProfile(this.props.token);
+  }
 
-  //   if (!email.includes(".") && !email.includes("@")) {
-  //     emailErr.emailNotEmail = "A valid email address is required";
-  //   }
-
-  //   this.setState({
-  //     usernameErr: usernameErr,
-  //     passwordErr: passwordErr,
-  //     emailErr: emailErr,
-  //   })
-  //   return isValid;
-  // };
-
+  sanitizeFormValues(rawFormData) {
+    const output = {};
+    for (const k in rawFormData) {
+      const validKeys = [this.state.formValues.Username, this.state.formValues.Password];
+      if (validKeys.includes(k) && !!rawFormData[k]) {
+        output[k] = rawFormData[k];
+      }
+    }
+    return output;
+  }
 
   render() {
     let { movies, userData, token } = this.props;
@@ -136,9 +133,9 @@ export class ProfileView extends React.Component {
                           <Link to={`/movies/${movie._id}`}>
                             <Card.Img className="movie-card-link" variant="top" src={movie.ImagePath} />
                           </Link>
-                          <Button className="remove-favorite" variant="danger" onClick={() => this.removeFavorite(movie)}>
-                            Remove Favorite
-                          </Button>
+                          <div className="remove-favorite">
+                            <Button className='add-favorite' variant='danger' onClick={() => this.removeFavorite(movie)}>Remove Favorite</Button>
+                          </div>
 
                         </Card>
                       </div>
