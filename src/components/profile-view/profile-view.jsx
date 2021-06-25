@@ -15,9 +15,6 @@ export class ProfileView extends React.Component {
         Email: props.userData.Email,
         Birthday: this.formatDate(props.userData.Birthday),
         FavoriteMovies: [],
-        UsernameErr: '',
-        PasswordErr: '',
-        EmailErr: '',
       },
     };
     this.handleChange = this.handleChange.bind(this);
@@ -96,23 +93,11 @@ export class ProfileView extends React.Component {
     this.updateProfile(this.props.token);
   }
 
-  sanitizeFormValues(rawFormData) {
-    const output = {};
-    for (const k in rawFormData) {
-      const validKeys = [this.state.formValues.Username, this.state.formValues.Password];
-      if (validKeys.includes(k) && !!rawFormData[k]) {
-        output[k] = rawFormData[k];
-      }
-    }
-    return output;
-  }
-
   render() {
     let { movies, userData, token } = this.props;
-    let { usernameErr, emailErr, passwordErr } = this.state;
-    // let favoriteMovieList = movies.filter(movie => {
-    //   return this.state.favoriteMovies.includes(movie._id);
-    // });
+    let favoriteMovieList = movies.filter(movie => {
+      return this.state.formValues.favoriteMovies.includes(movie._id);
+    });
 
     return (
       <Container className="profile-view" >
@@ -124,7 +109,7 @@ export class ProfileView extends React.Component {
             <Card.Text className="d-flex justify-content-center mb-1">Birthday: {`${this.formatDate(userData.Birthday)}`}</Card.Text>
             <Card.Body>
               <h2 className="profile-title d-flex justify-content-center text-danger mt-2">Favorite Movies</h2>
-              {/* <Container className=" favorites">
+              <Container className=" favorites">
                 {favoriteMovieList.map(
                   (movie) => {
                     return (
@@ -142,7 +127,7 @@ export class ProfileView extends React.Component {
                     );
                   }
                 )}
-              </Container> */}
+              </Container>
             </Card.Body>
           </Card.Body>
         </Card>
@@ -152,14 +137,6 @@ export class ProfileView extends React.Component {
           <Form.Group controlId="formUsername">
             <Form.Label>Username</Form.Label>
             <Form.Control name="Username" type="username" value={this.state.formValues.Username} placeholder="Update your username" onChange={this.handleChange} />
-            {/* <Form.Control name="Username" type="username" value={this.state.formValues.Username} placeholder="Enter a valid username of at least 6 characters" onChange={this.handleChange} />
-            {Object.keys(this.state.formValues.UsernameErr).map((key) => {
-              return (
-                <div key={key} style={{ color: "red" }}>
-                  {this.state.formValues.UsernameErr[key]}
-                </div>
-              );
-            })} */}
           </Form.Group>
           <Form.Group controlId="formPassword">
             <Form.Label>Password</Form.Label>
@@ -174,8 +151,6 @@ export class ProfileView extends React.Component {
             <Form.Control name="Birthday" type="date" value={this.state.formValues.Birthday} onChange={this.handleChange} />
           </Form.Group>
         </Form>
-
-
 
         <Button block variant="danger" type="submit" onClick={this.handleSubmit}>Update Profile</Button>
 
@@ -194,3 +169,15 @@ export class ProfileView extends React.Component {
     );
   }
 }
+
+
+{/* <Form.Control name="Username" type="username" value={this.state.formValues.Username} placeholder="Enter a valid username of at least 6 characters" onChange={this.handleChange} />
+{
+  Object.keys(this.state.formValues.UsernameErr).map((key) => {
+    return (
+      <div key={key} style={{ color: "red" }}>
+        {this.state.formValues.UsernameErr[key]}
+      </div>
+    );
+  })
+} */}
