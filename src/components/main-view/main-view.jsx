@@ -106,8 +106,9 @@ class MainView extends React.Component {
     this.setState({
       userData: updatedUserData,
       user: updatedUserData.Username
-    }),
-      localStorage.setItem("user", updatedUserData.Username);
+    });
+    localStorage.setItem("user", updatedUserData.Username);
+
   }
 
   render() {
