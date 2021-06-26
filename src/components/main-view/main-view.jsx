@@ -150,9 +150,8 @@ class MainView extends React.Component {
 
           {/*Profile View*/}
           <Route path={`/users/${user}`} render={({ history }) => {
-            if (!userData) return <Col>
-              <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-            </Col>
+            if (!userData) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+            if (movies.length === 0) return <div className="main-view" />;
             return <>
               <NavigationBar user={user} history={history} />
               <Col md={8}>

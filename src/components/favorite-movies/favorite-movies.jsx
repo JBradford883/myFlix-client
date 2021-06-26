@@ -9,6 +9,7 @@ import './favorite-movies.scss';
 export class FavoriteMovies extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {};
     this.removeFavorite = this.removeFavorite.bind(this);
   }
 
@@ -38,7 +39,7 @@ export class FavoriteMovies extends React.Component {
       <Container>
         <Card className='fav-view shadow'>
           <Card.Body>
-            <Row className="fav-movies mb-3">
+            {/* <Row className="fav-movies mb-3">
               {FavoriteMovies.length === 0 && <div className='card-content'>You don't have any favorite movies yet!</div>}
               <div className='favorites-container'>
                 {FavoriteMovies.length > 0 && movies.map((movie) => {
@@ -46,14 +47,14 @@ export class FavoriteMovies extends React.Component {
                     return (
                       <Col className="fav-card text-center mb-2" lg={3} md={6}>
                         <Link to={`/movies/${m._id}`}>
-                          <Card.Img className="fav-img" key={m._id} src={m.ImagePath} />
+                          <Card.Img className="fav-img" key={movie._id} src={movie.ImagePath} />
                         </Link>
                       </Col>
                     );
                   }
                 })}
               </div>
-            </Row>
+            </Row> */}
           </Card.Body>
         </Card>
       </Container>
