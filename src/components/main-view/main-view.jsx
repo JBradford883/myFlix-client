@@ -10,7 +10,8 @@ import { RegistrationView } from '../registration-view/registration-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { ProfileView } from '../profile-view/profile-view';
-import { NavigationBar } from '../navigation-bar/navigation-bar'
+import { NavigationBar } from '../navigation-bar/navigation-bar';
+import { FavoriteMovies } from '../favorite-movies/favorite-movies'
 
 import { Row, Col } from 'react-bootstrap';
 
@@ -108,7 +109,6 @@ class MainView extends React.Component {
       user: updatedUserData.Username
     });
     localStorage.setItem("user", updatedUserData.Username);
-
   }
 
   render() {
@@ -156,8 +156,13 @@ class MainView extends React.Component {
             return <>
               <NavigationBar user={user} history={history} />
               <Col md={8}>
-                <ProfileView user={user} token={token} history={history} userData={userData} onProfileUpdate={this.onProfileUpdate} onNewUser={newData => { this.newUser(newData); }} onBackClick={() => history.goBack()} />
+                <ProfileView user={user} token={token} history={history} userData={userData} onProfileUpdate={this.onProfileUpdate} onBackClick={() => history.goBack()} />
               </Col>
+              <Row className="d-flex justify-content-center">
+                <Col md={10}>
+                  <FavoriteMovies user={user} movies={movies} />
+                </Col>
+              </Row>
             </>
 
           }} />
