@@ -9,7 +9,25 @@ import './favorite-movies.scss';
 export class FavoriteMovies extends React.Component {
   constructor(props) {
     super(props);
-    //this.removeFavorite = this.removeFavorite.bind(this);
+    this.removeFavorite = this.removeFavorite.bind(this);
+  }
+
+  // DELETE request to remove a movie from favorites list
+  removeFavorite(movie) {
+    let token = localStorage.getItem('token');
+    let user = localStorage.getItem('user');
+    axios.delete(`https://myflix-2388-app.herokuapp.com/users/${user}/movies/${movie._id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    }).then(
+      (response) => {
+        console.log(response);
+        alert('You have sucessfully updated your favorites list.');
+      }).catch(
+        function (error) {
+          console.log(error)
+          alert('There was an error.');
+        }
+      );
   }
 
   render() {
