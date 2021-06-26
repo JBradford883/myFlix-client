@@ -39,7 +39,7 @@ export class FavoriteMovies extends React.Component {
       <Container>
         <Card className='fav-view shadow'>
           <Card.Body>
-            {/* <Row className="fav-movies mb-3">
+            <Row className="fav-movies mb-3">
               {FavoriteMovies.length === 0 && <div className='card-content'>You don't have any favorite movies yet!</div>}
               <div className='favorites-container'>
                 {FavoriteMovies.length > 0 && movies.map((movie) => {
@@ -54,7 +54,7 @@ export class FavoriteMovies extends React.Component {
                   }
                 })}
               </div>
-            </Row> */}
+            </Row>
           </Card.Body>
         </Card>
       </Container>

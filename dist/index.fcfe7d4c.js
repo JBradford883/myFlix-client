@@ -40490,7 +40490,56 @@ class FavoriteMovies extends _reactDefault.default.Component {
                 lineNumber: 41
             },
             __self: this
-        }))));
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Row, {
+            className: "fav-movies mb-3",
+            __source: {
+                fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/favorite-movies/favorite-movies.jsx",
+                lineNumber: 42
+            },
+            __self: this
+        }, FavoriteMovies1.length === 0 && /*#__PURE__*/ _reactDefault.default.createElement("div", {
+            className: "card-content",
+            __source: {
+                fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/favorite-movies/favorite-movies.jsx",
+                lineNumber: 43
+            },
+            __self: this
+        }, "You don't have any favorite movies yet!"), /*#__PURE__*/ _reactDefault.default.createElement("div", {
+            className: "favorites-container",
+            __source: {
+                fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/favorite-movies/favorite-movies.jsx",
+                lineNumber: 44
+            },
+            __self: this
+        }, FavoriteMovies1.length > 0 && movies.map((movie)=>{
+            if (movie._id === FavoriteMovies1.find((favMovie)=>favMovie === movie._id
+            )) return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
+                className: "fav-card text-center mb-2",
+                lg: 3,
+                md: 6,
+                __source: {
+                    fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/favorite-movies/favorite-movies.jsx",
+                    lineNumber: 48
+                },
+                __self: this
+            }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
+                to: `/movies/${m._id}`,
+                __source: {
+                    fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/favorite-movies/favorite-movies.jsx",
+                    lineNumber: 49
+                },
+                __self: this
+            }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Img, {
+                className: "fav-img",
+                key: movie._id,
+                src: movie.ImagePath,
+                __source: {
+                    fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/favorite-movies/favorite-movies.jsx",
+                    lineNumber: 50
+                },
+                __self: this
+            }))));
+        })))))));
     }
 }
 
