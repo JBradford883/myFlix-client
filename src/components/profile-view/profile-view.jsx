@@ -2,6 +2,8 @@ import axios from 'axios';
 import React from 'react';
 import { Form, Button, Container, Card, Row } from 'react-bootstrap';
 
+import { Link } from "react-router-dom";
+
 import './profile-view.scss';
 
 export class ProfileView extends React.Component {
@@ -14,7 +16,7 @@ export class ProfileView extends React.Component {
         Password: '',
         Email: props.userData.Email,
         Birthday: this.formatDate(props.userData.Birthday),
-        FavoriteMovies: [],
+        FavoriteMovies: props.userData.FavoriteMovies,
       },
     };
     this.handleChange = this.handleChange.bind(this);
@@ -55,23 +57,23 @@ export class ProfileView extends React.Component {
       });
   }
 
-  // DELETE request to remove a movie from favorites list
-  removeFavorite(movie) {
-    let token = localStorage.getItem('token');
-    let user = localStorage.getItem('user');
-    axios.delete(`https://myflix-2388-app.herokuapp.com/users/${user}/movies/${movie._id}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    }).then(
-      (response) => {
-        console.log(response);
-        alert('You have sucessfully updated your favorites list.');
-      }).catch(
-        function (error) {
-          console.log(error)
-          alert('There was an error.');
-        }
-      );
-  }
+  // // DELETE request to remove a movie from favorites list
+  // removeFavorite(movie) {
+  //   let token = localStorage.getItem('token');
+  //   let user = localStorage.getItem('user');
+  //   axios.delete(`https://myflix-2388-app.herokuapp.com/users/${user}/movies/${movie._id}`, {
+  //     headers: { Authorization: `Bearer ${token}` }
+  //   }).then(
+  //     (response) => {
+  //       console.log(response);
+  //       alert('You have sucessfully updated your favorites list.');
+  //     }).catch(
+  //       function (error) {
+  //         console.log(error)
+  //         alert('There was an error.');
+  //       }
+  //     );
+  // }
 
   formatDate(date) {
     if (date) date = date.substring(0, 10);
@@ -95,9 +97,7 @@ export class ProfileView extends React.Component {
 
   render() {
     let { movies, userData, token } = this.props;
-    let favoriteMovieList = movies.filter(movie => {
-      return this.state.formValues.favoriteMovies.includes(movie._id);
-    });
+    // let FavoriteMovies = this.state.formValues.FavoriteMovies;
 
     return (
       <Container className="profile-view" >
@@ -107,30 +107,8 @@ export class ProfileView extends React.Component {
             <Card.Text className="d-flex justify-content-center mb-1">Username: {`${userData.Username}`}</Card.Text>
             <Card.Text className="d-flex justify-content-center mb-1">Email: {`${userData.Email}`}</Card.Text>
             <Card.Text className="d-flex justify-content-center mb-1">Birthday: {`${this.formatDate(userData.Birthday)}`}</Card.Text>
-            <Card.Body>
-              <h2 className="profile-title d-flex justify-content-center text-danger mt-2">Favorite Movies</h2>
-              <Container className=" favorites">
-                {favoriteMovieList.map(
-                  (movie) => {
-                    return (
-                      <div key={movie._id}>
-                        <Card className='favorite-movies'>
-                          <Link to={`/movies/${movie._id}`}>
-                            <Card.Img className="movie-card-link" variant="top" src={movie.ImagePath} />
-                          </Link>
-                          <div className="remove-favorite">
-                            <Button className='add-favorite' variant='danger' onClick={() => this.removeFavorite(movie)}>Remove Favorite</Button>
-                          </div>
-
-                        </Card>
-                      </div>
-                    );
-                  }
-                )}
-              </Container>
-            </Card.Body>
           </Card.Body>
-        </Card>
+        </Card >
 
         <Form className="block">
           <h2 className="profile-title d-flex justify-content-center text-danger mt-3">Update your user profile</h2>
@@ -165,7 +143,7 @@ export class ProfileView extends React.Component {
           Delete Your Account
         </Button>
 
-      </Container>
+      </Container >
     );
   }
 }
@@ -181,3 +159,28 @@ export class ProfileView extends React.Component {
     );
   })
 } */}
+
+
+{/* <Container className='favorites-container'>
+                <h2 className="profile-title d-flex justify-content-center text-danger mt-2">Favorite Movies</h2>
+                {FavoriteMovies.length === 0 && <div className='text-center'>You don't have any favorite movies yet!</div>}
+                <div>
+                  {FavoriteMovies.length > 0 && movies.map((movie) => {
+                    if (movie._id === FavoriteMovies.find((favMovie) => favMovie === movie._id)) {
+                      return (
+                        <div key={movie._id}>
+                          <Card>
+                            <Link to={`/movies/${movie._id}`}>
+                              <Card.Img className='favorites-movie' src={movie.ImagePath} />
+                            </Link>
+                            <Card.Body className='movie-card-body'>
+                              <Button className='remove-favorite' variant='danger' onClick={() => this.removeFavorite(movie)}> Remove
+                              </Button>
+                            </Card.Body>
+                          </Card>
+                        </div>
+                      );
+                    }
+                  })}
+                </div>
+              </Container> */}
