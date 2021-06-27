@@ -31,7 +31,7 @@ export class DirectorView extends React.Component {
               {movies.map(m => {
                 if (m.Director && m.Director.Name === director.Name) {
                   return (
-                    <Col className="director-card text-center mb-2" lg={3} md={6}>
+                    <Col className="director-card text-center mb-2" lg={3} md={6} key={m._id}>
                       <Link to={`/movies/${m._id}`}>
                         <Card.Img className="director-img" key={m._id} src={m.ImagePath} />
                       </Link>
