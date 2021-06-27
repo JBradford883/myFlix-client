@@ -157,11 +157,10 @@ class MainView extends React.Component {
               <Col md={8}>
                 <ProfileView user={user} token={token} history={history} userData={userData} onProfileUpdate={this.onProfileUpdate} onBackClick={() => history.goBack()} />
               </Col>
-              <Row className="d-flex justify-content-center">
-                <Col md={10}>
-                  <FavoriteMovies user={user} movies={movies} />
-                </Col>
-              </Row>
+
+              <Col className="mt-5" md={12}>
+                <FavoriteMovies userData={userData} movies={movies} history={history} />
+              </Col>
             </>
 
           }} />
