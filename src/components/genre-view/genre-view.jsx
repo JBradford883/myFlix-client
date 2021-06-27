@@ -21,9 +21,9 @@ export class GenreView extends React.Component {
 
             <Row className="genre-movies mb-3">
               {movies.map(m => {
-                if (m.Genre && m.Genre.Name === genre.Name) {
+                if (m.Genre.Name === genre.Name) {
                   return (
-                    <Col className="genre-card text-center mb-2" lg={3} md={6}>
+                    <Col className="genre-card text-center mb-2" lg={3} md={6} key={m._id}>
                       <Link to={`/movies/${m._id}`}>
                         <Card.Img className="genre-img" key={m._id} src={m.ImagePath} />
                       </Link>

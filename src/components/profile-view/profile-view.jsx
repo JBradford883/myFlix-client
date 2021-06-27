@@ -2,6 +2,8 @@ import axios from 'axios';
 import React from 'react';
 import { Form, Button, Container, Card, Row } from 'react-bootstrap';
 
+import { Link } from "react-router-dom";
+
 import './profile-view.scss';
 
 export class ProfileView extends React.Component {
@@ -13,32 +15,14 @@ export class ProfileView extends React.Component {
         Username: props.userData.Username,
         Password: '',
         Email: props.userData.Email,
-        Birthday: props.userData.Birthday,
-        FavoriteMovies: []
+        Birthday: this.formatDate(props.userData.Birthday),
+        FavoriteMovies: props.userData.FavoriteMovies,
       },
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateProfile = this.updateProfile.bind(this);
     this.deleteAcc = this.deleteAcc.bind(this);
-  }
-
-  handleChange(e) {
-    const { target } = e;
-    this.setState((prev) => ({
-      formValues: {
-        ...prev.formValues,
-        [target.name]: target.value,
-      },
-    }));
-  }
-
-  handleSubmit(e) {
-    isValid = formValidation();
-    if (isValid) {
-      e.preventDefault();
-      this.updateProfile(this.props.token);
-    }
   }
 
   // PUT request to update the users profile
@@ -50,6 +34,7 @@ export class ProfileView extends React.Component {
         console.log('You have sucessfully updated your profile.');
         this.props.onProfileUpdate(response.data);
         alert('You have sucessfully updated your profile.');
+        this.props.history.push(`/users/${response.data.Username}`)
       })
       .catch(function (error) {
         console.log(error);
@@ -72,45 +57,28 @@ export class ProfileView extends React.Component {
       });
   }
 
-  // formValidation() {
-  //   let usernameErr = {};
-  //   let passwordErr = {};
-  //   let emailErr = {};
-  //   let isValid = true;
+  formatDate(date) {
+    if (date) date = date.substring(0, 10);
+    return date;
+  }
 
-  //   if (username === '') {
-  //     usernameErr.userMissing = "You must enter a Username";
-  //     isValid = false;
-  //   }
+  handleChange(e) {
+    const { target } = e;
+    this.setState((prev) => ({
+      formValues: {
+        ...prev.formValues,
+        [target.name]: target.value,
+      },
+    }));
+  }
 
-  //   if (username.trim().length < 6) {
-  //     usernameErr.usernameShort = "Username must be at least 6 characters";
-  //     isValid = false;
-  //   }
-
-  //   if (password === '') {
-  //     passwordErr.passwordMissing = "You must enter a Password"
-  //   }
-
-  //   if (!email.includes(".") && !email.includes("@")) {
-  //     emailErr.emailNotEmail = "A valid email address is required";
-  //   }
-
-  //   this.setState({
-  //     usernameErr: usernameErr,
-  //     passwordErr: passwordErr,
-  //     emailErr: emailErr,
-  //   })
-  //   return isValid;
-  // };
-
+  handleSubmit(e) {
+    e.preventDefault();
+    this.updateProfile(this.props.token);
+  }
 
   render() {
-    let { movies, userData, token } = this.props;
-    let { usernameErr, emailErr, passwordErr } = this.state;
-    // let favoriteMovieList = movies.filter(movie => {
-    //   return this.state.favoriteMovies.includes(movie._id);
-    // });
+    let { userData, token } = this.props;
 
     return (
       <Container className="profile-view" >
@@ -119,24 +87,15 @@ export class ProfileView extends React.Component {
           <Card.Body>
             <Card.Text className="d-flex justify-content-center mb-1">Username: {`${userData.Username}`}</Card.Text>
             <Card.Text className="d-flex justify-content-center mb-1">Email: {`${userData.Email}`}</Card.Text>
-            <Card.Text className="d-flex justify-content-center mb-1">Birthday: {`${userData.Birthday}`}</Card.Text>
+            <Card.Text className="d-flex justify-content-center mb-1">Birthday: {`${this.formatDate(userData.Birthday)}`}</Card.Text>
           </Card.Body>
-        </Card>
-
+        </Card >
 
         <Form className="block">
           <h2 className="profile-title d-flex justify-content-center text-danger mt-3">Update your user profile</h2>
           <Form.Group controlId="formUsername">
             <Form.Label>Username</Form.Label>
             <Form.Control name="Username" type="username" value={this.state.formValues.Username} placeholder="Update your username" onChange={this.handleChange} />
-            {/* <Form.Control name="Username" type="username" value={this.state.formValues.Username} placeholder="Enter a valid username of at least 6 characters" onChange={this.handleChange} />
-            {Object.keys(usernameErr).map((key) => {
-              return (
-                <div key={key} style={{ color: "red" }}>
-                  {usernameErr[key]}
-                </div>
-              );
-            })} */}
           </Form.Group>
           <Form.Group controlId="formPassword">
             <Form.Label>Password</Form.Label>
@@ -152,8 +111,6 @@ export class ProfileView extends React.Component {
           </Form.Group>
         </Form>
 
-
-
         <Button block variant="danger" type="submit" onClick={this.handleSubmit}>Update Profile</Button>
 
         <Button id="delete-btn" variant="danger" block onClick={() => {
@@ -167,27 +124,19 @@ export class ProfileView extends React.Component {
           Delete Your Account
         </Button>
 
-        {/* <Container className=" favorites">
-          {favoriteMovieList.map(
-            (movie) => {
-              return (
-                <div key={movie._id}>
-                  <Card className='favorite-movies'>
-                    <Link to={`/movies/${movie._id}`}>
-                      <Card.Img className="movie-card-link" variant="top" src={movie.ImagePath} />
-                    </Link>
-                    <Button className="remove-favorite" variant="danger" onClick={() => this.removeFavorite(movie)}>
-                      Remove Favorite
-                    </Button>
-
-                  </Card>
-                </div>
-              );
-            }
-          )}
-        </Container> */}
-
-      </Container>
+      </Container >
     );
   }
 }
+
+
+{/* <Form.Control name="Username" type="username" value={this.state.formValues.Username} placeholder="Enter a valid username of at least 6 characters" onChange={this.handleChange} />
+{
+  Object.keys(this.state.formValues.UsernameErr).map((key) => {
+    return (
+      <div key={key} style={{ color: "red" }}>
+        {this.state.formValues.UsernameErr[key]}
+      </div>
+    );
+  })
+} */}

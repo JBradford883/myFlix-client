@@ -10,7 +10,8 @@ import { RegistrationView } from '../registration-view/registration-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { ProfileView } from '../profile-view/profile-view';
-import { NavigationBar } from '../navigation-bar/navigation-bar'
+import { NavigationBar } from '../navigation-bar/navigation-bar';
+import { FavoriteMovies } from '../favorite-movies/favorite-movies'
 
 import { Row, Col } from 'react-bootstrap';
 
@@ -106,8 +107,8 @@ class MainView extends React.Component {
     this.setState({
       userData: updatedUserData,
       user: updatedUserData.Username
-    }),
-      localStorage.setItem("user", updatedUserData.Username);
+    });
+    localStorage.setItem("user", updatedUserData.Username);
   }
 
   render() {
@@ -149,13 +150,16 @@ class MainView extends React.Component {
 
           {/*Profile View*/}
           <Route path={`/users/${user}`} render={({ history }) => {
-            if (!userData) return <Col>
-              <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-            </Col>
+            if (!userData) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+            if (movies.length === 0) return <div className="main-view" />;
             return <>
               <NavigationBar user={user} history={history} />
               <Col md={8}>
-                <ProfileView user={user} token={token} history={history} userData={userData} onProfileUpdate={this.onProfileUpdate} onNewUser={newData => { this.newUser(newData); }} onBackClick={() => history.goBack()} />
+                <ProfileView user={user} token={token} history={history} userData={userData} onProfileUpdate={this.onProfileUpdate} onBackClick={() => history.goBack()} />
+              </Col>
+
+              <Col className="mt-5" md={12}>
+                <FavoriteMovies userData={userData} movies={movies} history={history} />
               </Col>
             </>
 
