@@ -22037,14 +22037,14 @@ class MainView extends _reactDefault.default.Component {
                     userData: userData,
                     onProfileUpdate: this.onProfileUpdate,
                     onBackClick: ()=>history.goBack()
-                })), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Row, {
-                    className: "d-flex justify-content-center"
-                }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
-                    md: 10
+                })), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
+                    className: "mt-5",
+                    md: 12
                 }, /*#__PURE__*/ _reactDefault.default.createElement(_favoriteMovies.FavoriteMovies, {
-                    user: user,
-                    movies: movies
-                })))));
+                    userData: userData,
+                    movies: movies,
+                    history: history
+                }))));
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
@@ -22077,7 +22077,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 170
+                lineNumber: 169
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -22105,7 +22105,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 184
+                lineNumber: 183
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -22133,7 +22133,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 199
+                lineNumber: 198
             },
             __self: this
         }))));
@@ -39845,6 +39845,7 @@ class DirectorView extends _reactDefault.default.Component {
                 className: "director-card text-center mb-2",
                 lg: 3,
                 md: 6,
+                key: m._id,
                 __source: {
                     fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/director-view/director-view.jsx",
                     lineNumber: 34
@@ -39972,6 +39973,7 @@ class GenreView extends _reactDefault.default.Component {
                 className: "genre-card text-center mb-2",
                 lg: 3,
                 md: 6,
+                key: m._id,
                 __source: {
                     fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/genre-view/genre-view.jsx",
                     lineNumber: 26
@@ -40083,23 +40085,6 @@ class ProfileView extends _reactDefault.default.Component {
             console.log(error);
         });
     }
-    // // DELETE request to remove a movie from favorites list
-    // removeFavorite(movie) {
-    //   let token = localStorage.getItem('token');
-    //   let user = localStorage.getItem('user');
-    //   axios.delete(`https://myflix-2388-app.herokuapp.com/users/${user}/movies/${movie._id}`, {
-    //     headers: { Authorization: `Bearer ${token}` }
-    //   }).then(
-    //     (response) => {
-    //       console.log(response);
-    //       alert('You have sucessfully updated your favorites list.');
-    //     }).catch(
-    //       function (error) {
-    //         console.log(error)
-    //         alert('There was an error.');
-    //       }
-    //     );
-    // }
     formatDate(date) {
         if (date) date = date.substring(0, 10);
         return date;
@@ -40119,81 +40104,80 @@ class ProfileView extends _reactDefault.default.Component {
         this.updateProfile(this.props.token);
     }
     render() {
-        let { movies , userData , token  } = this.props;
-        // let FavoriteMovies = this.state.formValues.FavoriteMovies;
+        let { userData , token  } = this.props;
         return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Container, {
             className: "profile-view",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 103
+                lineNumber: 84
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card, {
             className: "shadow-sm",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 104
+                lineNumber: 85
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement("h2", {
             className: "profile-title d-flex justify-content-center text-danger mt-2",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 105
+                lineNumber: 86
             },
             __self: this
         }, `${userData.Username}`, " Profile Info"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Body, {
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 106
+                lineNumber: 87
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Text, {
             className: "d-flex justify-content-center mb-1",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 107
+                lineNumber: 88
             },
             __self: this
         }, "Username: ", `${userData.Username}`), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Text, {
             className: "d-flex justify-content-center mb-1",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 108
+                lineNumber: 89
             },
             __self: this
         }, "Email: ", `${userData.Email}`), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Text, {
             className: "d-flex justify-content-center mb-1",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 109
+                lineNumber: 90
             },
             __self: this
         }, "Birthday: ", `${this.formatDate(userData.Birthday)}`))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form, {
             className: "block",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 113
+                lineNumber: 94
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement("h2", {
             className: "profile-title d-flex justify-content-center text-danger mt-3",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 114
+                lineNumber: 95
             },
             __self: this
         }, "Update your user profile"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Group, {
             controlId: "formUsername",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 115
+                lineNumber: 96
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Label, {
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 116
+                lineNumber: 97
             },
             __self: this
         }, "Username"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Control, {
@@ -40204,20 +40188,20 @@ class ProfileView extends _reactDefault.default.Component {
             onChange: this.handleChange,
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 117
+                lineNumber: 98
             },
             __self: this
         })), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Group, {
             controlId: "formPassword",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 119
+                lineNumber: 100
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Label, {
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 120
+                lineNumber: 101
             },
             __self: this
         }, "Password"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Control, {
@@ -40228,20 +40212,20 @@ class ProfileView extends _reactDefault.default.Component {
             onChange: this.handleChange,
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 121
+                lineNumber: 102
             },
             __self: this
         })), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Group, {
             controlId: "formEmail",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 123
+                lineNumber: 104
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Label, {
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 124
+                lineNumber: 105
             },
             __self: this
         }, "Email"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Control, {
@@ -40252,20 +40236,20 @@ class ProfileView extends _reactDefault.default.Component {
             onChange: this.handleChange,
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 125
+                lineNumber: 106
             },
             __self: this
         })), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Group, {
             controlId: "formBirthday",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 127
+                lineNumber: 108
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Label, {
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 128
+                lineNumber: 109
             },
             __self: this
         }, "Birthday"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Control, {
@@ -40275,7 +40259,7 @@ class ProfileView extends _reactDefault.default.Component {
             onChange: this.handleChange,
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 129
+                lineNumber: 110
             },
             __self: this
         }))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
@@ -40285,7 +40269,7 @@ class ProfileView extends _reactDefault.default.Component {
             onClick: this.handleSubmit,
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 133
+                lineNumber: 114
             },
             __self: this
         }, "Update Profile"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
@@ -40298,7 +40282,7 @@ class ProfileView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 135
+                lineNumber: 116
             },
             __self: this
         }, "Delete Your Account")));
@@ -40440,8 +40424,8 @@ parcelHelpers.export(exports, "FavoriteMovies", ()=>FavoriteMovies
 );
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
-var _propTypes = require("prop-types");
-var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _reactBootstrap = require("react-bootstrap");
 var _reactRouterDom = require("react-router-dom");
 var _favoriteMoviesScss = require("./favorite-movies.scss");
@@ -40450,13 +40434,15 @@ class FavoriteMovies extends _reactDefault.default.Component {
         super(props);
         this.state = {
         };
-        this.removeFavorite = this.removeFavorite.bind(this);
+    }
+    componentDidUpdate() {
+        return true;
     }
     // DELETE request to remove a movie from favorites list
     removeFavorite(movie) {
         let token = localStorage.getItem('token');
         let user = localStorage.getItem('user');
-        axios.delete(`https://myflix-2388-app.herokuapp.com/users/${user}/movies/${movie._id}`, {
+        _axiosDefault.default.delete(`https://myflix-2388-app.herokuapp.com/users/${user}/movies/${movie._id}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -40469,64 +40455,72 @@ class FavoriteMovies extends _reactDefault.default.Component {
         });
     }
     render() {
-        const FavoriteMovies1 = this.props.user.FavoriteMovies;
+        const favoriteMovies = this.props.userData.FavoriteMovies;
         const { movies  } = this.props;
         return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Container, {
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/favorite-movies/favorite-movies.jsx",
-                lineNumber: 39
+                lineNumber: 42
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card, {
             className: "fav-view shadow",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/favorite-movies/favorite-movies.jsx",
-                lineNumber: 40
+                lineNumber: 43
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Body, {
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/favorite-movies/favorite-movies.jsx",
-                lineNumber: 41
+                lineNumber: 44
             },
             __self: this
-        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Row, {
-            className: "fav-movies mb-3",
+        }, /*#__PURE__*/ _reactDefault.default.createElement("h2", {
+            className: "profile-title d-flex justify-content-center text-danger",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/favorite-movies/favorite-movies.jsx",
-                lineNumber: 42
+                lineNumber: 45
             },
             __self: this
-        }, FavoriteMovies1.length === 0 && /*#__PURE__*/ _reactDefault.default.createElement("div", {
+        }, "Your Favorite Movies"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Row, {
+            className: "fav-movies mb-3 justify-content-center",
+            __source: {
+                fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/favorite-movies/favorite-movies.jsx",
+                lineNumber: 46
+            },
+            __self: this
+        }, favoriteMovies.length === 0 && /*#__PURE__*/ _reactDefault.default.createElement("div", {
             className: "card-content",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/favorite-movies/favorite-movies.jsx",
-                lineNumber: 43
+                lineNumber: 47
             },
             __self: this
         }, "You don't have any favorite movies yet!"), /*#__PURE__*/ _reactDefault.default.createElement("div", {
             className: "favorites-container",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/favorite-movies/favorite-movies.jsx",
-                lineNumber: 44
+                lineNumber: 48
             },
             __self: this
-        }, FavoriteMovies1.length > 0 && movies.map((movie)=>{
-            if (movie._id === FavoriteMovies1.find((favMovie)=>favMovie === movie._id
-            )) return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
+        }, favoriteMovies.length > 0 && movies.filter((movie)=>{
+            return movie._id === favoriteMovies.find((favMovie)=>favMovie === movie._id
+            );
+        }).map((movie)=>{
+            return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
                 className: "fav-card text-center mb-2",
-                lg: 3,
-                md: 6,
+                key: movie._id,
                 __source: {
                     fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/favorite-movies/favorite-movies.jsx",
-                    lineNumber: 48
+                    lineNumber: 53
                 },
                 __self: this
             }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
-                to: `/movies/${m._id}`,
+                to: `/movies/${movie._id}`,
                 __source: {
                     fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/favorite-movies/favorite-movies.jsx",
-                    lineNumber: 49
+                    lineNumber: 54
                 },
                 __self: this
             }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Img, {
@@ -40535,10 +40529,27 @@ class FavoriteMovies extends _reactDefault.default.Component {
                 src: movie.ImagePath,
                 __source: {
                     fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/favorite-movies/favorite-movies.jsx",
-                    lineNumber: 50
+                    lineNumber: 55
                 },
                 __self: this
-            }))));
+            })), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Body, {
+                className: "movie-card-body",
+                __source: {
+                    fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/favorite-movies/favorite-movies.jsx",
+                    lineNumber: 57
+                },
+                __self: this
+            }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
+                className: "remove-favorite",
+                variant: "danger",
+                onClick: ()=>this.removeFavorite(movie)
+                ,
+                __source: {
+                    fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/favorite-movies/favorite-movies.jsx",
+                    lineNumber: 58
+                },
+                __self: this
+            }, " Remove"))));
         })))))));
     }
 }
@@ -40548,6 +40559,6 @@ class FavoriteMovies extends _reactDefault.default.Component {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","@parcel/transformer-js/src/esmodule-helpers.js":"7IoRK","../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"3QRYi","react-bootstrap":"4n7hB","react-router-dom":"1PMSK","prop-types":"4dfy5","./favorite-movies.scss":"GLCsx"}],"GLCsx":[function() {},{}],"7JlsF":[function() {},{}]},["1j6wU","Pi5Vq","6dau1"], "6dau1", "parcelRequire279c")
+},{"react":"3b2NM","@parcel/transformer-js/src/esmodule-helpers.js":"7IoRK","../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"3QRYi","react-bootstrap":"4n7hB","react-router-dom":"1PMSK","./favorite-movies.scss":"GLCsx","axios":"7rA65"}],"GLCsx":[function() {},{}],"7JlsF":[function() {},{}]},["1j6wU","Pi5Vq","6dau1"], "6dau1", "parcelRequire279c")
 
 //# sourceMappingURL=index.fcfe7d4c.js.map
