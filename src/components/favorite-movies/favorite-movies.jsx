@@ -12,10 +12,6 @@ export class FavoriteMovies extends React.Component {
     this.state = {};
   }
 
-  componentDidUpdate() {
-    return true;
-  }
-
   // DELETE request to remove a movie from favorites list
   removeFavorite(movie) {
     let token = localStorage.getItem('token');
