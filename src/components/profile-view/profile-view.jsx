@@ -2,8 +2,6 @@ import axios from 'axios';
 import React from 'react';
 import { Form, Button, Container, Card, Row } from 'react-bootstrap';
 
-import { Link } from "react-router-dom";
-
 import './profile-view.scss';
 
 export class ProfileView extends React.Component {
@@ -128,15 +126,3 @@ export class ProfileView extends React.Component {
     );
   }
 }
-
-
-{/* <Form.Control name="Username" type="username" value={this.state.formValues.Username} placeholder="Enter a valid username of at least 6 characters" onChange={this.handleChange} />
-{
-  Object.keys(this.state.formValues.UsernameErr).map((key) => {
-    return (
-      <div key={key} style={{ color: "red" }}>
-        {this.state.formValues.UsernameErr[key]}
-      </div>
-    );
-  })
-} */}
