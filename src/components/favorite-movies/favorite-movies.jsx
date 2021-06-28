@@ -12,10 +12,6 @@ export class FavoriteMovies extends React.Component {
     this.state = {};
   }
 
-  componentDidUpdate() {
-    return true;
-  }
-
   // DELETE request to remove a movie from favorites list
   removeFavorite(movie) {
     let token = localStorage.getItem('token');
@@ -26,6 +22,7 @@ export class FavoriteMovies extends React.Component {
       (response) => {
         console.log(response);
         alert('You have sucessfully updated your favorites list.');
+        location.reload();
       }).catch(
         function (error) {
           console.log(error)
@@ -50,7 +47,7 @@ export class FavoriteMovies extends React.Component {
                   return movie._id === favoriteMovies.find((favMovie) => favMovie === movie._id)
                 }).map((movie) => {
                   return (
-                    <Col className="fav-card text-center mb-2" key={movie._id}>
+                    <Col className="fav-card text-center mb-2" md={12} key={movie._id}>
                       <Link to={`/movies/${movie._id}`}>
                         <Card.Img className="fav-img" key={movie._id} src={movie.ImagePath} />
                       </Link>

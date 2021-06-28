@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Form, Row } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import { Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -22,6 +23,7 @@ export function LoginView(props) {
       })
       .catch(e => {
         console.log('no such user')
+        alert('Invalid username or password')
       });
   };
 
@@ -51,3 +53,12 @@ export function LoginView(props) {
     </>
   );
 }
+
+LoginView.propTypes = {
+  user: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+  }),
+  onLoggedIn: PropTypes.func.isRequired,
+  onRegister: PropTypes.func,
+};

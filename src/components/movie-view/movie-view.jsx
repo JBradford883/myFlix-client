@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Button, Container, Col } from 'react-bootstrap';
+import { Card, Button, Container } from 'react-bootstrap';
 import axios from 'axios';
 
 import { Link } from 'react-router-dom';
@@ -22,6 +22,7 @@ export class MovieView extends React.Component {
       (response) => {
         console.log(response);
         alert('You have sucessfully updated your favorites list.');
+        location.reload();
       }).catch(
         function (error) {
           console.log(error)
@@ -92,24 +93,3 @@ MovieView.propTypes = {
   }).isRequired,
   onBackClick: PropTypes.func.isRequired
 };
-
-
-// <Card className="movie-view">
-      //   <Card.Body>
-      //     <Card.Img className="movie-img mb-3" src={movie.ImagePath} />
-      //     <Card.Title>{movie.Title}</Card.Title>
-      //     <Card.Text className="description"><b>Description:</b> {movie.Description}</Card.Text>
-      //     <Card.Text>
-      //       <span className="label font-weight-bold">Director: </span>
-      //       <Link className="link" to={`/directors/${movie.Director.Name}`}>
-      //         <span className="value">{movie.Director.Name}</span>
-      //       </Link>
-      //     </Card.Text>
-      //     <Card.Text>
-      //       <span className="label font-weight-bold">Genre: </span>
-      //       <Link className="link" to={`/genres/${movie.Genre.Name}`}>
-      //         <span className="value">{movie.Genre.Name}</span>
-      //       </Link>
-      //     </Card.Text>
-      //   </Card.Body>
-      // </Card>
