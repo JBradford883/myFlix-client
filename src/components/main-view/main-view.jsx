@@ -154,13 +154,13 @@ class MainView extends React.Component {
             if (movies.length === 0) return <div className="main-view" />;
             return <>
               <NavigationBar user={user} history={history} />
-              <Col md={8}>
+              <Col lg={8} md={12}>
                 <ProfileView user={user} token={token} history={history} userData={userData} onProfileUpdate={this.onProfileUpdate} onBackClick={() => history.goBack()} />
               </Col>
 
-              <Col className="mt-5" md={12}>
+              <Row className="mt-5" md={8}>
                 <FavoriteMovies userData={userData} movies={movies} history={history} />
-              </Col>
+              </Row>
             </>
 
           }} />
