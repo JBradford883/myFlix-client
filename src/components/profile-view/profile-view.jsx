@@ -39,7 +39,10 @@ export class ProfileView extends React.Component {
       });
   }
 
-  // DELETE request to remove the user profile 
+  /*
+  DELETE request to remove the user profile 
+  Refreshes the page and brings user back to login in view
+  */
   deleteAcc(token) {
     axios.delete(`https://myflix-2388-app.herokuapp.com/users/${this.props.user}`,
       { headers: { 'Authorization': `Bearer ${token}` } })
@@ -55,6 +58,7 @@ export class ProfileView extends React.Component {
       });
   }
 
+  // Function to convert date into YYYY/MM/DD
   formatDate(date) {
     if (date) date = date.substring(0, 10);
     return date;
