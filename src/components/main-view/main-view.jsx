@@ -1,14 +1,15 @@
 import React from 'react';
 import axios from 'axios';
 
+// Redux
 import { connect } from 'react-redux';
-
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-
 import { setMovies, setUser } from '../../actions/actions';
 
-import MoviesList from '../movies-list/movies-list';
+// Router
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
+// Components
+import MoviesList from '../movies-list/movies-list';
 import { LoginView } from '../login-view/login-view';
 import { MovieView } from '../movie-view/movie-view';
 import { RegistrationView } from '../registration-view/registration-view';
@@ -18,6 +19,7 @@ import { ProfileView } from '../profile-view/profile-view';
 import { NavigationBar } from '../navigation-bar/navigation-bar';
 import { FavoriteMovies } from '../favorite-movies/favorite-movies'
 
+// React-Bootstrap components
 import { Row, Col } from 'react-bootstrap';
 
 class MainView extends React.Component {
@@ -45,6 +47,7 @@ class MainView extends React.Component {
     }
   }
 
+  // Gets the user account from the database
   getAcc(token, user) {
     axios.get(`https://myflix-2388-app.herokuapp.com/users/${user}`, {
       headers: { Authorization: `Bearer ${token}` }
@@ -60,10 +63,7 @@ class MainView extends React.Component {
       });
   }
 
-  /*
-  When a user successfully logs in, this function updates the `user` property in state to that *particular user
-  Stores users data in their browser so when a page refresh occur they do not need to log back in.
-  */
+  // Gets the movies from the Database
   getMovies(token) {
     axios.get('https://myflix-2388-app.herokuapp.com/movies', {
       headers: { Authorization: `Bearer ${token}` }
@@ -76,7 +76,7 @@ class MainView extends React.Component {
       });
   }
 
-  /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
+  // Login function
   onLoggedIn(authData) {
     console.log(authData);
     this.setState({

@@ -24804,9 +24804,12 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
+// Redux
 var _reactRedux = require("react-redux");
-var _reactRouterDom = require("react-router-dom");
 var _actions = require("../../actions/actions");
+// Router
+var _reactRouterDom = require("react-router-dom");
+// Components
 var _moviesList = require("../movies-list/movies-list");
 var _moviesListDefault = parcelHelpers.interopDefault(_moviesList);
 var _loginView = require("../login-view/login-view");
@@ -24817,6 +24820,7 @@ var _genreView = require("../genre-view/genre-view");
 var _profileView = require("../profile-view/profile-view");
 var _navigationBar = require("../navigation-bar/navigation-bar");
 var _favoriteMovies = require("../favorite-movies/favorite-movies");
+// React-Bootstrap components
 var _reactBootstrap = require("react-bootstrap");
 class MainView extends _reactDefault.default.Component {
     constructor(){
@@ -24840,6 +24844,7 @@ class MainView extends _reactDefault.default.Component {
             this.getMovies(accessToken);
         }
     }
+    // Gets the user account from the database
     getAcc(token, user) {
         _axiosDefault.default.get(`https://myflix-2388-app.herokuapp.com/users/${user}`, {
             headers: {
@@ -24854,10 +24859,8 @@ class MainView extends _reactDefault.default.Component {
             console.log(error);
         });
     }
-    /*
-  When a user successfully logs in, this function updates the `user` property in state to that *particular user
-  Stores users data in their browser so when a page refresh occur they do not need to log back in.
-  */ getMovies(token) {
+    // Gets the movies from the Database
+    getMovies(token) {
         _axiosDefault.default.get('https://myflix-2388-app.herokuapp.com/movies', {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -24868,7 +24871,8 @@ class MainView extends _reactDefault.default.Component {
             console.log(error);
         });
     }
-    /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/ onLoggedIn(authData) {
+    // Login function
+    onLoggedIn(authData) {
         console.log(authData);
         this.setState({
             user: authData.user.Username,
