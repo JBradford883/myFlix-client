@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react';
-import { Form, Button, Container, Card, Row } from 'react-bootstrap';
+import { Form, Button, Container, Card } from 'react-bootstrap';
 
 import './profile-view.scss';
 
@@ -115,7 +115,7 @@ export class ProfileView extends React.Component {
 
         <Button block variant="danger" type="submit" onClick={this.handleSubmit}>Update Profile</Button>
 
-        <Button id="delete-btn" variant="danger" block onClick={() => {
+        <Button className="mb-3" variant="danger" block onClick={() => {
           const confirmBox = window.confirm(
             "Are you sure you want to delete your account?"
           )
