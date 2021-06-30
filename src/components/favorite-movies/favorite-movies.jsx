@@ -9,7 +9,6 @@ import './favorite-movies.scss';
 export class FavoriteMovies extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
   }
 
   // DELETE request to remove a movie from favorites list
@@ -41,15 +40,15 @@ export class FavoriteMovies extends React.Component {
           <Card.Body>
             <h2 className="profile-title d-flex justify-content-center text-danger">Your Favorite Movies</h2>
             <Row className="fav-movies mb-3 justify-content-center">
-              {favoriteMovies.length === 0 && <div className='card-content'>You don't have any favorite movies yet!</div>}
+              {favoriteMovies.length === 0 && <div>You don't have any favorite movies yet!</div>}
               <div className='favorites-container'>
                 {favoriteMovies.length > 0 && movies.filter(movie => {
                   return movie._id === favoriteMovies.find((favMovie) => favMovie === movie._id)
                 }).map((movie) => {
                   return (
-                    <Col className="fav-card text-center mb-2" md={12} key={movie._id}>
+                    <Col className="favorite-card text-center mb-2" key={movie._id}>
                       <Link to={`/movies/${movie._id}`}>
-                        <Card.Img className="fav-img" key={movie._id} src={movie.ImagePath} />
+                        <Card.Img className="fav-img" src={movie.ImagePath} />
                       </Link>
                       <Card.Body className='movie-card-body'>
                         <Button className='remove-favorite' variant='danger' onClick={() => this.removeFavorite(movie)}> Remove
