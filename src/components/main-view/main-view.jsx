@@ -5,8 +5,7 @@ import { connect } from 'react-redux';
 
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
-// #0
-import { setMovies } from '../../actions/actions';
+import { setMovies, setUser } from '../../actions/actions';
 
 import MoviesList from '../movies-list/movies-list';
 
@@ -26,8 +25,6 @@ class MainView extends React.Component {
   constructor() {
     super();
     this.state = {
-      movies: [],
-      selectedMovie: null,
       user: null,
       userData: null,
       token: null,
@@ -46,12 +43,6 @@ class MainView extends React.Component {
       this.getAcc(accessToken, userToken);
       this.getMovies(accessToken);
     }
-  }
-
-  setSelectedMovie(movie) {
-    this.setState({
-      selectedMovie: movie
-    });
   }
 
   getAcc(token, user) {
@@ -78,10 +69,7 @@ class MainView extends React.Component {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
-        // Assign the result to the state
-        this.setState({
-          movies: response.data
-        });
+        this.props.setMovies(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -118,7 +106,8 @@ class MainView extends React.Component {
   }
 
   render() {
-    const { movies, user, userData, token } = this.state;
+    let { movies } = this.props;
+    let { user, userData, token } = this.state;
 
     return (
       <Router>
@@ -127,23 +116,14 @@ class MainView extends React.Component {
 
           {/*Main View*/}
           <Route exact path="/" render={({ history }) => {
-            if (!user) return (
-              <Col>
-                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-              </Col>
-            )
+            if (!user) return <Col>
+              <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+            </Col>
             if (movies.length === 0) return <div className="main-view" />;
-            return (
-              <>
-                <NavigationBar user={user} history={history} />
-                {movies.map(m => (
-                  <Col lg={3} sm={4} key={m._id}>
-                    <MovieCard movie={m} />
-                  </Col>
-
-                ))}
-              </>
-            );
+            return <>
+              <NavigationBar user={user} history={history} />
+              <MoviesList movies={movies} />
+            </>
           }} />
 
           {/*Registration View*/}
@@ -162,11 +142,8 @@ class MainView extends React.Component {
               <NavigationBar user={user} history={history} />
               <Col lg={8} md={12}>
                 <ProfileView user={user} token={token} history={history} userData={userData} onProfileUpdate={this.onProfileUpdate} onBackClick={() => history.goBack()} />
-              </Col>
-
-              <Row className="mt-5" md={8}>
                 <FavoriteMovies userData={userData} movies={movies} history={history} />
-              </Row>
+              </Col>
             </>
 
           }} />
@@ -220,4 +197,10 @@ class MainView extends React.Component {
   }
 }
 
-export default MainView;
+let mapStateToProps = state => {
+  return {
+    movies: state.movies
+  }
+}
+
+export default connect(mapStateToProps, { setMovies })(MainView);
