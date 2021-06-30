@@ -142,6 +142,9 @@ class MainView extends React.Component {
               <NavigationBar user={user} history={history} />
               <Col lg={8} md={12}>
                 <ProfileView user={user} token={token} history={history} userData={userData} onProfileUpdate={this.onProfileUpdate} onBackClick={() => history.goBack()} />
+
+              </Col>
+              <Col lg={8} md={12}>
                 <FavoriteMovies userData={userData} movies={movies} history={history} />
               </Col>
             </>
@@ -156,7 +159,7 @@ class MainView extends React.Component {
             if (movies.length === 0) return <div className="main-view" />;
             return <>
               <NavigationBar user={user} history={history} />
-              <Col lg={12} md={10} sm={8} className="movie-view">
+              <Col lg={9} md={12} className="movie-view">
                 <MovieView movie={movies.find(m => m._id === match.params.movieId)} onBackClick={() => history.goBack()} />
               </Col>
             </>

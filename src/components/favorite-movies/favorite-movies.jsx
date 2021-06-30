@@ -36,30 +36,33 @@ export class FavoriteMovies extends React.Component {
 
     return (
       <Container>
-        <Card className='fav-view shadow'>
-          <Card.Body>
-            <h2 className="profile-title d-flex justify-content-center text-danger">Your Favorite Movies</h2>
-            <Row className="fav-movies mb-3 justify-content-center">
-              {favoriteMovies.length === 0 && <div>You don't have any favorite movies yet!</div>}
-              <div className='favorites-container'>
-                {favoriteMovies.length > 0 && movies.filter(movie => {
-                  return movie._id === favoriteMovies.find((favMovie) => favMovie === movie._id)
-                }).map((movie) => {
-                  return (
-                    <Col className="favorite-card text-center mb-2" key={movie._id}>
+        <Card className='movie-card shadow-sm'>
+          <h2 className="profile-title d-flex justify-content-center text-danger mt-3">Your Favorite Movies</h2>
+          <Row className="fav-movies mb-3 justify-content-center">
+            {favoriteMovies.length === 0 && <div>You don't have any favorite movies yet!</div>}
+            <div className='favorites-container'>
+              {favoriteMovies.length > 0 && movies.filter(movie => {
+                return movie._id === favoriteMovies.find((favMovie) => favMovie === movie._id)
+              }).map((movie) => {
+                return (
+                  <div key={movie._id}>
+                    <Col className="favorite-card container-fluid text-center mb-2" md={8}>
                       <Link to={`/movies/${movie._id}`}>
                         <Card.Img className="fav-img" src={movie.ImagePath} />
                       </Link>
-                      <Card.Body className='movie-card-body'>
-                        <Button className='remove-favorite' variant='danger' onClick={() => this.removeFavorite(movie)}> Remove
-                        </Button>
-                      </Card.Body>
+
+                      <Button
+                        className='remove-favorite mt-2 mb-3'
+                        variant='danger'
+                        onClick={() => this.removeFavorite(movie)}>
+                        Remove Favorite
+                      </Button>
                     </Col>
-                  );
-                })}
-              </div>
-            </Row>
-          </Card.Body>
+                  </div>
+                );
+              })}
+            </div>
+          </Row>
         </Card>
       </Container>
     );

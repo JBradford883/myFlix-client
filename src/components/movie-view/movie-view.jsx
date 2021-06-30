@@ -37,12 +37,13 @@ export class MovieView extends React.Component {
     return (
       <Container>
         <Card className="movie-view shadow">
-          <div className="m-4">
-            <div className="movie-poster float-left text-center mr-3">
-              <img src={movie.ImagePath} />
-            </div>
+          <div className="m-3">
+
             <div className="movie-title text-center mb-3">
-              <span className="value font-weight-bold h3">{movie.Title}</span>
+              <span className="value font-weight-bold h1">{movie.Title}</span>
+            </div>
+            <div className="movie-poster text-center mb-3">
+              <img src={movie.ImagePath} />
             </div>
             <div className="movie-info mb-2">
               <span className="label font-weight-bold">Description: </span>
@@ -60,12 +61,11 @@ export class MovieView extends React.Component {
                 <span className="value">{movie.Genre.Name}</span>
               </Link>
             </div>
-            <div className="">
-              <Button className='add-favorite mt-3' variant='danger' onClick={() => this.addFavorite(movie)}>Add to Favorites</Button>
-            </div>
-            <div>
+            <div className="add-favorite text-center">
+              <Button className='add-favorite mr-2' variant='dark' onClick={() => this.addFavorite(movie)}>Add to Favorites</Button>
+
               <Link to={`/`}>
-                <Button className="return-button mt-2" variant="danger">Back to Main</Button>
+                <Button className="return-button" variant="dark">Back to Main</Button>
               </Link>
             </div>
           </div>

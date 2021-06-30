@@ -84,14 +84,13 @@ export class ProfileView extends React.Component {
 
     return (
       <Container className="profile-view" >
-        <Card className="shadow-sm">
+        <div className="user-info mb-3">
           <h2 className="profile-title d-flex justify-content-center text-danger mt-2">{`${userData.Username}`} Profile Info</h2>
-          <Card.Body>
-            <Card.Text className="d-flex justify-content-center mb-1">Username: {`${userData.Username}`}</Card.Text>
-            <Card.Text className="d-flex justify-content-center mb-1">Email: {`${userData.Email}`}</Card.Text>
-            <Card.Text className="d-flex justify-content-center mb-1">Birthday: {`${this.formatDate(userData.Birthday)}`}</Card.Text>
-          </Card.Body>
-        </Card >
+
+          <p className="d-flex justify-content-center mb-1">Username: {`${userData.Username}`} </p>
+          <p className="d-flex justify-content-center mb-1">Email: {`${userData.Email}`}</p>
+          <p className="d-flex justify-content-center mb-1">Birthday: {`${this.formatDate(userData.Birthday)}`}</p>
+        </div>
 
         <Form className="block">
           <h2 className="profile-title d-flex justify-content-center text-danger mt-3">Update your user profile</h2>
@@ -112,20 +111,18 @@ export class ProfileView extends React.Component {
             <Form.Control name="Birthday" type="date" value={this.state.formValues.Birthday} onChange={this.handleChange} />
           </Form.Group>
         </Form>
+        <div className="buttons text-center">
+          <Button className="update-profile mr-2" variant="dark" type="submit" onClick={this.handleSubmit}>Update Profile</Button>
 
-        <Button block variant="danger" type="submit" onClick={this.handleSubmit}>Update Profile</Button>
-
-        <Button className="mb-3" variant="danger" block onClick={() => {
-          const confirmBox = window.confirm(
-            "Are you sure you want to delete your account?"
-          )
-          if (confirmBox === true) {
-            this.deleteAcc(token)
-          }
-        }} >
-          Delete Your Account
-        </Button>
-
+          <Button className="delete-button" variant="dark" onClick={() => {
+            const confirmBox = window.confirm("Are you sure you want to delete your account?")
+            if (confirmBox === true) {
+              this.deleteAcc(token)
+            }
+          }} >
+            Delete Account
+          </Button>
+        </div>
       </Container >
     );
   }
