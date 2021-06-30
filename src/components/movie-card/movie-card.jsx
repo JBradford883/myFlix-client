@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Card, Col } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 
 import { Link } from "react-router-dom";
 
@@ -19,12 +19,6 @@ export class MovieCard extends React.Component {
           <Card.Text className="movie-description">{movie.Description}</Card.Text>
           <Link to={`/movies/${movie._id}`}>
             <Button className="mb-2" block variant="danger">Movie Info</Button>
-          </Link>
-          <Link to={`/directors/${movie.Director.Name}`}>
-            <Button className="mb-2" block variant="danger">Director</Button>
-          </Link>
-          <Link to={`/genres/${movie.Genre.Name}`}>
-            <Button className="mb-2" block variant="danger">Genre</Button>
           </Link>
         </Card.Body>
       </Card >
