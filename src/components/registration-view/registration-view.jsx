@@ -31,6 +31,11 @@ export function RegistrationView(props) {
       isValid = false;
     }
 
+    if (username.match(`[^\s][A-z0-9À-ž\s]+`)) {
+      usernameErr.usernameNotAlphanumeric = "Username must only include alphanumeric symbols.";
+      isValid = false;
+    }
+
     if (password === '') {
       passwordErr.passwordMissing = "You must enter a Password"
     }
