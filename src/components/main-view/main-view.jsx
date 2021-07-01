@@ -42,13 +42,13 @@ class MainView extends React.Component {
         user: localStorage.getItem('user'),
         token: localStorage.getItem('token')
       });
-      this.getAcc(accessToken, userToken);
+      this.getUser(accessToken, userToken);
       this.getMovies(accessToken);
     }
   }
 
   // Gets the user account from the database
-  getAcc(token, user) {
+  getUser(token, user) {
     axios.get(`https://myflix-2388-app.herokuapp.com/users/${user}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -86,7 +86,7 @@ class MainView extends React.Component {
 
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
-    this.getAcc(authData.token, authData.user.Username)
+    this.getUser(authData.token, authData.user.Username)
     this.getMovies(authData.token);
   }
 

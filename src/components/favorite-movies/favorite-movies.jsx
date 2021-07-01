@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Button, Card, Container, Row, Col } from 'react-bootstrap';
+import { Button, Card, Row, Col } from 'react-bootstrap';
 
 import { Link } from "react-router-dom";
 
@@ -35,36 +35,34 @@ export class FavoriteMovies extends React.Component {
     const { movies } = this.props;
 
     return (
-      <Container>
-        <Card className='movie-card shadow-sm'>
-          <h2 className="profile-title d-flex justify-content-center text-danger mt-3">Your Favorite Movies</h2>
-          <Row className="fav-movies mb-3 justify-content-center">
-            {favoriteMovies.length === 0 && <div>You don't have any favorite movies yet!</div>}
-            <div className='favorites-container'>
-              {favoriteMovies.length > 0 && movies.filter(movie => {
-                return movie._id === favoriteMovies.find((favMovie) => favMovie === movie._id)
-              }).map((movie) => {
-                return (
-                  <div key={movie._id}>
-                    <Col className="favorite-card container-fluid text-center mb-2" md={8}>
-                      <Link to={`/movies/${movie._id}`}>
-                        <Card.Img className="fav-img" src={movie.ImagePath} />
-                      </Link>
+      <Card className='movie-card shadow-sm mb-2'>
+        <h2 className="profile-title d-flex justify-content-center text-danger mt-3">Your Favorite Movies</h2>
+        <Row className="fav-movies mb-3 justify-content-center">
+          {favoriteMovies.length === 0 && <div>You don't have any favorite movies yet!</div>}
+          <div className='favorite-movies__container'>
+            {favoriteMovies.length > 0 && movies.filter(movie => {
+              return movie._id === favoriteMovies.find((favMovie) => favMovie === movie._id)
+            }).map((movie) => {
+              return (
+                <div key={movie._id}>
+                  <Col className="container-fluid text-center mb-2" md={8}>
+                    <Link to={`/movies/${movie._id}`}>
+                      <Card.Img className="fav-img" src={movie.ImagePath} />
+                    </Link>
 
-                      <Button
-                        className='remove-favorite mt-2 mb-3'
-                        variant='danger'
-                        onClick={() => this.removeFavorite(movie)}>
-                        Remove Favorite
-                      </Button>
-                    </Col>
-                  </div>
-                );
-              })}
-            </div>
-          </Row>
-        </Card>
-      </Container>
+                    <Button
+                      className='remove-favorite mt-2 mb-2'
+                      variant='dark'
+                      onClick={() => this.removeFavorite(movie)}>
+                      Remove Favorite
+                    </Button>
+                  </Col>
+                </div>
+              );
+            })}
+          </div>
+        </Row>
+      </Card>
     );
   }
 }

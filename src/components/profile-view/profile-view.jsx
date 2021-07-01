@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React from 'react';
-import { Form, Button, Container, Card } from 'react-bootstrap';
+
+// React-Bootstrap-components
+import { Form, Button, Container } from 'react-bootstrap';
 
 import './profile-view.scss';
 
@@ -83,17 +85,17 @@ export class ProfileView extends React.Component {
     let { userData, token } = this.props;
 
     return (
-      <Container className="profile-view" >
-        <div className="user-info mb-3">
-          <h2 className="profile-title d-flex justify-content-center text-danger mt-2">{`${userData.Username}`} Profile Info</h2>
+      <Container className="profile-view">
 
-          <p className="d-flex justify-content-center mb-1">Username: {`${userData.Username}`} </p>
-          <p className="d-flex justify-content-center mb-1">Email: {`${userData.Email}`}</p>
-          <p className="d-flex justify-content-center mb-1">Birthday: {`${this.formatDate(userData.Birthday)}`}</p>
+        <div className="user-info mb-5">
+          <h2 className="profile-title d-flex justify-content-center text-danger mt-2">{`${userData.Username}`} Profile Info</h2>
+          <p className="d-flex justify-content-center mb-1"><b className="mr-1">Username:</b> {`${userData.Username}`} </p>
+          <p className="d-flex justify-content-center mb-1"><b className="mr-1">Email:</b> {`${userData.Email}`}</p>
+          <p className="d-flex justify-content-center mb-1"><b className="mr-1">Birthday:</b> {`${this.formatDate(userData.Birthday)}`}</p>
         </div>
 
-        <Form className="block">
-          <h2 className="profile-title d-flex justify-content-center text-danger mt-3">Update your user profile</h2>
+        <Form>
+          <h3 className="profile-title d-flex justify-content-center text-danger mt-3">Update your user profile</h3>
           <Form.Group controlId="formUsername">
             <Form.Label>Username</Form.Label>
             <Form.Control name="Username" type="username" value={this.state.formValues.Username} placeholder="Update your username" onChange={this.handleChange} />
@@ -111,18 +113,15 @@ export class ProfileView extends React.Component {
             <Form.Control name="Birthday" type="date" value={this.state.formValues.Birthday} onChange={this.handleChange} />
           </Form.Group>
         </Form>
-        <div className="buttons text-center">
-          <Button className="update-profile mr-2" variant="dark" type="submit" onClick={this.handleSubmit}>Update Profile</Button>
 
+        <div className="buttons text-center mb-3">
+          <Button className="update-profile mr-2" variant="dark" type="submit" onClick={this.handleSubmit}>Update Profile</Button>
           <Button className="delete-button" variant="dark" onClick={() => {
             const confirmBox = window.confirm("Are you sure you want to delete your account?")
-            if (confirmBox === true) {
-              this.deleteAcc(token)
-            }
-          }} >
-            Delete Account
-          </Button>
+            if (confirmBox === true) { this.deleteAcc(token) }
+          }} > Delete Account </Button>
         </div>
+
       </Container >
     );
   }
