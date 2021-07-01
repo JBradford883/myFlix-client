@@ -1,36 +1,61 @@
 # **myFlix App Client Side**
 
-### **Objective**
+## **Objective**
 
 To create the client-side component of a movie web application. The web application will provide users with access to information about different movies, directors, and genres. Users will be able to sign up, update their personal information, and create a list of their favorite movies.
 
 ---
 
-### **Features**
+## **Essential Views and Features**
 
-- Returns a list of ALL movies in the database to the user.
-- Returns data about a single movie to the user (description, genre, director, image URL, and if the movie was featured.)
-- Returns data about a genre (description) by name/title (e.g., "Action").
-- Returns data about a director (bio, birth year, death year) by name.
-- Allows new users to register.
-- Allows users to update their info (username, password, email, birthday).
-- Allows users to add movies to a list of their favorites.
-- Allows users to remove movies from their favorites.
-- Allows existing users to deregister.
+#### **Main View**
+
+- Returns a list of ALL movies to the user (each listed item with an image, title, and description)
+- Sorting and filtering
+- Ability to select a movie for more details
+
+#### **Single Movie View**
+- Returns data (description, genre, director, image) about a single movie to the user
+- Allows users to add a movie to their list of favorites
+
+#### **Login View**
+- Allows users to log in with a username and password
+- Registration view
+- Allows new users to register (username, password, email, birthday)
+
+#### **Genre View**
+- Returns data about a genre, with a name and description
+- Displays example movies
+
+#### **Director View**
+- Returns data about a director (name, bio, birth year, death year)
+- Displays example movies
+
+#### **Profile view**
+- Allows users to update their user info (username, password, email, date of birth)
+- Allows existing users to deregister
+- Displays favorite movies
+- Allows users to remove a movie from their list of favorites
 
 ---
 
-### **Built with**
+## **Built with**
 
 - Visual Studio Code
 - React
+- React-Bootstrap
+- React-Redux
 
 ---
 
-### **Dependencies**
+## **Dependencies**
 
-- React
-- React-dom
-- React-Bootstrap
-- axios
-- prop-types
+- "axios": "^0.21.1",
+- "prop-types": "^15.7.2",
+- "react": "^17.0.2",
+- "react-bootstrap": "^1.6.1",
+- "react-dom": "^17.0.2",
+- "react-redux": "^7.2.4",
+- "react-router-dom": "^5.2.0",
+- "redux": "^4.1.0",
+- "redux-devtools-extension": "^2.13.9"
