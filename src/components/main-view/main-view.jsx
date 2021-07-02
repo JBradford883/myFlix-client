@@ -36,10 +36,10 @@ class MainView extends React.Component {
     let accessToken = localStorage.getItem('token');
     let userToken = localStorage.getItem('user');
     if (accessToken !== null) {
-      this.setState({
-        user: localStorage.getItem('user'),
-        token: localStorage.getItem('token')
-      });
+      // this.setState({
+      //   user: localStorage.getItem('user'),
+      //   token: localStorage.getItem('token')
+      // });
       this.getUser(accessToken, userToken);
       this.getMovies(accessToken);
     }
@@ -51,11 +51,11 @@ class MainView extends React.Component {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
-        console.log('Account was received successfully');
         this.props.setUser(response.data);
-        this.setState({
-          userData: response.data
-        });
+        console.log('Account was received successfully');
+        // this.setState({
+        //   userData: response.data
+        // });
       })
       .catch(function (error) {
         console.log(error);
@@ -80,12 +80,12 @@ class MainView extends React.Component {
     console.log(authData);
     this.setState({
       user: authData.user.Username,
-      token: authData.token
+      //token: authData.token
     });
 
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
-    this.getUser(authData.token, authData.user.Username)
+    //this.getUser(authData.token, authData.user.Username)
     this.getMovies(authData.token);
   }
 
