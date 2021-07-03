@@ -1,8 +1,13 @@
 import React from 'react';
 import axios from 'axios';
+
+// React-Bootstrap components
 import { Button, Card, Row, Col } from 'react-bootstrap';
 
 import { Link } from "react-router-dom";
+
+// Redux
+import { connect } from 'react-redux';
 
 import './favorite-movies.scss';
 
@@ -67,3 +72,11 @@ export class FavoriteMovies extends React.Component {
   }
 }
 
+let mapStateToProps = state => {
+  return {
+    user: state.user,
+    movies: state.movies
+  }
+}
+
+export default connect(mapStateToProps)(FavoriteMovies);

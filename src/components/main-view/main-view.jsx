@@ -36,10 +36,10 @@ class MainView extends React.Component {
     let accessToken = localStorage.getItem('token');
     let userToken = localStorage.getItem('user');
     if (accessToken !== null) {
-      // this.setState({
-      //   user: localStorage.getItem('user'),
-      //   token: localStorage.getItem('token')
-      // });
+      this.setState({
+        user: localStorage.getItem('user'),
+        token: localStorage.getItem('token')
+      });
       this.getUser(accessToken, userToken);
       this.getMovies(accessToken);
     }
@@ -51,11 +51,11 @@ class MainView extends React.Component {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
-        this.props.setUser(response.data);
         console.log('Account was received successfully');
-        // this.setState({
-        //   userData: response.data
-        // });
+        this.props.setUser(response.data);
+        this.setState({
+          userData: response.data
+        });
       })
       .catch(function (error) {
         console.log(error);
@@ -80,12 +80,12 @@ class MainView extends React.Component {
     console.log(authData);
     this.setState({
       user: authData.user.Username,
-      //token: authData.token
+      token: authData.token
     });
 
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
-    //this.getUser(authData.token, authData.user.Username)
+    this.getUser(authData.token, authData.user.Username)
     this.getMovies(authData.token);
   }
 
@@ -173,7 +173,9 @@ class MainView extends React.Component {
             return <>
               <NavigationBar user={user} history={history} />
               <Col md={12}>
-                <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} onBackClick={() => history.goBack()} movies={movies} />
+                <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director}
+                  directorsMovies={movies.filter(m => m.Director.Name === match.params.name)}
+                  onBackClick={() => history.goBack()} movies={movies} />
               </Col>
             </>
           }
@@ -188,7 +190,9 @@ class MainView extends React.Component {
             return <>
               <NavigationBar user={user} history={history} />
               <Col md={12}>
-                <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre} onBackClick={() => history.goBack()} movies={movies} />
+                <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre}
+                  genresMovies={movies.filter(m => m.Genre.Name === match.params.name)}
+                  onBackClick={() => history.goBack()} movies={movies} />
               </Col>
             </>
           }} />

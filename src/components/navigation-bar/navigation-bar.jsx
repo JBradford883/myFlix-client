@@ -1,14 +1,23 @@
 import React from 'react';
+
+// React-Bootstrap components
 import { Nav, Navbar } from 'react-bootstrap';
 
+// Redux
+import { connect } from 'react-redux';
 
 export class NavigationBar extends React.Component {
+
+  constructor(props) {
+    super(props)
+  }
 
   onLoggedOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.setState({
-      user: null
+      user: null,
+      movies: []
     });
     console.log("You have been logged out");
     window.open('/', '_self');
@@ -41,3 +50,12 @@ export class NavigationBar extends React.Component {
     );
   }
 }
+
+let mapStateToProps = state => {
+  return {
+    user: state.user,
+    movies: state.movies
+  }
+}
+
+export default connect(mapStateToProps)(NavigationBar);

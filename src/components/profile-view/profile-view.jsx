@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React from 'react';
 
-import { connect } from 'react-redux';
-import { setMovies, updateUser } from '../../actions/actions';
+import PropTypes from 'prop-types';
 
 // React-Bootstrap-components
 import { Form, Button, Container } from 'react-bootstrap';
+
+// Redux
+import { connect } from 'react-redux';
 
 import './profile-view.scss';
 
@@ -130,11 +132,26 @@ export class ProfileView extends React.Component {
   }
 }
 
+ProfileView.propTypes = {
+  users: PropTypes.shape({
+    Username: PropTypes.string.isRequired,
+    Email: PropTypes.string.isRequired,
+    Birthdate: PropTypes.string,
+    FavoriteMovies: PropTypes.array,
+  }),
+};
+
 let mapStateToProps = state => {
   return {
-    movies: state.movies,
-    user: state.user
+    user: state.user,
+    movies: state.movies
   }
 }
 
-export default connect(mapStateToProps, { setMovies, updateUser })(ProfileView);
+let mapDispatchToProps = dispatch => {
+  return {
+
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileView);
