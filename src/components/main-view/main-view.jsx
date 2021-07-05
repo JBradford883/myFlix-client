@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // Redux
 import { connect } from 'react-redux';
-import { setMovies, setUser } from '../../actions/actions';
+import { setMovies, setUser, updateUser, deleteUser } from '../../actions/actions';
 
 // Router
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
@@ -53,6 +53,8 @@ class MainView extends React.Component {
       .then(response => {
         console.log('Account was received successfully');
         this.props.setUser(response.data);
+        this.props.updateUser(response.data);
+        this.props.deleteUser(response.data);
         this.setState({
           userData: response.data
         });
@@ -206,4 +208,4 @@ let mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { setMovies, setUser })(MainView);
+export default connect(mapStateToProps, { setMovies, setUser, deleteUser, updateUser })(MainView);
