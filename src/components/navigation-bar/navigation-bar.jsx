@@ -38,14 +38,13 @@ export class NavigationBar extends React.Component {
                 All Movies
               </Nav.Link>
               <Nav.Link className="text-white" onClick={() => { history.push(`/users/${user}`); }}>
-                <span>{`${user}`}</span>
+                <span>Profile</span>
               </Nav.Link>
 
               <Nav.Link className="text-white" onClick={() => { this.onLoggedOut() }}>Sign Out</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-        <div className="margin"></div>
       </>
     );
   }
@@ -53,8 +52,7 @@ export class NavigationBar extends React.Component {
 
 let mapStateToProps = state => {
   return {
-    user: state.user,
-    movies: state.movies
+    user: state.user
   }
 }
 

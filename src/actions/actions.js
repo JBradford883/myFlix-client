@@ -11,6 +11,7 @@ export const UPDATE_USER = 'UPDATE_USER'
 
 
 export function setMovies(value) {
+  console.log('SET_MOVIES action triggered');
   return {
     type: SET_MOVIES,
     value
@@ -18,6 +19,7 @@ export function setMovies(value) {
 }
 
 export function setFilter(value) {
+  console.log('SET_FILTER action triggered');
   return {
     type: SET_FILTER,
     value
@@ -25,6 +27,7 @@ export function setFilter(value) {
 }
 
 export function setFavorite(value) {
+  console.log('SET_FAVORTIE action triggered');
   return {
     type: SET_FAVORITE,
     value
@@ -32,6 +35,7 @@ export function setFavorite(value) {
 }
 
 export function deleteFavorite(value) {
+  console.log('DELETE_FAVORITE action triggered');
   return {
     type: DELETE_FAVORITE,
     value
@@ -39,6 +43,7 @@ export function deleteFavorite(value) {
 }
 
 export function setUser(value) {
+  console.log('SET_USER action triggered');
   return {
     type: SET_USER,
     value
@@ -46,6 +51,7 @@ export function setUser(value) {
 }
 
 export function updateUser(value) {
+  console.log('UPDATE_USER action triggered');
   return {
     type: UPDATE_USER,
     value
@@ -53,6 +59,7 @@ export function updateUser(value) {
 }
 
 export function deleteUser(value) {
+  console.log('DELETE_USER action triggered');
   return {
     type: DELETE_USER,
     value

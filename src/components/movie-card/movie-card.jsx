@@ -34,6 +34,11 @@ MovieCard.propTypes = {
   }).isRequired,
 };
 
+
+
+
+
+
 /* Director and Genre Buttons
 
 <Link to={`/directors/${movie.Director.Name}`}>

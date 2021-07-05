@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React from 'react';
 
+import { connect } from 'react-redux';
+
 import PropTypes from 'prop-types';
 
 // React-Bootstrap-components
@@ -36,7 +38,6 @@ export class ProfileView extends React.Component {
       this.state.formValues,
       { headers: { 'Authorization': `Bearer ${token}` } })
       .then(response => {
-        console.log('You have sucessfully updated your profile.');
         this.props.onProfileUpdate(response.data);
         alert('You have sucessfully updated your profile.');
         this.props.history.push(`/users/${response.data.Username}`)
@@ -148,10 +149,4 @@ let mapStateToProps = state => {
   }
 }
 
-let mapDispatchToProps = dispatch => {
-  return {
-
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileView);
+export default connect(mapStateToProps)(ProfileView);

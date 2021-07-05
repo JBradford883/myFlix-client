@@ -173,9 +173,7 @@ class MainView extends React.Component {
             return <>
               <NavigationBar user={user} history={history} />
               <Col md={12}>
-                <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director}
-                  directorsMovies={movies.filter(m => m.Director.Name === match.params.name)}
-                  onBackClick={() => history.goBack()} movies={movies} />
+                <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} onBackClick={() => history.goBack()} movies={movies} />
               </Col>
             </>
           }
@@ -190,9 +188,7 @@ class MainView extends React.Component {
             return <>
               <NavigationBar user={user} history={history} />
               <Col md={12}>
-                <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre}
-                  genresMovies={movies.filter(m => m.Genre.Name === match.params.name)}
-                  onBackClick={() => history.goBack()} movies={movies} />
+                <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre} onBackClick={() => history.goBack()} movies={movies} />
               </Col>
             </>
           }} />
