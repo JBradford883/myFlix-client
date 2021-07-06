@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -32,7 +32,7 @@ export function LoginView(props) {
   Expects - valid username and password to be entered into the form
   */
   return (
-    <>
+    <Container className="mt-3" >
       <h1 className="headline text-center font-weight-bold text-danger">Welcome to myFlix App</h1>
       <Form className="col-md-6 offset-3">
         <Form.Group controlId="formUsername">
@@ -50,7 +50,7 @@ export function LoginView(props) {
           <h6 className="not-a-member">Not a member? Register Here</h6>
         </Link>
       </Form>
-    </>
+    </Container>
   );
 }
 

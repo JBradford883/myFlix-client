@@ -24768,7 +24768,10 @@ class MainView extends _reactDefault.default.Component {
             exact: true,
             path: "/",
             render: ({ history  })=>{
-                if (!user) return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/ _reactDefault.default.createElement(_loginView.LoginView, {
+                if (!user) return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
+                    lg: 8,
+                    md: 10
+                }, /*#__PURE__*/ _reactDefault.default.createElement(_loginView.LoginView, {
                     onLoggedIn: (user1)=>this.onLoggedIn(user1)
                 })));
                 if (movies.length === 0) return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
@@ -24858,7 +24861,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 135
+                lineNumber: 134
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -24886,7 +24889,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 149
+                lineNumber: 148
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -24914,7 +24917,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 164
+                lineNumber: 163
             },
             __self: this
         }))));
@@ -24929,8 +24932,7 @@ let mapStateToProps = (state)=>{
 exports.default = _reactRedux.connect(mapStateToProps, {
     setMovies: _actions.setMovies,
     setUser: _actions.setUser,
-    deleteUser: _actions.deleteUser,
-    updateUser: _actions.updateUser
+    deleteUser: _actions.deleteUser
 })(MainView);
 
   helpers.postlude(module);
@@ -27293,7 +27295,14 @@ function LoginView(props) {
     /*
   Login form
   Expects - valid username and password to be entered into the form
-  */ return(/*#__PURE__*/ _reactDefault.default.createElement(_reactDefault.default.Fragment, null, /*#__PURE__*/ _reactDefault.default.createElement("h1", {
+  */ return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Container, {
+        className: "mt-3",
+        __source: {
+            fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/login-view/login-view.jsx",
+            lineNumber: 35
+        },
+        __self: this
+    }, /*#__PURE__*/ _reactDefault.default.createElement("h1", {
         className: "headline text-center font-weight-bold text-danger",
         __source: {
             fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/login-view/login-view.jsx",
@@ -41734,7 +41743,7 @@ class ProfileView extends _reactDefault.default.Component {
             console.log(error);
         });
     }
-    // Function to convert date into YYYY/MM/DD
+    // Convert date into YYYY/MM/DD
     formatDate(date) {
         if (date) date = date.substring(0, 10);
         return date;
