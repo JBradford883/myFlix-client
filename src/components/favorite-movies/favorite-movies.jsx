@@ -11,6 +11,8 @@ import { connect } from 'react-redux';
 
 import './favorite-movies.scss';
 
+import { authClient } from '../../xhr/auth';
+
 export class FavoriteMovies extends React.Component {
   constructor(props) {
     super(props);
@@ -18,25 +20,23 @@ export class FavoriteMovies extends React.Component {
 
   // DELETE request to remove a movie from favorites list
   removeFavorite(movie) {
-    let token = localStorage.getItem('token');
     let user = localStorage.getItem('user');
-    axios.delete(`https://myflix-2388-app.herokuapp.com/users/${user}/movies/${movie._id}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    }).then(
-      (response) => {
-        console.log(response);
-        alert('You have sucessfully updated your favorites list.');
-        location.reload();
-      }).catch(
-        function (error) {
-          console.log(error)
-          alert('There was an error.');
-        }
-      );
+    authClient.delete(`https://myflix-2388-app.herokuapp.com/users/${user}/movies/${movie._id}`)
+      .then(
+        (response) => {
+          console.log(response);
+          alert('You have sucessfully updated your favorites list.');
+          location.reload();
+        }).catch(
+          function (error) {
+            console.log(error)
+            alert('There was an error.');
+          }
+        );
   }
 
   render() {
-    const favoriteMovies = this.props.userData.FavoriteMovies;
+    const favoriteMovies = this.props.user.FavoriteMovies;
     const { movies } = this.props;
 
     return (
