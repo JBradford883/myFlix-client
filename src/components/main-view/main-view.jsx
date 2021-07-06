@@ -2,7 +2,7 @@ import React from 'react';
 
 // Redux
 import { connect } from 'react-redux';
-import { setMovies, setUser, updateUser, deleteUser } from '../../actions/actions';
+import { setMovies, setUser, deleteUser } from '../../actions/actions';
 
 // Router
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
@@ -96,7 +96,7 @@ class MainView extends React.Component {
 
           {/*Main View*/}
           <Route exact path="/" render={({ history }) => {
-            if (!user) return <Col>
+            if (!user) return <Col lg={8} md={10}>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
@@ -122,7 +122,6 @@ class MainView extends React.Component {
               <NavigationBar user={user} history={history} />
               <Col lg={8} md={12}>
                 <ProfileView user={user} history={history} onProfileUpdate={this.onProfileUpdate} onBackClick={() => history.goBack()} />
-
               </Col>
               <Col lg={8} md={12}>
                 <FavoriteMovies user={user} movies={movies} history={history} />
@@ -187,4 +186,4 @@ let mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { setMovies, setUser, deleteUser, updateUser })(MainView);
+export default connect(mapStateToProps, { setMovies, setUser, deleteUser })(MainView);
