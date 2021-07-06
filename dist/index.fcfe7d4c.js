@@ -24764,15 +24764,10 @@ class MainView extends _reactDefault.default.Component {
     }
     onRegister(register) {
         console.log(register);
-        this.setState({
-            register
-        });
+        this.props.setUser(response.data);
     }
     onProfileUpdate(updatedUserData) {
-        this.setState({
-            userData: updatedUserData,
-            user: updatedUserData.Username
-        });
+        this.props.updateUser(response.data);
         localStorage.setItem("user", updatedUserData.Username);
     }
     render() {
@@ -24781,14 +24776,14 @@ class MainView extends _reactDefault.default.Component {
         return(/*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.BrowserRouter, {
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 114
+                lineNumber: 109
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Row, {
             className: "main-view justify-content-md-center",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 116
+                lineNumber: 111
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -24810,7 +24805,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 119
+                lineNumber: 114
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -24823,7 +24818,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 131
+                lineNumber: 126
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -24859,7 +24854,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 139
+                lineNumber: 134
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -24887,7 +24882,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 156
+                lineNumber: 151
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -24915,7 +24910,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 170
+                lineNumber: 165
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -24943,7 +24938,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 185
+                lineNumber: 180
             },
             __self: this
         }))));

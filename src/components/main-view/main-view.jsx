@@ -93,16 +93,11 @@ class MainView extends React.Component {
 
   onRegister(register) {
     console.log(register);
-    this.setState({
-      register,
-    });
+    this.props.setUser(response.data);
   }
 
   onProfileUpdate(updatedUserData) {
-    this.setState({
-      userData: updatedUserData,
-      user: updatedUserData.Username
-    });
+    this.props.updateUser(response.data);
     localStorage.setItem("user", updatedUserData.Username);
   }
 
