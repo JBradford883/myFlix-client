@@ -24698,6 +24698,7 @@ var _genreView = require("../genre-view/genre-view");
 var _profileView = require("../profile-view/profile-view");
 var _navigationBar = require("../navigation-bar/navigation-bar");
 var _favoriteMovies = require("../favorite-movies/favorite-movies");
+var _auth = require("../../xhr/auth");
 // React-Bootstrap components
 var _reactBootstrap = require("react-bootstrap");
 class MainView extends _reactDefault.default.Component {
@@ -24710,41 +24711,27 @@ class MainView extends _reactDefault.default.Component {
     }
     componentDidMount() {
         let accessToken = localStorage.getItem('token');
-        let userToken = localStorage.getItem('user');
+        let username = localStorage.getItem('user');
         if (accessToken !== null) {
-            this.setState({
-                user: localStorage.getItem('user'),
-                token: localStorage.getItem('token')
-            });
-            this.getUser(accessToken, userToken);
-            this.getMovies(accessToken);
+            this.getUser(username);
+            this.getMovies();
         }
     }
     // Gets the user account from the database
-    getUser(token, user) {
-        _axiosDefault.default.get(`https://myflix-2388-app.herokuapp.com/users/${user}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then((response)=>{
+    getUser(user) {
+        _auth.authClient.get(`https://myflix-2388-app.herokuapp.com/users/${user}`).then((response)=>{
             console.log('Account was received successfully');
             this.props.setUser(response.data);
-            this.props.updateUser(response.data);
-            this.props.deleteUser(response.data);
-            this.setState({
-                userData: response.data
-            });
+        // this.setState({
+        //   userData: response.data
+        // });
         }).catch(function(error) {
             console.log(error);
         });
     }
     // Gets the movies from the Database
-    getMovies(token) {
-        _axiosDefault.default.get('https://myflix-2388-app.herokuapp.com/movies', {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then((response)=>{
+    getMovies() {
+        _auth.authClient.get('https://myflix-2388-app.herokuapp.com/movies').then((response)=>{
             this.props.setMovies(response.data);
         }).catch(function(error) {
             console.log(error);
@@ -24753,37 +24740,34 @@ class MainView extends _reactDefault.default.Component {
     // Login function
     onLoggedIn(authData) {
         console.log(authData);
-        this.setState({
-            user: authData.user.Username,
-            token: authData.token
-        });
+        this.props.setUser(authData.user);
         localStorage.setItem('token', authData.token);
         localStorage.setItem('user', authData.user.Username);
-        this.getUser(authData.token, authData.user.Username);
-        this.getMovies(authData.token);
+        this.getUser(authData.user.Username);
+        this.getMovies();
     }
     onRegister(register) {
         console.log(register);
-        this.props.setUser(response.data);
+        this.props.setUser(register);
     }
-    onProfileUpdate(updatedUserData) {
-        this.props.updateUser(response.data);
-        localStorage.setItem("user", updatedUserData.Username);
+    onProfileUpdate(updatedUser) {
+        this.props.setUser(updatedUser);
+        localStorage.setItem("user", updatedUser.Username);
     }
     render() {
-        let { movies  } = this.props;
-        let { user , userData , token  } = this.state;
+        let { movies , user  } = this.props;
+        //let { user, userData, token } = this.state;
         return(/*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.BrowserRouter, {
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 109
+                lineNumber: 98
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Row, {
             className: "main-view justify-content-md-center",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 111
+                lineNumber: 100
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -24805,7 +24789,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 114
+                lineNumber: 103
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -24818,13 +24802,13 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 126
+                lineNumber: 115
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
             path: `/users/${user}`,
             render: ({ history  })=>{
-                if (!userData) return(/*#__PURE__*/ _reactDefault.default.createElement(_loginView.LoginView, {
+                if (!user) return(/*#__PURE__*/ _reactDefault.default.createElement(_loginView.LoginView, {
                     onLoggedIn: (user1)=>this.onLoggedIn(user1)
                 }));
                 if (movies.length === 0) return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
@@ -24838,23 +24822,21 @@ class MainView extends _reactDefault.default.Component {
                     md: 12
                 }, /*#__PURE__*/ _reactDefault.default.createElement(_profileView.ProfileView, {
                     user: user,
-                    token: token,
                     history: history,
-                    userData: userData,
                     onProfileUpdate: this.onProfileUpdate,
                     onBackClick: ()=>history.goBack()
                 })), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
                     lg: 8,
                     md: 12
                 }, /*#__PURE__*/ _reactDefault.default.createElement(_favoriteMovies.FavoriteMovies, {
-                    userData: userData,
+                    user: user,
                     movies: movies,
                     history: history
                 }))));
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 134
+                lineNumber: 123
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -24882,7 +24864,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 151
+                lineNumber: 140
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -24910,7 +24892,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 165
+                lineNumber: 154
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -24938,7 +24920,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 180
+                lineNumber: 169
             },
             __self: this
         }))));
@@ -24962,7 +24944,7 @@ exports.default = _reactRedux.connect(mapStateToProps, {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","axios":"7rA65","react-router-dom":"1PMSK","../login-view/login-view":"2Z0HZ","../movie-view/movie-view":"3jpQC","../registration-view/registration-view":"1QKnt","../director-view/director-view":"39ZVM","../genre-view/genre-view":"3jllo","../profile-view/profile-view":"e9Iw2","../navigation-bar/navigation-bar":"3pGYJ","../favorite-movies/favorite-movies":"2oWz5","react-bootstrap":"4n7hB","@parcel/transformer-js/src/esmodule-helpers.js":"7IoRK","../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"3QRYi","react-redux":"7GDa4","../../actions/actions":"5S6cN","../movies-list/movies-list":"6RsWi"}],"7rA65":[function(require,module,exports) {
+},{"react":"3b2NM","axios":"7rA65","react-router-dom":"1PMSK","../login-view/login-view":"2Z0HZ","../movie-view/movie-view":"3jpQC","../registration-view/registration-view":"1QKnt","../director-view/director-view":"39ZVM","../genre-view/genre-view":"3jllo","../profile-view/profile-view":"e9Iw2","../navigation-bar/navigation-bar":"3pGYJ","../favorite-movies/favorite-movies":"2oWz5","react-bootstrap":"4n7hB","@parcel/transformer-js/src/esmodule-helpers.js":"7IoRK","../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"3QRYi","react-redux":"7GDa4","../../actions/actions":"5S6cN","../movies-list/movies-list":"6RsWi","../../xhr/auth":"2gQha"}],"7rA65":[function(require,module,exports) {
 module.exports = require('./lib/axios');
 
 },{"./lib/axios":"4qfhW"}],"4qfhW":[function(require,module,exports) {
@@ -41717,17 +41699,18 @@ var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _reactBootstrap = require("react-bootstrap");
 // Redux
 var _reactRedux = require("react-redux");
+var _auth = require("../../xhr/auth");
 var _profileViewScss = require("./profile-view.scss");
 class ProfileView extends _reactDefault.default.Component {
     constructor(props){
         super(props);
         this.state = {
             formValues: {
-                Username: props.userData.Username,
+                Username: props.user.Username,
                 Password: '',
-                Email: props.userData.Email,
-                Birthday: this.formatDate(props.userData.Birthday),
-                FavoriteMovies: props.userData.FavoriteMovies
+                Email: props.user.Email,
+                Birthday: this.formatDate(props.user.Birthday),
+                FavoriteMovies: props.user.FavoriteMovies
             }
         };
         this.handleChange = this.handleChange.bind(this);
@@ -41736,12 +41719,8 @@ class ProfileView extends _reactDefault.default.Component {
         this.deleteAcc = this.deleteAcc.bind(this);
     }
     // PUT request to update the users profile
-    updateProfile(token) {
-        _axiosDefault.default.put(`https://myflix-2388-app.herokuapp.com/users/${this.props.user}`, this.state.formValues, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        }).then((response)=>{
+    updateProfile() {
+        _auth.authClient.put(`https://myflix-2388-app.herokuapp.com/users/${this.props.user}`, this.state.formValues).then((response)=>{
             this.props.onProfileUpdate(response.data);
             alert('You have sucessfully updated your profile.');
             this.props.history.push(`/users/${response.data.Username}`);
@@ -41752,12 +41731,8 @@ class ProfileView extends _reactDefault.default.Component {
     /*
   DELETE request to remove the user profile 
   Refreshes the page and brings user back to login in view
-  */ deleteAcc(token) {
-        _axiosDefault.default.delete(`https://myflix-2388-app.herokuapp.com/users/${this.props.user}`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        }).then(()=>{
+  */ deleteAcc() {
+        _auth.authClient.delete(`https://myflix-2388-app.herokuapp.com/users/${this.props.user}`).then(()=>{
             alert(`${this.props.user} has been deleted`);
             localStorage.removeItem("user");
             localStorage.removeItem("token");
@@ -41783,32 +41758,46 @@ class ProfileView extends _reactDefault.default.Component {
     }
     handleSubmit(e) {
         e.preventDefault();
-        this.updateProfile(this.props.token);
+        this.updateProfile();
     }
     render() {
-        let { userData , token  } = this.props;
+        let { user  } = this.props;
         return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Container, {
             className: "profile-view",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 92
+                lineNumber: 91
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement("div", {
             className: "user-info mb-5",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 94
+                lineNumber: 93
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement("h2", {
             className: "profile-title d-flex justify-content-center text-danger mt-2",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
+                lineNumber: 94
+            },
+            __self: this
+        }, `${user.Username}`, " Profile Info"), /*#__PURE__*/ _reactDefault.default.createElement("p", {
+            className: "d-flex justify-content-center mb-1",
+            __source: {
+                fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
                 lineNumber: 95
             },
             __self: this
-        }, `${userData.Username}`, " Profile Info"), /*#__PURE__*/ _reactDefault.default.createElement("p", {
+        }, /*#__PURE__*/ _reactDefault.default.createElement("b", {
+            className: "mr-1",
+            __source: {
+                fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
+                lineNumber: 95
+            },
+            __self: this
+        }, "Username:"), " ", `${user.Username}`, " "), /*#__PURE__*/ _reactDefault.default.createElement("p", {
             className: "d-flex justify-content-center mb-1",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
@@ -41822,7 +41811,7 @@ class ProfileView extends _reactDefault.default.Component {
                 lineNumber: 96
             },
             __self: this
-        }, "Username:"), " ", `${userData.Username}`, " "), /*#__PURE__*/ _reactDefault.default.createElement("p", {
+        }, "Email:"), " ", `${user.Email}`), /*#__PURE__*/ _reactDefault.default.createElement("p", {
             className: "d-flex justify-content-center mb-1",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
@@ -41836,44 +41825,30 @@ class ProfileView extends _reactDefault.default.Component {
                 lineNumber: 97
             },
             __self: this
-        }, "Email:"), " ", `${userData.Email}`), /*#__PURE__*/ _reactDefault.default.createElement("p", {
-            className: "d-flex justify-content-center mb-1",
+        }, "Birthday:"), " ", `${this.formatDate(user.Birthday)}`)), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form, {
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 98
-            },
-            __self: this
-        }, /*#__PURE__*/ _reactDefault.default.createElement("b", {
-            className: "mr-1",
-            __source: {
-                fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 98
-            },
-            __self: this
-        }, "Birthday:"), " ", `${this.formatDate(userData.Birthday)}`)), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form, {
-            __source: {
-                fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 101
+                lineNumber: 100
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement("h3", {
             className: "profile-title d-flex justify-content-center text-danger mt-3",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 102
+                lineNumber: 101
             },
             __self: this
         }, "Update your user profile"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Group, {
             controlId: "formUsername",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 103
+                lineNumber: 102
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Label, {
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 104
+                lineNumber: 103
             },
             __self: this
         }, "Username"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Control, {
@@ -41884,20 +41859,20 @@ class ProfileView extends _reactDefault.default.Component {
             onChange: this.handleChange,
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 105
+                lineNumber: 104
             },
             __self: this
         })), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Group, {
             controlId: "formPassword",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 107
+                lineNumber: 106
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Label, {
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 108
+                lineNumber: 107
             },
             __self: this
         }, "Password"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Control, {
@@ -41908,20 +41883,20 @@ class ProfileView extends _reactDefault.default.Component {
             onChange: this.handleChange,
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 109
+                lineNumber: 108
             },
             __self: this
         })), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Group, {
             controlId: "formEmail",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 111
+                lineNumber: 110
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Label, {
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 112
+                lineNumber: 111
             },
             __self: this
         }, "Email"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Control, {
@@ -41932,20 +41907,20 @@ class ProfileView extends _reactDefault.default.Component {
             onChange: this.handleChange,
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 113
+                lineNumber: 112
             },
             __self: this
         })), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Group, {
             controlId: "formBirthday",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 115
+                lineNumber: 114
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Label, {
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 116
+                lineNumber: 115
             },
             __self: this
         }, "Birthday"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Control, {
@@ -41955,14 +41930,14 @@ class ProfileView extends _reactDefault.default.Component {
             onChange: this.handleChange,
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 117
+                lineNumber: 116
             },
             __self: this
         }))), /*#__PURE__*/ _reactDefault.default.createElement("div", {
             className: "buttons text-center mb-3",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 121
+                lineNumber: 120
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
@@ -41972,7 +41947,7 @@ class ProfileView extends _reactDefault.default.Component {
             onClick: this.handleSubmit,
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 122
+                lineNumber: 121
             },
             __self: this
         }, "Update Profile"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
@@ -41980,11 +41955,11 @@ class ProfileView extends _reactDefault.default.Component {
             variant: "dark",
             onClick: ()=>{
                 const confirmBox = window.confirm("Are you sure you want to delete your account?");
-                if (confirmBox === true) this.deleteAcc(token);
+                if (confirmBox === true) this.deleteAcc();
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 123
+                lineNumber: 122
             },
             __self: this
         }, " Delete Account "))));
@@ -42011,7 +41986,21 @@ exports.default = _reactRedux.connect(mapStateToProps)(ProfileView);
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","react-bootstrap":"4n7hB","@parcel/transformer-js/src/esmodule-helpers.js":"7IoRK","../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"3QRYi","axios":"7rA65","./profile-view.scss":"5rPqE","prop-types":"4dfy5","react-redux":"7GDa4"}],"5rPqE":[function() {},{}],"3pGYJ":[function(require,module,exports) {
+},{"react":"3b2NM","react-bootstrap":"4n7hB","@parcel/transformer-js/src/esmodule-helpers.js":"7IoRK","../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"3QRYi","axios":"7rA65","./profile-view.scss":"5rPqE","prop-types":"4dfy5","react-redux":"7GDa4","../../xhr/auth":"2gQha"}],"5rPqE":[function() {},{}],"2gQha":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "authClient", ()=>authClient
+);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+const authClient = _axiosDefault.default.create();
+authClient.interceptors.request.use((config)=>{
+    const token = localStorage.getItem('token');
+    config.headers.Authorization = `Bearer ${token}`;
+    return config;
+});
+
+},{"axios":"7rA65","@parcel/transformer-js/src/esmodule-helpers.js":"7IoRK"}],"3pGYJ":[function(require,module,exports) {
 var helpers = require("../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -42096,7 +42085,7 @@ class NavigationBar extends _reactDefault.default.Component {
         }, "All Movies"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Nav.Link, {
             className: "text-white",
             onClick: ()=>{
-                history.push(`/users/${user}`);
+                history.push(`/users/${user.Username}`);
             },
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/navigation-bar/navigation-bar.jsx",
@@ -42155,19 +42144,15 @@ var _reactRouterDom = require("react-router-dom");
 // Redux
 var _reactRedux = require("react-redux");
 var _favoriteMoviesScss = require("./favorite-movies.scss");
+var _auth = require("../../xhr/auth");
 class FavoriteMovies extends _reactDefault.default.Component {
     constructor(props){
         super(props);
     }
     // DELETE request to remove a movie from favorites list
     removeFavorite(movie) {
-        let token = localStorage.getItem('token');
         let user = localStorage.getItem('user');
-        _axiosDefault.default.delete(`https://myflix-2388-app.herokuapp.com/users/${user}/movies/${movie._id}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then((response)=>{
+        _auth.authClient.delete(`https://myflix-2388-app.herokuapp.com/users/${user}/movies/${movie._id}`).then((response)=>{
             console.log(response);
             alert('You have sucessfully updated your favorites list.');
             location.reload();
@@ -42177,7 +42162,7 @@ class FavoriteMovies extends _reactDefault.default.Component {
         });
     }
     render() {
-        const favoriteMovies = this.props.userData.FavoriteMovies;
+        const favoriteMovies = this.props.user.FavoriteMovies;
         const { movies  } = this.props;
         return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card, {
             className: "movie-card shadow-sm mb-2",
@@ -42274,7 +42259,7 @@ exports.default = _reactRedux.connect(mapStateToProps)(FavoriteMovies);
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","axios":"7rA65","react-bootstrap":"4n7hB","react-router-dom":"1PMSK","./favorite-movies.scss":"GLCsx","@parcel/transformer-js/src/esmodule-helpers.js":"7IoRK","../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"3QRYi","react-redux":"7GDa4"}],"GLCsx":[function() {},{}],"5S6cN":[function(require,module,exports) {
+},{"react":"3b2NM","axios":"7rA65","react-bootstrap":"4n7hB","react-router-dom":"1PMSK","./favorite-movies.scss":"GLCsx","@parcel/transformer-js/src/esmodule-helpers.js":"7IoRK","../../../../../../.nvm/versions/node/v14.16.1/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"3QRYi","react-redux":"7GDa4","../../xhr/auth":"2gQha"}],"GLCsx":[function() {},{}],"5S6cN":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "SET_MOVIES", ()=>SET_MOVIES
@@ -42289,8 +42274,6 @@ parcelHelpers.export(exports, "SET_USER", ()=>SET_USER
 );
 parcelHelpers.export(exports, "DELETE_USER", ()=>DELETE_USER
 );
-parcelHelpers.export(exports, "UPDATE_USER", ()=>UPDATE_USER
-);
 parcelHelpers.export(exports, "setMovies", ()=>setMovies
 );
 parcelHelpers.export(exports, "setFilter", ()=>setFilter
@@ -42301,8 +42284,6 @@ parcelHelpers.export(exports, "deleteFavorite", ()=>deleteFavorite
 );
 parcelHelpers.export(exports, "setUser", ()=>setUser
 );
-parcelHelpers.export(exports, "updateUser", ()=>updateUser
-);
 parcelHelpers.export(exports, "deleteUser", ()=>deleteUser
 );
 const SET_MOVIES = 'SET_MOVIES';
@@ -42311,7 +42292,6 @@ const SET_FAVORITE = 'SET_FAVORITE';
 const DELETE_FAVORITE = 'DELETE_FAVORITE';
 const SET_USER = 'SET_USER';
 const DELETE_USER = 'DELETE_USER';
-const UPDATE_USER = 'UPDATE_USER';
 function setMovies(value) {
     console.log('SET_MOVIES action triggered');
     return {
@@ -42344,13 +42324,6 @@ function setUser(value) {
     console.log('SET_USER action triggered');
     return {
         type: SET_USER,
-        value
-    };
-}
-function updateUser(value) {
-    console.log('UPDATE_USER action triggered');
-    return {
-        type: UPDATE_USER,
         value
     };
 }
@@ -42607,23 +42580,10 @@ function movies(state = [], action) {
             return state;
     }
 }
-function favorite(state = [], action) {
-    switch(action.type){
-        case _actions.SET_FAVORITE:
-            console.log('SET_FAVORITE reducer reached');
-        case _actions.DELETE_FAVORITE:
-            console.log('DELETE_FAVORITE reducer reached');
-        default:
-            return state;
-    }
-}
-function user(state = {
-}, action) {
+function user(state = null, action) {
     switch(action.type){
         case _actions.SET_USER:
-            console.log('SET_USER reducer reached');
-        case _actions.UPDATE_USER:
-            console.log('UPDATE_USER reducer reached');
+            return action.value;
         case _actions.DELETE_USER:
             console.log('DELETE_USER reducer reached');
         default:
@@ -42633,7 +42593,6 @@ function user(state = {
 const moviesApp = _redux.combineReducers({
     visibilityFilter,
     movies,
-    favorite,
     user
 });
 exports.default = moviesApp;
