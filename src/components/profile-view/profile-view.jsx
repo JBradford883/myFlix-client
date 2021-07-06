@@ -1,8 +1,6 @@
 import axios from 'axios';
 import React from 'react';
 
-import { connect } from 'react-redux';
-
 import PropTypes from 'prop-types';
 
 // React-Bootstrap-components
