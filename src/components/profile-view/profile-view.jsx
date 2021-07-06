@@ -62,7 +62,7 @@ export class ProfileView extends React.Component {
       });
   }
 
-  // Function to convert date into YYYY/MM/DD
+  // Convert date into YYYY/MM/DD
   formatDate(date) {
     if (date) date = date.substring(0, 10);
     return date;
