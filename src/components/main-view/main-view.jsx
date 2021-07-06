@@ -19,6 +19,8 @@ import { ProfileView } from '../profile-view/profile-view';
 import { NavigationBar } from '../navigation-bar/navigation-bar';
 import { FavoriteMovies } from '../favorite-movies/favorite-movies'
 
+import { authClient } from '../../xhr/auth';
+
 // React-Bootstrap components
 import { Row, Col } from 'react-bootstrap';
 
@@ -34,30 +36,22 @@ class MainView extends React.Component {
 
   componentDidMount() {
     let accessToken = localStorage.getItem('token');
-    let userToken = localStorage.getItem('user');
+    let username = localStorage.getItem('user');
     if (accessToken !== null) {
-      this.setState({
-        user: localStorage.getItem('user'),
-        token: localStorage.getItem('token')
-      });
-      this.getUser(accessToken, userToken);
-      this.getMovies(accessToken);
+      this.getUser(username);
+      this.getMovies();
     }
   }
 
   // Gets the user account from the database
-  getUser(token, user) {
-    axios.get(`https://myflix-2388-app.herokuapp.com/users/${user}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    })
+  getUser(user) {
+    authClient.get(`https://myflix-2388-app.herokuapp.com/users/${user}`)
       .then(response => {
         console.log('Account was received successfully');
         this.props.setUser(response.data);
-        this.props.updateUser(response.data);
-        this.props.deleteUser(response.data);
-        this.setState({
-          userData: response.data
-        });
+        // this.setState({
+        //   userData: response.data
+        // });
       })
       .catch(function (error) {
         console.log(error);
@@ -65,10 +59,8 @@ class MainView extends React.Component {
   }
 
   // Gets the movies from the Database
-  getMovies(token) {
-    axios.get('https://myflix-2388-app.herokuapp.com/movies', {
-      headers: { Authorization: `Bearer ${token}` }
-    })
+  getMovies() {
+    authClient.get('https://myflix-2388-app.herokuapp.com/movies')
       .then(response => {
         this.props.setMovies(response.data);
       })
@@ -80,30 +72,27 @@ class MainView extends React.Component {
   // Login function
   onLoggedIn(authData) {
     console.log(authData);
-    this.setState({
-      user: authData.user.Username,
-      token: authData.token
-    });
+    this.props.setUser(authData.user);
 
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
-    this.getUser(authData.token, authData.user.Username)
-    this.getMovies(authData.token);
+    this.getUser(authData.user.Username)
+    this.getMovies();
   }
 
   onRegister(register) {
     console.log(register);
-    this.props.setUser(response.data);
+    this.props.setUser(register);
   }
 
-  onProfileUpdate(updatedUserData) {
-    this.props.updateUser(response.data);
-    localStorage.setItem("user", updatedUserData.Username);
+  onProfileUpdate(updatedUser) {
+    this.props.setUser(updatedUser);
+    localStorage.setItem("user", updatedUser.Username);
   }
 
   render() {
-    let { movies } = this.props;
-    let { user, userData, token } = this.state;
+    let { movies, user } = this.props;
+    //let { user, userData, token } = this.state;
 
     return (
       <Router>
@@ -132,16 +121,16 @@ class MainView extends React.Component {
 
           {/*Profile View*/}
           <Route path={`/users/${user}`} render={({ history }) => {
-            if (!userData) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+            if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             if (movies.length === 0) return <div className="main-view" />;
             return <>
               <NavigationBar user={user} history={history} />
               <Col lg={8} md={12}>
-                <ProfileView user={user} token={token} history={history} userData={userData} onProfileUpdate={this.onProfileUpdate} onBackClick={() => history.goBack()} />
+                <ProfileView user={user} history={history} onProfileUpdate={this.onProfileUpdate} onBackClick={() => history.goBack()} />
 
               </Col>
               <Col lg={8} md={12}>
-                <FavoriteMovies userData={userData} movies={movies} history={history} />
+                <FavoriteMovies user={user} movies={movies} history={history} />
               </Col>
             </>
 
