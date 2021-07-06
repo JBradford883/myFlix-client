@@ -1,5 +1,4 @@
 import React from 'react';
-
 import PropTypes from 'prop-types';
 
 // React-Bootstrap-components
@@ -56,6 +55,7 @@ export class ProfileView extends React.Component {
         localStorage.removeItem("user");
         localStorage.removeItem("token");
         window.location.pathname = "/";
+        this.props.deleteUser();
       })
       .catch(function (error) {
         console.log(error);

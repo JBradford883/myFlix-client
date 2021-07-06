@@ -88,7 +88,6 @@ class MainView extends React.Component {
 
   render() {
     let { movies, user } = this.props;
-    //let { user, userData, token } = this.state;
 
     return (
       <Router>
