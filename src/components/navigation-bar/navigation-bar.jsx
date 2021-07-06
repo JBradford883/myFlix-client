@@ -37,7 +37,7 @@ export class NavigationBar extends React.Component {
               <Nav.Link className="text-white" onClick={() => { history.push(`/`); }}>
                 All Movies
               </Nav.Link>
-              <Nav.Link className="text-white" onClick={() => { history.push(`/users/${user}`); }}>
+              <Nav.Link className="text-white" onClick={() => { history.push(`/users/${user.Username}`); }}>
                 <span>Profile</span>
               </Nav.Link>
 
