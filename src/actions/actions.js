@@ -7,7 +7,6 @@ export const DELETE_FAVORITE = 'DELETE_FAVORITE'
 // User Actions
 export const SET_USER = 'SET_USER';
 export const DELETE_USER = 'DELETE_USER';
-export const UPDATE_USER = 'UPDATE_USER'
 
 
 export function setMovies(value) {
@@ -46,14 +45,6 @@ export function setUser(value) {
   console.log('SET_USER action triggered');
   return {
     type: SET_USER,
-    value
-  };
-}
-
-export function updateUser(value) {
-  console.log('UPDATE_USER action triggered');
-  return {
-    type: UPDATE_USER,
     value
   };
 }
