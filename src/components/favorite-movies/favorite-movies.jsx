@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 
 // React-Bootstrap components
 import { Button, Card, Row, Col } from 'react-bootstrap';

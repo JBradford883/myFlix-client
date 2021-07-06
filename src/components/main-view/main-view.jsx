@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 
 // Redux
 import { connect } from 'react-redux';
@@ -49,9 +48,6 @@ class MainView extends React.Component {
       .then(response => {
         console.log('Account was received successfully');
         this.props.setUser(response.data);
-        // this.setState({
-        //   userData: response.data
-        // });
       })
       .catch(function (error) {
         console.log(error);
