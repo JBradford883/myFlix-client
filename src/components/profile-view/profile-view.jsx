@@ -9,6 +9,8 @@ import { Form, Button, Container } from 'react-bootstrap';
 // Redux
 import { connect } from 'react-redux';
 
+import { authClient } from '../../xhr/auth';
+
 import './profile-view.scss';
 
 export class ProfileView extends React.Component {
@@ -17,11 +19,11 @@ export class ProfileView extends React.Component {
     super(props);
     this.state = {
       formValues: {
-        Username: props.userData.Username,
+        Username: props.user.Username,
         Password: '',
-        Email: props.userData.Email,
-        Birthday: this.formatDate(props.userData.Birthday),
-        FavoriteMovies: props.userData.FavoriteMovies,
+        Email: props.user.Email,
+        Birthday: this.formatDate(props.user.Birthday),
+        FavoriteMovies: props.user.FavoriteMovies,
       },
     };
     this.handleChange = this.handleChange.bind(this);
@@ -31,10 +33,9 @@ export class ProfileView extends React.Component {
   }
 
   // PUT request to update the users profile
-  updateProfile(token) {
-    axios.put(`https://myflix-2388-app.herokuapp.com/users/${this.props.user}`,
-      this.state.formValues,
-      { headers: { 'Authorization': `Bearer ${token}` } })
+  updateProfile() {
+    authClient.put(`https://myflix-2388-app.herokuapp.com/users/${this.props.user}`,
+      this.state.formValues)
       .then(response => {
         this.props.onProfileUpdate(response.data);
         alert('You have sucessfully updated your profile.');
@@ -49,10 +50,8 @@ export class ProfileView extends React.Component {
   DELETE request to remove the user profile 
   Refreshes the page and brings user back to login in view
   */
-  deleteAcc(token) {
-    axios.delete(`https://myflix-2388-app.herokuapp.com/users/${this.props.user}`,
-      { headers: { 'Authorization': `Bearer ${token}` } })
-
+  deleteAcc() {
+    authClient.delete(`https://myflix-2388-app.herokuapp.com/users/${this.props.user}`)
       .then(() => {
         alert(`${this.props.user} has been deleted`);
         localStorage.removeItem("user");
@@ -82,20 +81,20 @@ export class ProfileView extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.updateProfile(this.props.token);
+    this.updateProfile();
   }
 
   render() {
-    let { userData, token } = this.props;
+    let { user } = this.props;
 
     return (
       <Container className="profile-view">
 
         <div className="user-info mb-5">
-          <h2 className="profile-title d-flex justify-content-center text-danger mt-2">{`${userData.Username}`} Profile Info</h2>
-          <p className="d-flex justify-content-center mb-1"><b className="mr-1">Username:</b> {`${userData.Username}`} </p>
-          <p className="d-flex justify-content-center mb-1"><b className="mr-1">Email:</b> {`${userData.Email}`}</p>
-          <p className="d-flex justify-content-center mb-1"><b className="mr-1">Birthday:</b> {`${this.formatDate(userData.Birthday)}`}</p>
+          <h2 className="profile-title d-flex justify-content-center text-danger mt-2">{`${user.Username}`} Profile Info</h2>
+          <p className="d-flex justify-content-center mb-1"><b className="mr-1">Username:</b> {`${user.Username}`} </p>
+          <p className="d-flex justify-content-center mb-1"><b className="mr-1">Email:</b> {`${user.Email}`}</p>
+          <p className="d-flex justify-content-center mb-1"><b className="mr-1">Birthday:</b> {`${this.formatDate(user.Birthday)}`}</p>
         </div>
 
         <Form>
@@ -122,7 +121,7 @@ export class ProfileView extends React.Component {
           <Button className="update-profile mr-2" variant="dark" type="submit" onClick={this.handleSubmit}>Update Profile</Button>
           <Button className="delete-button" variant="dark" onClick={() => {
             const confirmBox = window.confirm("Are you sure you want to delete your account?")
-            if (confirmBox === true) { this.deleteAcc(token) }
+            if (confirmBox === true) { this.deleteAcc() }
           }} > Delete Account </Button>
         </div>
 
