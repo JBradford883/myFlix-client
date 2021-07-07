@@ -24747,7 +24747,7 @@ class MainView extends _reactDefault.default.Component {
     }
     onProfileUpdate(updatedUser) {
         this.props.setUser(updatedUser);
-        localStorage.setItem("user", updatedUser.Username);
+        localStorage.setItem('user', updatedUser.Username);
     }
     render() {
         let { movies , user  } = this.props;
@@ -24768,10 +24768,7 @@ class MainView extends _reactDefault.default.Component {
             exact: true,
             path: "/",
             render: ({ history  })=>{
-                if (!user) return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
-                    lg: 8,
-                    md: 10
-                }, /*#__PURE__*/ _reactDefault.default.createElement(_loginView.LoginView, {
+                if (!user) return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/ _reactDefault.default.createElement(_loginView.LoginView, {
                     onLoggedIn: (user1)=>this.onLoggedIn(user1)
                 })));
                 if (movies.length === 0) return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
@@ -24803,7 +24800,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
-            path: `/users/${user}`,
+            path: "/users/:Username",
             render: ({ history  })=>{
                 if (!user) return(/*#__PURE__*/ _reactDefault.default.createElement(_loginView.LoginView, {
                     onLoggedIn: (user1)=>this.onLoggedIn(user1)
@@ -42585,7 +42582,7 @@ function user(state = null, action) {
         case _actions.SET_USER:
             return action.value;
         case _actions.DELETE_USER:
-            console.log('DELETE_USER reducer reached');
+            return action.value;
         default:
             return state;
     }

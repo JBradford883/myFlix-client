@@ -27,7 +27,7 @@ function user(state = null, action) {
     case SET_USER:
       return action.value;
     case DELETE_USER:
-      console.log('DELETE_USER reducer reached')
+      return action.value
     default:
       return state;
   }
