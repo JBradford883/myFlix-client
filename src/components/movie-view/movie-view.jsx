@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { Card, Button, Container } from 'react-bootstrap';
 import axios from 'axios';
 
+// Redux
+import { connect } from 'react-redux';
+
 import { Link } from 'react-router-dom';
 
 import './movie-view.scss';
@@ -93,3 +96,12 @@ MovieView.propTypes = {
   }).isRequired,
   onBackClick: PropTypes.func.isRequired
 };
+
+let mapStateToProps = state => {
+  return {
+    user: state.user,
+    movies: state.movies
+  }
+}
+
+export default connect(mapStateToProps)(MovieView);
