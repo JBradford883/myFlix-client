@@ -19,13 +19,13 @@ export class MovieView extends React.Component {
   addFavorite(movie) {
     let token = localStorage.getItem('token');
     let user = localStorage.getItem('user');
-    axios.post(`https://myflix-2388-app.herokuapp.com/users/${user.Username}/movies/${movie._id}`, null, {
+    axios.post(`https://myflix-2388-app.herokuapp.com/users/${user}/movies/${movie._id}`, null, {
       headers: { Authorization: `Bearer ${token}` }
     }).then(
       (response) => {
         console.log(response);
         alert('You have sucessfully updated your favorites list.');
-        location.reload();
+        //location.reload();
       }).catch(
         function (error) {
           console.log(error)
