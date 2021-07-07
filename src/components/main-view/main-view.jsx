@@ -83,7 +83,7 @@ class MainView extends React.Component {
 
   onProfileUpdate(updatedUser) {
     this.props.setUser(updatedUser);
-    localStorage.setItem("user", updatedUser.Username);
+    localStorage.setItem('user', updatedUser.Username);
   }
 
   render() {
@@ -96,7 +96,7 @@ class MainView extends React.Component {
 
           {/*Main View*/}
           <Route exact path="/" render={({ history }) => {
-            if (!user) return <Col lg={8} md={10}>
+            if (!user) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
@@ -115,7 +115,7 @@ class MainView extends React.Component {
           }} />
 
           {/*Profile View*/}
-          <Route path={`/users/${user}`} render={({ history }) => {
+          <Route path="/users/:Username" render={({ history }) => {
             if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             if (movies.length === 0) return <div className="main-view" />;
             return <>
