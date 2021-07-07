@@ -40958,7 +40958,7 @@ class MovieView extends _reactDefault.default.Component {
         }).then((response)=>{
             console.log(response);
             alert('You have sucessfully updated your favorites list.');
-        // location.reload();
+            location.reload();
         }).catch(function(error) {
             console.log(error);
             alert('There was an error.');
