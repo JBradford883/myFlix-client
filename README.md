@@ -4,6 +4,8 @@
 
 To create the client-side component of a movie web application. The web application will provide users with access to information about different movies, directors, and genres. Users will be able to sign up, update their personal information, and create a list of their favorite movies.
 
+Netlify Link: https://myflix-app-react.netlify.app
+
 ---
 
 ## **Essential Views and Features**
@@ -51,6 +53,8 @@ To create the client-side component of a movie web application. The web applicat
 ## **Dependencies**
 
 - "axios": "^0.21.1",
+- "parcel": "^2.0.0-beta.3.1",
+- "parcel-bundler": "^1.12.5",
 - "prop-types": "^15.7.2",
 - "react": "^17.0.2",
 - "react-bootstrap": "^1.6.1",
@@ -59,3 +63,5 @@ To create the client-side component of a movie web application. The web applicat
 - "react-router-dom": "^5.2.0",
 - "redux": "^4.1.0",
 - "redux-devtools-extension": "^2.13.9"
+
+#### **Parcel Path:** parcel src/index.html
