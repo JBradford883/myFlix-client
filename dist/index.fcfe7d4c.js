@@ -41718,7 +41718,7 @@ class ProfileView extends _reactDefault.default.Component {
     }
     // PUT request to update the users profile
     updateProfile() {
-        _auth.authClient.put(`https://myflix-2388-app.herokuapp.com/users/${this.props.user}`, this.state.formValues).then((response)=>{
+        _auth.authClient.put(`https://myflix-2388-app.herokuapp.com/users/${this.props.user.Username}`, this.state.formValues).then((response)=>{
             this.props.onProfileUpdate(response.data);
             alert('You have sucessfully updated your profile.');
             this.props.history.push(`/users/${response.data.Username}`);
@@ -41730,8 +41730,8 @@ class ProfileView extends _reactDefault.default.Component {
   DELETE request to remove the user profile 
   Refreshes the page and brings user back to login in view
   */ deleteAcc() {
-        _auth.authClient.delete(`https://myflix-2388-app.herokuapp.com/users/${this.props.user}`).then(()=>{
-            alert(`${this.props.user} has been deleted`);
+        _auth.authClient.delete(`https://myflix-2388-app.herokuapp.com/users/${this.props.user.Username}`).then(()=>{
+            alert(`${this.props.user.Username} has been deleted`);
             localStorage.removeItem("user");
             localStorage.removeItem("token");
             window.location.pathname = "/";
