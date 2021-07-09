@@ -19,26 +19,31 @@ Netlify Link: https://myflix-app-react.netlify.app
 
 #### **Single Movie View**
 - Returns data (description, genre, director, image) about a single movie to the user
-- Allows users to add a movie to their list of favorites
+- Allows users to add a movie to their list of favorites  
+<a href="img/SingleMovie-View.png" target="_blank">View Sample of Single Movie View</a>
 
 #### **Login View**
 - Allows users to log in with a username and password
 - Registration view
-- Allows new users to register (username, password, email, birthday)
+- Allows new users to register (username, password, email, birthday)  
+
 
 #### **Genre View**
 - Returns data about a genre, with a name and description
-- Displays example movies
+- Displays example movies  
+<a href="img/Genre-View.png" target="_blank">View Sample of Genre View</a>
 
 #### **Director View**
 - Returns data about a director (name, bio, birth year, death year)
-- Displays example movies
+- Displays example movies  
+<a href="img/Director-View.png" target="_blank">View Sample of Director View</a>
 
 #### **Profile view**
 - Allows users to update their user info (username, password, email, date of birth)
 - Allows existing users to deregister
 - Displays favorite movies
-- Allows users to remove a movie from their list of favorites
+- Allows users to remove a movie from their list of favorites  
+<a href="img/Profile-View.png" target="_blank">View Sample of Profile View</a>
 
 ---
 
