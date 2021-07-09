@@ -75,4 +75,8 @@ Use the following credentials, or register with your own profile
 - "redux": "^4.1.0",
 - "redux-devtools-extension": "^2.13.9"
 
-#### **Parcel Path:** parcel src/index.html
+---
+
+### **How to run the app locally**
+To build the project in the terminal, run `parcel src/index.html`  
+Open webpage and use, `http://localhost:1234/`
