@@ -1,0 +1,43 @@
+.vis-filter {
+  margin-top: 60px;
+}
+.movie-card {
+  margin-top: 20px;
+}
+
+.movie-description {
+  overflow: hidden;
+  line-height: 1.5rem;
+  max-height: 8rem;
+  -webkit-box-orient: vertical;
+  display: block;
+  display: -webkit-box;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 4;
+}
+.headline {
+  font-family: "Limelight";
+  padding: 20px 0;
+}
+.movie-view {
+  margin-top: 50px;
+}
+.director-view {
+  margin-top: 80px;
+}
+.genre-view {
+  margin-top: 80px;
+}
+.profile-view {
+  margin-top: 80px;
+}
+
+.profile-title {
+  font-family: "Limelight";
+}
+
+.my-flix {
+  color: steelblue;
+}
+/*# sourceMappingURL=index.cc4391cf.css.map */
