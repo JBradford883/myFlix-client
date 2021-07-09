@@ -52,6 +52,12 @@ export function RegistrationView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (username.length === 0 || password.length === 0 || email.length === 0 || birthday.length === 0) {
+      alert('Please fill in all the fields')
+      return false
+    }
+
     const isValid = formValidation();
     if (isValid) {
       /* Send a request to the server for authentication */
@@ -70,6 +76,11 @@ export function RegistrationView(props) {
         })
         .catch(e => {
           console.log('error registering the user')
+          if (e.response.data == `${username} already exist.` && e.response.status == 400) {
+            alert('Username already exists');
+          } else {
+            alert(e.response.data);
+          }
         });
     }
   };
