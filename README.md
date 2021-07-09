@@ -14,7 +14,8 @@ Netlify Link: https://myflix-app-react.netlify.app
 
 - Returns a list of ALL movies to the user (each listed item with an image, title, and description)
 - Sorting and filtering
-- Ability to select a movie for more details
+- Ability to select a movie for more details  
+<a href="img/Main-View.png" target="_blank">View Sample of Main View</a>
 
 #### **Single Movie View**
 - Returns data (description, genre, director, image) about a single movie to the user
