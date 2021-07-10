@@ -20,7 +20,7 @@ export class FavoriteMovies extends React.Component {
   // DELETE request to remove a movie from favorites list
   removeFavorite(movie) {
     let user = localStorage.getItem('user');
-    authClient.delete(`https://myflix-2388-app.herokuapp.com/users/${user.Username}/movies/${movie._id}`)
+    authClient.delete(`https://myflix-2388-app.herokuapp.com/users/${user}/movies/${movie._id}`)
       .then(
         (response) => {
           console.log(response);
