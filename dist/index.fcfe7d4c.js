@@ -24662,7 +24662,6 @@ var _actions = require("../actions/actions");
 function visibilityFilter(state = '', action) {
     switch(action.type){
         case _actions.SET_FILTER:
-            console.log('SET_FILTER reducer reached');
             return action.value;
         default:
             return state;
@@ -24671,7 +24670,6 @@ function visibilityFilter(state = '', action) {
 function movies(state = [], action) {
     switch(action.type){
         case _actions.SET_MOVIES:
-            console.log('SET_MOVIES reducer reached');
             return action.value;
         default:
             return state;
@@ -24728,42 +24726,36 @@ const DELETE_FAVORITE = 'DELETE_FAVORITE';
 const SET_USER = 'SET_USER';
 const DELETE_USER = 'DELETE_USER';
 function setMovies(value) {
-    console.log('SET_MOVIES action triggered');
     return {
         type: SET_MOVIES,
         value
     };
 }
 function setFilter(value) {
-    console.log('SET_FILTER action triggered');
     return {
         type: SET_FILTER,
         value
     };
 }
 function setFavorite(value) {
-    console.log('SET_FAVORTIE action triggered');
     return {
         type: SET_FAVORITE,
         value
     };
 }
 function deleteFavorite(value) {
-    console.log('DELETE_FAVORITE action triggered');
     return {
         type: DELETE_FAVORITE,
         value
     };
 }
 function setUser(value) {
-    console.log('SET_USER action triggered');
     return {
         type: SET_USER,
         value
     };
 }
 function deleteUser(value) {
-    console.log('DELETE_USER action triggered');
     return {
         type: DELETE_USER,
         value
@@ -24866,7 +24858,7 @@ class MainView extends _reactDefault.default.Component {
     // Gets the user account from the database
     getUser(user) {
         _auth.authClient.get(`https://myflix-2388-app.herokuapp.com/users/${user}`).then((response)=>{
-            console.log('Account was received successfully');
+            //console.log('Account was received successfully');
             this.props.setUser(response.data);
         }).catch(function(error) {
             console.log(error);
@@ -41291,7 +41283,7 @@ class MovieView extends _reactDefault.default.Component {
     addFavorite(movie) {
         let token = localStorage.getItem('token');
         let user = localStorage.getItem('user');
-        _axiosDefault.default.post(`https://myflix-2388-app.herokuapp.com/users/${user.Username}/movies/${movie._id}`, null, {
+        _axiosDefault.default.post(`https://myflix-2388-app.herokuapp.com/users/${user}/movies/${movie._id}`, null, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -42502,7 +42494,7 @@ class FavoriteMovies extends _reactDefault.default.Component {
     // DELETE request to remove a movie from favorites list
     removeFavorite(movie) {
         let user = localStorage.getItem('user');
-        _auth.authClient.delete(`https://myflix-2388-app.herokuapp.com/users/${user.Username}/movies/${movie._id}`).then((response)=>{
+        _auth.authClient.delete(`https://myflix-2388-app.herokuapp.com/users/${user}/movies/${movie._id}`).then((response)=>{
             console.log(response);
             alert('You have sucessfully updated your favorites list.');
             location.reload();

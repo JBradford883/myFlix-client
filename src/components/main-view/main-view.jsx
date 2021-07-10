@@ -46,7 +46,7 @@ class MainView extends React.Component {
   getUser(user) {
     authClient.get(`https://myflix-2388-app.herokuapp.com/users/${user}`)
       .then(response => {
-        console.log('Account was received successfully');
+        //console.log('Account was received successfully');
         this.props.setUser(response.data);
       })
       .catch(function (error) {
