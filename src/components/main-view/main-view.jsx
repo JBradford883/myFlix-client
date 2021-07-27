@@ -123,7 +123,7 @@ class MainView extends React.Component {
               <Col lg={8} md={12}>
                 <ProfileView user={user} history={history} onProfileUpdate={this.onProfileUpdate} onBackClick={() => history.goBack()} />
               </Col>
-              <Col lg={8} md={12}>
+              <Col lg={12} md={12}>
                 <FavoriteMovies user={user} movies={movies} history={history} />
               </Col>
             </>

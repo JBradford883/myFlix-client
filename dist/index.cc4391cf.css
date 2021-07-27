@@ -36,7 +36,14 @@
 .profile-title {
   font-family: "Limelight";
 }
+.favorite-movies__container {
+  display: flex;
+  flex-wrap: wrap;
+}
 
+.favorite-movies__container-item {
+  width: 30%;
+}
 .my-flix {
   color: steelblue;
 }
