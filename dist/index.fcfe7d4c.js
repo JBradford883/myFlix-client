@@ -24960,7 +24960,7 @@ class MainView extends _reactDefault.default.Component {
                     onProfileUpdate: this.onProfileUpdate,
                     onBackClick: ()=>history.goBack()
                 })), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
-                    lg: 8,
+                    lg: 12,
                     md: 12
                 }, /*#__PURE__*/ _reactDefault.default.createElement(_favoriteMovies.FavoriteMovies, {
                     user: user,
@@ -42507,7 +42507,7 @@ class FavoriteMovies extends _reactDefault.default.Component {
         const favoriteMovies = this.props.user.FavoriteMovies;
         const { movies  } = this.props;
         return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card, {
-            className: "movie-card shadow-sm mb-2",
+            className: "movie-card shadow-sm mb-3",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/favorite-movies/favorite-movies.jsx",
                 lineNumber: 42
@@ -42521,7 +42521,7 @@ class FavoriteMovies extends _reactDefault.default.Component {
             },
             __self: this
         }, "Your Favorite Movies"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Row, {
-            className: "fav-movies mb-3 justify-content-center",
+            className: "fav-movies",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/favorite-movies/favorite-movies.jsx",
                 lineNumber: 44
@@ -42534,7 +42534,7 @@ class FavoriteMovies extends _reactDefault.default.Component {
             },
             __self: this
         }, "You don't have any favorite movies yet!"), /*#__PURE__*/ _reactDefault.default.createElement("div", {
-            className: "favorite-movies__container",
+            className: "favorite-movies__container justify-content-center",
             __source: {
                 fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/favorite-movies/favorite-movies.jsx",
                 lineNumber: 46
@@ -42546,6 +42546,7 @@ class FavoriteMovies extends _reactDefault.default.Component {
         }).map((movie)=>{
             return(/*#__PURE__*/ _reactDefault.default.createElement("div", {
                 key: movie._id,
+                className: "favorite-movies__container-item",
                 __source: {
                     fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/favorite-movies/favorite-movies.jsx",
                     lineNumber: 51
@@ -42553,7 +42554,7 @@ class FavoriteMovies extends _reactDefault.default.Component {
                 __self: this
             }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
                 className: "container-fluid text-center mb-2",
-                md: 8,
+                md: 10,
                 __source: {
                     fileName: "/Users/Skudda1/Desktop/careerfoundry/myFlix-client/src/components/favorite-movies/favorite-movies.jsx",
                     lineNumber: 52

@@ -39,17 +39,17 @@ export class FavoriteMovies extends React.Component {
     const { movies } = this.props;
 
     return (
-      <Card className='movie-card shadow-sm mb-2'>
+      <Card className='movie-card shadow-sm mb-3'>
         <h2 className="profile-title d-flex justify-content-center text-danger mt-3">Your Favorite Movies</h2>
-        <Row className="fav-movies mb-3 justify-content-center">
+        <Row className="fav-movies">
           {favoriteMovies.length === 0 && <div>You don't have any favorite movies yet!</div>}
-          <div className='favorite-movies__container'>
+          <div className='favorite-movies__container justify-content-center'>
             {favoriteMovies.length > 0 && movies.filter(movie => {
               return movie._id === favoriteMovies.find((favMovie) => favMovie === movie._id)
             }).map((movie) => {
               return (
-                <div key={movie._id}>
-                  <Col className="container-fluid text-center mb-2" md={8}>
+                <div key={movie._id} className="favorite-movies__container-item">
+                  <Col className="container-fluid text-center mb-2" md={10}>
                     <Link to={`/movies/${movie._id}`}>
                       <Card.Img className="fav-img" src={movie.ImagePath} />
                     </Link>
